@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur GPX — La Science du Cyclisme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:          #FFFFFF;
+    --bg-off:      #FAFAFA;
+    --border:      #E8E8E8;
+    --border-mid:  #D0D0D0;
+    --accent:      #F5E100;
+    --accent-dark: #C8B800;
+    --accent-soft: rgba(245,225,0,0.12);
+    --text:        #111111;
+    --muted:       #555555;
+    --dim:         #999999;
+    --radius:      12px;
+    --radius-lg:   20px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ─────────────────────────────────── */
+  nav {
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .logo img {
+    height: 26px;
+    width: auto;
+  }
+
+  .logo-sep {
+    width: 1px;
+    height: 20px;
+    background: var(--border-mid);
+  }
+
+  .logo-name {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* ── HERO ────────────────────────────────── */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 24px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+  }
+
+  .hero-left { padding-bottom: 80px; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #111;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #111;
+    opacity: 0.4;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  h1 em {
+    font-style: normal;
+    position: relative;
+    display: inline-block;
+  }
+
+  h1 em::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: var(--accent);
+    z-index: -1;
+    border-radius: 2px;
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+
+  /* ── FEATURES LIST ───────────────────────── */
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .feature-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .feature-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .feature-text {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .feature-text span {
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* ── FORM SIDE ───────────────────────────── */
+  .hero-right {
+    padding-bottom: 80px;
+  }
+
+  .form-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent);
+  }
+
+  .form-card-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  .form-card-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .beehiiv-wrap {
+    margin: 0 -8px;
+  }
+
+  .form-privacy {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--dim);
+    margin-top: 16px;
+  }
+
+  .form-privacy svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+
+  /* ── MOCKUP SECTION ──────────────────────── */
+  .mockup-section {
+    background: var(--text);
+    padding: 80px 24px;
+    overflow: hidden;
+  }
+
+  .mockup-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .mockup-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .mockup-header .section-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #111;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  .mockup-header h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #fff;
+    line-height: 1.15;
+  }
+
+  .mockup-header h2 span { color: var(--accent); }
+
+  .mockup-header p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 12px;
+  }
+
+  /* App mockup */
+  .app-mockup {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .mock-nav {
+    background: #fff;
+    border-bottom: 1px solid #E8E8E8;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .mock-nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #111;
+  }
+
+  .mock-nav-dot {
+    width: 20px;
+    height: 20px;
+    background: #F5E100;
+    border-radius: 4px;
+  }
+
+  .mock-nav-badge {
+    font-size: 10px;
+    font-weight: 700;
+    background: #F5E100;
+    color: #111;
+    padding: 3px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.06em;
+  }
+
+  .mock-body {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    height: 320px;
+  }
+
+  .mock-sidebar {
+    background: #FAFAFA;
+    border-right: 1px solid #E8E8E8;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mock-section-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 8px;
+  }
+
+  .mock-upload {
+    border: 1.5px dashed #D0D0D0;
+    border-radius: 8px;
+    padding: 14px 10px;
+    text-align: center;
+    background: #fff;
+  }
+
+  .mock-upload-icon {
+    width: 28px;
+    height: 28px;
+    background: #F5E100;
+    border-radius: 6px;
+    margin: 0 auto 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .mock-upload-text {
+    font-size: 10px;
+    font-weight: 700;
+    color: #111;
+  }
+
+  .mock-upload-sub {
+    font-size: 9px;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  .mock-slider-group { display: flex; flex-direction: column; gap: 8px; }
+
+  .mock-slider-row { display: flex; flex-direction: column; gap: 3px; }
+
+  .mock-slider-label {
+    font-size: 9px;
+    color: #999;
+    font-weight: 500;
+  }
+
+  .mock-slider-track {
+    height: 3px;
+    background: #E8E8E8;
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .mock-slider-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: #111;
+    position: absolute;
+    left: 0;
+  }
+
+  .mock-slider-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #F5E100;
+    border: 1.5px solid #111;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .mock-main {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  .mock-results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .mock-result-card {
+    background: #fff;
+    border: 1px solid #E8E8E8;
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+
+  .mock-result-card.yellow {
+    background: #F5E100;
+    border-color: #C8B800;
+  }
+
+  .mock-rc-label {
+    font-size: 8px;
+    color: #999;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .mock-result-card.yellow .mock-rc-label { color: rgba(0,0,0,0.4); }
+
+  .mock-rc-val {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #111;
+    line-height: 1;
+  }
+
+  .mock-rc-unit {
+    font-size: 8px;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  .mock-result-card.yellow .mock-rc-unit { color: rgba(0,0,0,0.4); }
+
+  .mock-chart-area {
+    background: #fff;
+    border: 1px solid #E8E8E8;
+    border-radius: 8px;
+    padding: 10px;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mock-chart-label {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 6px;
+  }
+
+  .mock-chart-svg {
+    width: 100%;
+    height: 80px;
+  }
+
+  .mock-bars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .mock-bar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mock-bar-track {
+    height: 4px;
+    background: #F4F4F4;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .mock-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+
+  .mock-bar-label {
+    font-size: 8px;
+    color: #999;
+  }
+
+  /* ── BONUS SECTION ───────────────────────── */
+  .bonus-section {
+    padding: 80px 24px;
+    background: var(--bg-off);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .bonus-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .bonus-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .bonus-header .section-tag-dark {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #111;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  .bonus-header h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.15;
+  }
+
+  .bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .bonus-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bonus-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .bonus-num {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 12px;
+  }
+
+  .bonus-title {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .bonus-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 768px) {
+    .bonus-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── FOOTER ──────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--dim);
+  }
+
+  footer a { color: var(--dim); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  /* ── ANIMATIONS ──────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left  { animation: fadeUp 0.6s ease both; }
+  .hero-right { animation: fadeUp 0.6s 0.15s ease both; }
+
+  /* ── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 768px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-top: 48px;
+    }
+    .hero-left, .hero-right { padding-bottom: 0; }
+    .hero-right { padding-bottom: 48px; }
+    .proof-grid { grid-template-columns: 1fr; }
+    .mock-body { grid-template-columns: 1fr; height: auto; }
+    .mock-sidebar { display: none; }
+    .mock-results { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <img src="logo-lsdc.png" alt="LSDC" onerror="this.style.display='none'">
+    <div class="logo-sep"></div>
+    <span class="logo-name">La Science du Cyclisme</span>
+  </a>
+  <span class="nav-tag">Offert</span>
+</nav>
+
+<!-- HERO -->
+<section>
+  <div class="hero">
+
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="badge">
+        <div class="badge-dot"></div>
+        LSDC Calculator
+      </div>
+
+      <h1>L'arme ultime pour :</h1>
+
+      <div class="features">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none">
+              <path d="M2 6l3 3 5-5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="feature-text">Créer tes stratégies de course</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none">
+              <path d="M2 6l3 3 5-5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="feature-text">Pulvériser tes chronos en bosse</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none">
+              <path d="M2 6l3 3 5-5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="feature-text">Pour utiliser ton capteur de puissance à 100%</div>
+        </div>
+      </div>
+
+      <p class="hero-sub">
+        Arrête de rouler à l'aveugle. Gagner des watts c'est dur, alors commence par utiliser ce que tu as à 100%.
+      </p>
+    </div>
+
+    <!-- RIGHT — FORM -->
+    <div class="hero-right">
+
+      <!-- Aperçu combiné des 3 outils -->
+      <div style="position: relative; height: 200px; margin-bottom: 28px;">
+        <img src="Image 3.png" alt="Outil 3"
+          style="position: absolute; width: 62%; border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,0.18); top: 16px; left: 0; transform: rotate(-3deg);">
+        <img src="Image 2.png" alt="Outil 2"
+          style="position: absolute; width: 62%; border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,0.18); top: 8px; left: 50%; transform: translateX(-50%) rotate(1deg);">
+        <img src="Image 1.png" alt="Outil 1"
+          style="position: absolute; width: 62%; border-radius: 10px; box-shadow: 0 16px 40px rgba(0,0,0,0.22); top: 0; right: 0; transform: rotate(3deg);">
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-title">Accède au calculateur gratuitement</div>
+        <div class="form-card-sub">Entre ton email — on t'envoie le lien directement.</div>
+
+        <div id="form-wrap">
+          <div style="display:flex; gap:8px; margin-bottom:12px;">
+            <input
+              type="email"
+              id="email-input"
+              placeholder="ton@email.com"
+              style="flex:1; padding: 13px 16px; border: 1.5px solid #E8E8E8; border-radius: 10px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s; color: #111;"
+              onfocus="this.style.borderColor='#111'"
+              onblur="this.style.borderColor='#E8E8E8'"
+            >
+            <button
+              id="submit-btn"
+              onclick="submitForm()"
+              style="padding: 13px 22px; background: #111; color: #fff; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer; white-space: nowrap; transition: all 0.2s;"
+              onmouseover="this.style.background='#333'"
+              onmouseout="this.style.background='#111'"
+            >
+              Accès offert →
+            </button>
+          </div>
+          <div id="form-error" style="display:none; font-size:12px; color:#dc2626; margin-bottom:8px;"></div>
+        </div>
+
+        <div id="form-success" style="display:none; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 16px; text-align:center;">
+          <div style="font-size: 20px; margin-bottom:6px;">✓</div>
+          <div style="font-size: 14px; font-weight: 700; color: #15803d; margin-bottom:4px;">C'est parti !</div>
+          <div style="font-size: 13px; color: #166534;">Vérifie ta boîte mail — le lien arrive dans quelques secondes.</div>
+        </div>
+
+        <div class="form-privacy">
+          <svg viewBox="0 0 12 12" fill="none">
+            <rect x="2" y="5" width="8" height="6" rx="1" stroke="#999" stroke-width="1"/>
+            <path d="M4 5V3.5a2 2 0 014 0V5" stroke="#999" stroke-width="1"/>
+          </svg>
+          Pas de spam. Désabonnement en 1 clic.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+async function submitForm() {
+  const email = document.getElementById('email-input').value.trim();
+  const btn = document.getElementById('submit-btn');
+  const errorEl = document.getElementById('form-error');
+
+  errorEl.style.display = 'none';
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errorEl.textContent = 'Merci d\'entrer une adresse email valide.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  btn.textContent = 'Envoi...';
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+
+  try {
+    const res = await fetch('/.netlify/functions/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+
+    if (res.ok || res.status === 201) {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    } else {
+      throw new Error('Erreur API');
+    }
+  } catch(e) {
+    errorEl.textContent = 'Une erreur est survenue. Réessaie dans quelques secondes.';
+    errorEl.style.display = 'block';
+    btn.textContent = 'Accès offert →';
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  }
+}
+
+document.getElementById('email-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitForm();
+});
+</script>
+
+<!-- MOCKUP SECTION -->
+<section class="mockup-section">
+  <div class="mockup-inner">
+    <div class="mockup-header">
+      <div class="section-tag">Aperçu de l'outil</div>
+      <h2>Un calculateur pensé pour les <span>cyclistes sérieux</span></h2>
+      <p>Pas d'estimation au doigt mouillé. Des chiffres issus de la physique, segment par segment.</p>
+      <p style="margin-top: 24px; font-size: 1.15rem; font-weight: 700; color: #fff;">Avec ces 3 outils tu vas enfin utiliser ton capteur de puissance</p>
+    </div>
+
+    <!-- 3 outils -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <img src="Image 1.png" alt="Outil 1" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.4);">
+        <p style="font-size: 14px; color: rgba(255,255,255,0.75); text-align: center; line-height: 1.6;">Ta stratégie de course depuis ton circuit GPX. Travail en kJ, cible de puissance, chrono.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <img src="Image 2.png" alt="Outil 2" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.4);">
+        <p style="font-size: 14px; color: rgba(255,255,255,0.75); text-align: center; line-height: 1.6;">L'outil pour voler des KOM Strava. Calcule tes meilleurs chronos possible à la seconde.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <img src="Image 3.png" alt="Outil 3" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.4);">
+        <p style="font-size: 14px; color: rgba(255,255,255,0.75); text-align: center; line-height: 1.6;">Analyse ton profil de coureur et maîtrise ta puissance. Découvre tous tes records de puissance et tes temps de soutien.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BONUS SECTION -->
+<section class="bonus-section">
+  <div class="bonus-inner">
+    <div class="bonus-header">
+      <div class="section-tag-dark">Inclus avec le calculateur</div>
+      <h2>3 bonus offerts avec ton accès</h2>
+    </div>
+
+    <div class="bonus-grid">
+      <div class="bonus-card">
+        <div class="bonus-num">Bonus #1</div>
+        <div class="bonus-title">Le guide de l'entraînement Gran Fondo</div>
+        <div class="bonus-desc">Ta stratégie d'entraînement pour maximiser tes capacités physiologiques et arriver à 100% sur la ligne de départ.</div>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-num">Bonus #2</div>
+        <div class="bonus-title">Accès illimité au logiciel</div>
+        <div class="bonus-desc">Tu peux charger autant de fichiers GPX que tu souhaites pour préparer n'importe quelle Gran Fondo — sans restriction.</div>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-num">Bonus #3</div>
+        <div class="bonus-title">Un conseil d'entraînement par semaine jusqu'à l'EDT</div>
+        <div class="bonus-desc">Chaque dimanche je t'envoie un conseil clé à appliquer dans ta pratique pour tout casser cet été.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 La Science du Cyclisme — Antonin
+  &nbsp;·&nbsp;
+  <a href="#">Mentions légales</a>
+  &nbsp;·&nbsp;
+  <a href="#">CGV</a>
+</footer>
+
+</body>
+</html>
