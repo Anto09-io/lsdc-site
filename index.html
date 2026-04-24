@@ -86,6 +86,7 @@
     .stats {
       display: flex;
       justify-content: center;
+      align-items: center;
       margin-bottom: 0.2rem;
     }
 
@@ -112,6 +113,15 @@
       font-size: 0.72rem;
       color: var(--muted);
       font-weight: 500;
+    }
+
+    .stat-photo-img {
+      width: 58px;
+      height: 58px;
+      border-radius: 10px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
 
     /* ── Section label ── */
@@ -310,6 +320,9 @@
 
     <!-- ── Stats ── -->
     <div class="stats" role="list" aria-label="Statistiques">
+      <div class="stat" role="listitem">
+        <img src="Photo Anto.png" alt="Antonin Albouy" class="stat-photo-img">
+      </div>
       <div class="stat" role="listitem">
         <span class="stat-number">8,5K</span>
         <span class="stat-label">Newsletter</span>
