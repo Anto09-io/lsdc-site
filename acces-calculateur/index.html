@@ -810,7 +810,7 @@ async function submitForm() {
   btn.style.opacity = '0.6';
 
   try {
-    const res = await fetch('/.netlify/functions/subscribe', {
+    const res = await fetch('/api/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })
