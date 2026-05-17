@@ -1,17 +1,32 @@
+const LISTS = {
+  waitinglist: {
+    automationEnv: 'BEEHIIV_AUTOMATION_WAITINGLIST_ID',
+    utm_source: 'waitinglist',
+    utm_medium: 'landing-page'
+  },
+  default: {
+    automationEnv: 'BEEHIIV_AUTOMATION_ID',
+    utm_source: 'calculateur-gpx',
+    utm_medium: 'landing-page'
+  }
+};
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { email } = req.body;
+  const { email, list } = req.body;
 
   if (!email) {
     return res.status(400).json({ error: 'Email manquant' });
   }
 
-  const BEEHIIV_API_KEY      = process.env.BEEHIIV_API_KEY;
-  const BEEHIIV_PUB_ID       = process.env.BEEHIIV_PUB_ID;
-  const BEEHIIV_AUTOMATION_ID = process.env.BEEHIIV_AUTOMATION_ID;
+  const config = LISTS[list] || LISTS.default;
+
+  const BEEHIIV_API_KEY       = process.env.BEEHIIV_API_KEY;
+  const BEEHIIV_PUB_ID        = process.env.BEEHIIV_PUB_ID;
+  const BEEHIIV_AUTOMATION_ID = process.env[config.automationEnv];
 
   const headers = {
     'Content-Type': 'application/json',
@@ -29,8 +44,8 @@ export default async function handler(req, res) {
           email,
           reactivate_existing: false,
           send_welcome_email: false,
-          utm_source: 'calculateur-gpx',
-          utm_medium: 'landing-page'
+          utm_source: config.utm_source,
+          utm_medium: config.utm_medium
         })
       }
     );

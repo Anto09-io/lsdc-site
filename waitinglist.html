@@ -460,8 +460,9 @@
 </footer>
 
 <script>
-  function submitForm() {
+  async function submitForm() {
     const email = document.getElementById('email-input').value.trim();
+    const btn = document.getElementById('submit-btn');
     const errorEl = document.getElementById('form-error');
 
     errorEl.style.display = 'none';
@@ -472,9 +473,31 @@
       return;
     }
 
-    // TODO: connecter à l'API d'inscription (ex: /api/subscribe ou Beehiiv)
-    document.getElementById('form-content').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
+    const originalBtn = btn.innerHTML;
+    btn.innerHTML = 'Envoi…';
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, list: 'waitinglist' })
+      });
+
+      if (res.ok || res.status === 201) {
+        document.getElementById('form-content').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        throw new Error('API error');
+      }
+    } catch (e) {
+      errorEl.textContent = 'Une erreur est survenue. Réessaie dans quelques secondes.';
+      errorEl.style.display = 'block';
+      btn.innerHTML = originalBtn;
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    }
   }
 
   document.getElementById('email-input').addEventListener('keydown', e => {
