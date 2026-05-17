@@ -44,13 +44,14 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
   /* ── NAV ─────────────────────────────────── */
   nav {
     border-bottom: 1px solid var(--line);
-    padding: 0 2rem;
-    height: 60px;
+    padding: 0 clamp(16px, 4vw, 32px);
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -69,14 +70,14 @@
   }
 
   .logo img {
-    height: 32px;
+    height: clamp(24px, 5vw, 32px);
     width: auto;
     display: block;
   }
 
   .nav-tag {
     font-family: var(--font-body);
-    font-size: var(--t-micro);
+    font-size: clamp(10px, 2.4vw, 11px);
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -87,7 +88,7 @@
   .hero {
     max-width: 760px;
     margin: 0 auto;
-    padding: 80px 24px 60px;
+    padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 24px) clamp(40px, 6vw, 60px);
     text-align: center;
   }
 
@@ -96,7 +97,7 @@
     align-items: center;
     gap: 8px;
     font-family: var(--font-body);
-    font-size: var(--t-micro);
+    font-size: clamp(10px, 2.4vw, 11px);
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -104,7 +105,7 @@
     color: var(--creme);
     padding: 6px 14px;
     border-radius: 0;
-    margin-bottom: 32px;
+    margin-bottom: clamp(20px, 4vw, 32px);
   }
 
   .badge-dot {
@@ -117,11 +118,12 @@
   h1 {
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: clamp(2.6rem, 6vw, 4.5rem);
-    line-height: 0.9;
+    font-size: clamp(2.1rem, 8vw, 4.5rem);
+    line-height: 0.95;
     letter-spacing: -0.022em;
-    margin-bottom: 24px;
+    margin-bottom: clamp(16px, 3vw, 24px);
     color: var(--noir);
+    text-wrap: balance;
   }
 
   h1 em {
@@ -132,11 +134,12 @@
   .hero-sub {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: clamp(24px, 3.4vw, 32px);
+    font-size: clamp(18px, 5vw, 32px);
     line-height: 1.3;
     color: var(--graphite);
     max-width: 640px;
-    margin: 0 auto 40px;
+    margin: 0 auto clamp(28px, 6vw, 40px);
+    text-wrap: balance;
   }
 
   /* ── FORM CARD ───────────────────────────── */
@@ -148,7 +151,7 @@
   .form-card {
     background: var(--creme-deep);
     border: 1px solid var(--noir);
-    padding: 36px 32px;
+    padding: clamp(24px, 5vw, 36px) clamp(20px, 5vw, 32px);
     position: relative;
     text-align: left;
   }
@@ -184,24 +187,34 @@
   .field input {
     flex: 1;
     min-width: 0;
-    padding: 15px 18px;
+    min-height: 52px;
+    padding: 14px 18px;
     border: none;
     background: transparent;
     font-family: var(--font-body);
-    font-size: 15px;
+    font-size: 16px;
     color: var(--noir);
     outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
   }
 
   .field input::placeholder {
     color: var(--ash);
   }
 
+  .field input:focus {
+    background: rgba(91,33,182,0.04);
+  }
+
   .field button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
-    padding: 15px 22px;
+    min-height: 52px;
+    padding: 14px 22px;
     background: var(--violet);
     color: var(--creme);
     border: none;
@@ -286,7 +299,7 @@
   .benefits {
     max-width: 760px;
     margin: 0 auto;
-    padding: 40px 24px 80px;
+    padding: clamp(24px, 5vw, 40px) clamp(20px, 5vw, 24px) clamp(48px, 8vw, 80px);
   }
 
   .benefits-grid {
@@ -297,7 +310,7 @@
   }
 
   .benefit {
-    padding: 28px 22px 24px;
+    padding: clamp(20px, 4vw, 28px) clamp(18px, 4vw, 22px) clamp(18px, 4vw, 24px);
     border-right: 1px solid rgba(239,234,224,0.16);
   }
 
@@ -317,7 +330,7 @@
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 900;
-    font-size: 40px;
+    font-size: clamp(32px, 7vw, 40px);
     line-height: 0.9;
     letter-spacing: -0.01em;
     color: var(--creme);
@@ -337,26 +350,42 @@
     .benefits-grid { grid-template-columns: 1fr; }
     .benefit { border-right: 0; border-bottom: 1px solid rgba(239,234,224,0.16); }
     .benefit:last-child { border-bottom: 0; }
-    .field { flex-direction: column; }
-    .field input { width: 100%; }
-    .field button { width: 100%; justify-content: center; }
+    .field { flex-direction: column; border: none; background: transparent; gap: 10px; }
+    .field input {
+      width: 100%;
+      border: 1.5px solid var(--noir);
+      background: var(--blanc);
+      min-height: 54px;
+    }
+    .field button { width: 100%; justify-content: center; min-height: 54px; }
+  }
+
+  @media (max-width: 380px) {
+    .nav-tag { display: none; }
+    .form-card { padding: 22px 18px; }
+    .benefit { padding: 18px 16px; }
   }
 
   /* ── FOOTER ──────────────────────────────── */
   footer {
     border-top: 1px solid var(--line);
-    padding: 24px;
+    padding: clamp(20px, 5vw, 24px);
     text-align: center;
     font-family: var(--font-body);
-    font-size: var(--t-micro);
-    letter-spacing: 0.16em;
+    font-size: clamp(10px, 2.4vw, 11px);
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     font-weight: 600;
     color: var(--graphite);
+    line-height: 1.8;
   }
 
   footer a { color: var(--graphite); text-decoration: none; }
   footer a:hover { color: var(--noir); }
+
+  @media (max-width: 480px) {
+    footer .sep { display: block; height: 6px; visibility: hidden; }
+  }
 
   /* ── ANIMATIONS ──────────────────────────── */
   @keyframes fadeUp {
@@ -454,8 +483,8 @@
 
 <!-- FOOTER -->
 <footer>
-  © 2026 La Science du Cyclisme · Antonin
-  &nbsp;·&nbsp;
+  <span>© 2026 La Science du Cyclisme · Antonin</span>
+  <span class="sep">&nbsp;·&nbsp;</span>
   <a href="/">Retour à l'accueil</a>
 </footer>
 
