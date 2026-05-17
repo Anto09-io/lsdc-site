@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rejoins la liste d'attente LSDC — sois prévenu en premier dès qu'une place se libère.">
+<title>Liste d'attente — La Science du Cyclisme</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --violet:        #5B21B6;
+    --violet-deep:   #3F1488;
+    --violet-light:  #7C3AED;
+
+    --noir:          #0F0F0F;
+    --noir-soft:     #1C1C1C;
+    --graphite:      #4A4A4A;
+    --ash:           #8A8580;
+    --line:          #D8D2C5;
+
+    --creme:         #EFEAE0;
+    --creme-deep:    #E5DFD2;
+    --blanc:         #FFFFFF;
+    --jaune:         #D97706;
+
+    --font-display:  "Barlow Condensed", Impact, sans-serif;
+    --font-body:     "DM Sans", system-ui, sans-serif;
+    --font-serif:    "Instrument Serif", Georgia, serif;
+
+    --t-micro:   11px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--creme);
+    color: var(--noir);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ── NAV ─────────────────────────────────── */
+  nav {
+    border-bottom: 1px solid var(--line);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--creme);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--noir);
+  }
+
+  .logo img {
+    height: 32px;
+    width: auto;
+    display: block;
+  }
+
+  .nav-tag {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--graphite);
+  }
+
+  /* ── HERO ────────────────────────────────── */
+  .hero {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 24px 60px;
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: var(--violet);
+    color: var(--creme);
+    padding: 6px 14px;
+    border-radius: 0;
+    margin-bottom: 32px;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--jaune);
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.6rem, 6vw, 4.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.022em;
+    margin-bottom: 24px;
+    color: var(--noir);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--violet);
+  }
+
+  .hero-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(24px, 3.4vw, 32px);
+    line-height: 1.3;
+    color: var(--graphite);
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+
+  /* ── FORM CARD ───────────────────────────── */
+  .form-wrap {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .form-card {
+    background: var(--creme-deep);
+    border: 1px solid var(--noir);
+    padding: 36px 32px;
+    position: relative;
+    text-align: left;
+  }
+
+  .form-card-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+    color: var(--noir);
+  }
+
+  .form-card-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--graphite);
+    margin-bottom: 24px;
+  }
+
+  .field {
+    display: flex;
+    gap: 0;
+    border: 1.5px solid var(--noir);
+    background: var(--blanc);
+    margin-bottom: 12px;
+  }
+
+  .field input {
+    flex: 1;
+    min-width: 0;
+    padding: 15px 18px;
+    border: none;
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--noir);
+    outline: none;
+  }
+
+  .field input::placeholder {
+    color: var(--ash);
+  }
+
+  .field button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 22px;
+    background: var(--violet);
+    color: var(--creme);
+    border: none;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.12s ease, transform 0.12s ease;
+  }
+
+  .field button .arr { font-style: italic; font-weight: 900; font-size: 18px; }
+  .field button:hover { background: var(--violet-deep); }
+  .field button:active { transform: translateY(1px); }
+
+  .form-error {
+    display: none;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: #B91C1C;
+    margin-bottom: 8px;
+  }
+
+  .form-success {
+    display: none;
+    background: var(--noir);
+    color: var(--creme);
+    padding: 22px;
+    text-align: center;
+  }
+
+  .form-success-icon {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--jaune);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .form-success-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--creme);
+    margin-bottom: 6px;
+  }
+
+  .form-success-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba(239,234,224,0.85);
+  }
+
+  .form-privacy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    letter-spacing: 0.04em;
+    color: var(--graphite);
+    margin-top: 16px;
+  }
+
+  .form-privacy svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+
+  /* ── BENEFITS ────────────────────────────── */
+  .benefits {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--noir);
+    color: var(--creme);
+  }
+
+  .benefit {
+    padding: 28px 22px 24px;
+    border-right: 1px solid rgba(239,234,224,0.16);
+  }
+
+  .benefit:last-child { border-right: 0; }
+
+  .benefit-label {
+    font-family: var(--font-body);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(239,234,224,0.6);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .benefit-num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    color: var(--creme);
+    margin-bottom: 10px;
+  }
+
+  .benefit-num.accent { color: var(--jaune); }
+
+  .benefit-desc {
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 1.55;
+    color: rgba(239,234,224,0.75);
+  }
+
+  @media (max-width: 640px) {
+    .benefits-grid { grid-template-columns: 1fr; }
+    .benefit { border-right: 0; border-bottom: 1px solid rgba(239,234,224,0.16); }
+    .benefit:last-child { border-bottom: 0; }
+    .field { flex-direction: column; }
+    .field input { width: 100%; }
+    .field button { width: 100%; justify-content: center; }
+  }
+
+  /* ── FOOTER ──────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 24px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--graphite);
+  }
+
+  footer a { color: var(--graphite); text-decoration: none; }
+  footer a:hover { color: var(--noir); }
+
+  /* ── ANIMATIONS ──────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero { animation: fadeUp 0.6s ease both; }
+  .form-wrap { animation: fadeUp 0.6s 0.15s ease both; }
+  .benefits { animation: fadeUp 0.6s 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="/">
+    <img src="Logo%20LSDC%20noir.svg" alt="LSDC — La Science du Cyclisme">
+  </a>
+  <span class="nav-tag">Liste d'attente</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Liste d'attente
+  </div>
+
+  <h1>Progresse sur le long terme en <em>roulant librement</em></h1>
+
+  <p class="hero-sub">
+    Grâce à ton copilote d'entraînement.
+  </p>
+
+  <div class="form-wrap">
+    <div class="form-card">
+      <div class="form-card-sub">Entre ton email — je te préviens dès l'ouverture du projet.</div>
+
+      <div id="form-content">
+        <div class="field">
+          <input
+            type="email"
+            id="email-input"
+            placeholder="ton@email.com"
+            autocomplete="email"
+            aria-label="Adresse email"
+          >
+          <button id="submit-btn" type="button" onclick="submitForm()">
+            Je m'inscris <span class="arr">→</span>
+          </button>
+        </div>
+        <div id="form-error" class="form-error"></div>
+      </div>
+
+      <div id="form-success" class="form-success">
+        <div class="form-success-icon">✓</div>
+        <div class="form-success-title">Tu es sur la liste.</div>
+        <div class="form-success-text">On te prévient en premier dès l'ouverture du projet.</div>
+      </div>
+
+      <div class="form-privacy">
+        <svg viewBox="0 0 12 12" fill="none">
+          <rect x="2" y="5" width="8" height="6" rx="1" stroke="#4A4A4A" stroke-width="1"/>
+          <path d="M4 5V3.5a2 2 0 014 0V5" stroke="#4A4A4A" stroke-width="1"/>
+        </svg>
+        Pas de spam. Désabonnement en 1 clic.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="benefits-grid">
+    <div class="benefit">
+      <div class="benefit-label">Avant-première</div>
+      <div class="benefit-num accent">01</div>
+      <div class="benefit-desc">Découvre le nouveau projet en avant-première.</div>
+    </div>
+
+    <div class="benefit">
+      <div class="benefit-label">Calculateur TTE</div>
+      <div class="benefit-num">02</div>
+      <div class="benefit-desc">Accède au calculateur de TTE. Maîtrise enfin ton Profil de Puissance Record.</div>
+    </div>
+
+    <div class="benefit">
+      <div class="benefit-label">Support écrit</div>
+      <div class="benefit-num accent">03</div>
+      <div class="benefit-desc">Accède au support écrit de la vidéo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 La Science du Cyclisme · Antonin
+  &nbsp;·&nbsp;
+  <a href="/">Retour à l'accueil</a>
+</footer>
+
+<script>
+  function submitForm() {
+    const email = document.getElementById('email-input').value.trim();
+    const errorEl = document.getElementById('form-error');
+
+    errorEl.style.display = 'none';
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorEl.textContent = 'Merci d\'entrer une adresse email valide.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    // TODO: connecter à l'API d'inscription (ex: /api/subscribe ou Beehiiv)
+    document.getElementById('form-content').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+  document.getElementById('email-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') submitForm();
+  });
+</script>
+
+</body>
+</html>
