@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JustPush — Le copilote d'entraînement pour cyclistes amateurs qui roulent 6-12h par semaine. Pré-vente accès à vie.">
+  <title>JustPush — Pré-vente accès à vie | La Science du Cyclisme</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0a0e1f;
+      --bg-deep:    #060916;
+      --card:       #131730;
+      --card-2:     #1a1f3d;
+      --border:     #232844;
+      --border-mid: #2e345a;
+      --text:       #ffffff;
+      --muted:      #9aa3c7;
+      --dim:        #6b739a;
+      --accent:     #F5E100;
+      --accent-dark:#C8B800;
+      --blue:       #1d4ed8;
+      --blue-soft:  #1e3a8a;
+      --green:      #22c55e;
+      --red:        #ef4444;
+      --radius:     14px;
+      --radius-lg:  20px;
+      --max-w:      1100px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOP BANNER ─────────────────────────── */
+    .top-banner {
+      background: linear-gradient(90deg, #dc2626, #b91c1c);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .top-banner strong { font-weight: 800; }
+
+    /* ── HEADER ─────────────────────────────── */
+    .site-header {
+      display: flex;
+      justify-content: center;
+      padding: 24px 16px 8px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img { height: 30px; width: auto; }
+
+    .brand-name {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── HERO ───────────────────────────────── */
+    .hero {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.7rem, 4.8vw, 3rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 .accent { color: var(--accent); }
+
+    .hero .eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 6px 14px;
+      border: 1px solid rgba(245, 225, 0, 0.3);
+      border-radius: 999px;
+      margin-bottom: 22px;
+    }
+
+    .hero .sub {
+      font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 28px;
+      line-height: 1.55;
+    }
+
+    /* Video VSL */
+    .vsl {
+      max-width: 760px;
+      margin: 0 auto 28px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dim);
+      font-size: 0.9rem;
+    }
+
+    .vsl iframe,
+    .vsl video {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .vsl-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+    }
+
+    .vsl-placeholder .play {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: #fff;
+    }
+
+    /* CTAs */
+    .cta-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+      border: none;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0e1f;
+      box-shadow: 0 14px 40px -10px rgba(245,225,0,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #fff200;
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: #fff;
+      padding: 12px 22px;
+      font-size: 0.92rem;
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-2px);
+      background: #1ebe57;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-mid);
+    }
+
+    .cta-note {
+      font-size: 0.78rem;
+      color: var(--dim);
+      margin-top: 4px;
+    }
+
+    /* ── TRUST STRIP ───────────────────────── */
+    .trust {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-deep);
+      padding: 36px 20px;
+    }
+
+    .trust-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .trust-title {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 22px;
+      font-weight: 500;
+    }
+
+    .trust-title strong { color: var(--text); font-weight: 700; }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trust-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(245, 225, 0, 0.1);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .trust-num {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .trust-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* ── SECTION GENERAL ───────────────────── */
+    section { padding: 72px 20px; }
+
+    .section-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 48px;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .section-title .accent { color: var(--accent); font-style: italic; }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
+    /* ── PILLARS ───────────────────────────── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .pillar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      position: relative;
+    }
+
+    .pillar:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-dark);
+    }
+
+    .pillar-num {
+      position: absolute;
+      top: -14px;
+      left: 22px;
+      background: var(--accent);
+      color: #0a0e1f;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+
+    .pillar-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 18px;
+      margin-top: 6px;
+    }
+
+    .pillar h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .pillar p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .pillar p + p { margin-top: 10px; }
+
+    .pillars-cta {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    /* ── ROADMAP ───────────────────────────── */
+    .roadmap-section {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    .roadmap::before {
+      content: "";
+      position: absolute;
+      top: 32px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    .road-step {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 4px;
+    }
+
+    .road-date {
+      display: inline-block;
+      background: var(--accent);
+      color: #0a0e1f;
+      font-weight: 900;
+      font-size: 0.85rem;
+      padding: 14px 18px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .road-step h4 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .road-step p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .roadmap-note {
+      text-align: center;
+      margin-top: 36px;
+      padding: 18px;
+      background: rgba(245, 225, 0, 0.06);
+      border: 1px solid rgba(245, 225, 0, 0.2);
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .roadmap-note strong { color: var(--accent); }
+
+    /* ── FOR YOU / NOT FOR YOU ────────────── */
+    .twocol {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .col-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+    }
+
+    .col-box.for h3 { color: var(--green); }
+    .col-box.against h3 { color: var(--red); }
+
+    .col-box h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .col-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .col-list li {
+      display: flex;
+      gap: 12px;
+      font-size: 0.94rem;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .col-list li i {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      margin-top: 2px;
+    }
+
+    .col-list.for li i {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--green);
+    }
+
+    .col-list.against li i {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--red);
+    }
+
+    .col-list li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .col-list li span {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .twocol-cta {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    /* ── OFFER / PRICING ──────────────────── */
+    .offer-section {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+    }
+
+    .offer-card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      box-shadow: 0 30px 80px -20px rgba(245,225,0,0.15);
+    }
+
+    .offer-card h3 {
+      font-size: 1.05rem;
+      color: var(--accent);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+    }
+
+    .offer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .offer-list li {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--border);
+      font-size: 0.95rem;
+    }
+
+    .offer-list li:last-child { border-bottom: none; }
+
+    .offer-list li.sub {
+      padding-left: 28px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      border-bottom: none;
+      padding: 4px 0 4px 28px;
+    }
+
+    .offer-list li .label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .offer-list li .label i {
+      color: var(--accent);
+    }
+
+    .offer-list li .value {
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .offer-total {
+      text-align: center;
+      padding: 16px 0;
+      border-top: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .offer-total .label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .offer-total .val {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .offer-total .strike {
+      text-decoration: line-through;
+      color: var(--dim);
+      font-size: 1.2rem;
+      margin-right: 10px;
+    }
+
+    .offer-price {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .offer-price .pretitle {
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .offer-price .big {
+      font-size: clamp(2.6rem, 7vw, 3.6rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .offer-price .sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .offer-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .offer-meta .deadline {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .offer-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .guarantee {
+      margin-top: 24px;
+      padding: 16px 18px;
+      background: rgba(34, 197, 94, 0.06);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .guarantee i {
+      color: var(--green);
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .guarantee strong { color: var(--text); }
+
+    /* ── FAQ ───────────────────────────────── */
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    details.faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      transition: border-color 0.2s ease;
+    }
+
+    details.faq-item[open] {
+      border-color: var(--border-mid);
+    }
+
+    details.faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      letter-spacing: -0.005em;
+    }
+
+    details.faq-item summary::-webkit-details-marker { display: none; }
+
+    details.faq-item summary::after {
+      content: "+";
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--accent);
+      transition: transform 0.2s ease;
+      line-height: 1;
+    }
+
+    details.faq-item[open] summary::after {
+      content: "−";
+    }
+
+    .faq-body {
+      padding: 0 24px 22px;
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── FINAL CTA ─────────────────────────── */
+    .final-cta {
+      text-align: center;
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+      padding: 80px 20px;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta h2 .accent { color: var(--accent); font-style: italic; }
+
+    .final-cta p {
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 28px;
+      font-size: 1rem;
+    }
+
+    /* ── FOOTER ────────────────────────────── */
+    .site-footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+      color: var(--dim);
+      font-size: 0.82rem;
+    }
+
+    .site-footer .brand {
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      margin-top: 8px;
+      font-size: 0.78rem;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ────────────────────────── */
+    /* Hover states uniquement sur écrans qui supportent le hover (pas touch) */
+    @media (hover: none) {
+      .card:hover, .pillar:hover, .btn-primary:hover, .btn-whatsapp:hover {
+        transform: none;
+      }
+    }
+
+    /* ── TABLETTE (≤1024px) ────────────────── */
+    @media (max-width: 1024px) {
+      .pillars { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .roadmap { grid-template-columns: repeat(2, 1fr); gap: 24px 18px; }
+      .roadmap::before { display: none; }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
+    }
+
+    /* ── PETITE TABLETTE / GRAND MOBILE (≤768px) ── */
+    @media (max-width: 768px) {
+      section { padding: 60px 18px; }
+      .hero { padding: 28px 18px 48px; }
+      .twocol { grid-template-columns: 1fr; gap: 18px; }
+      .section-head { margin-bottom: 36px; }
+
+      /* Hero */
+      .hero .eyebrow {
+        font-size: 0.68rem;
+        padding: 5px 12px;
+        white-space: normal;
+        line-height: 1.4;
+      }
+      .vsl { border-radius: 14px; }
+      .vsl-placeholder .play { width: 60px; height: 60px; font-size: 1.3rem; }
+
+      /* Trust */
+      .trust { padding: 28px 18px; }
+      .trust-num { font-size: 1.05rem; }
+      .trust-label { font-size: 0.72rem; }
+
+      /* Pillars */
+      .pillar { padding: 24px 20px; }
+      .pillar h3 { font-size: 1.05rem; }
+      .pillar p { font-size: 0.9rem; }
+
+      /* Offer card */
+      .offer-card { padding: 32px 24px; }
+      .offer-price .big { font-size: 2.8rem; }
+
+      /* FAQ */
+      details.faq-item summary {
+        padding: 18px 20px;
+        font-size: 0.92rem;
+        gap: 12px;
+      }
+      .faq-body { padding: 0 20px 18px; }
+
+      /* App showcase phones — un peu plus petits */
+      .app-showcase-section { padding: 60px 18px 72px; }
+      .app-showcase-section .phone { zoom: 0.58; }
+      .app-showcase-section .showcase { gap: 32px; margin-top: 30px; }
+
+      /* Demo video */
+      .demo-video-wrap { border-radius: 14px; margin-bottom: 36px; }
+      .demo-video-caption { margin: -28px auto 30px; }
+
+      /* Final CTA */
+      .final-cta { padding: 60px 18px; }
+    }
+
+    /* ── MOBILE (≤480px) ────────────────────── */
+    @media (max-width: 480px) {
+      section { padding: 48px 16px; }
+      .hero { padding: 20px 16px 36px; }
+
+      /* Top banner */
+      .top-banner {
+        font-size: 0.76rem;
+        padding: 9px 14px;
+        line-height: 1.4;
+      }
+
+      /* Header */
+      .site-header { padding: 20px 16px 4px; }
+      .brand img { height: 26px; }
+      .brand-name { font-size: 1rem; }
+
+      /* Hero */
+      .hero h1 {
+        font-size: 1.85rem;
+        line-height: 1.18;
+      }
+      .hero .sub { font-size: 0.95rem; margin-bottom: 22px; }
+      .hero .eyebrow {
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        margin-bottom: 18px;
+      }
+
+      /* Trust */
+      .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px 14px;
+        max-width: 360px;
+      }
+      .trust-icon { width: 38px; height: 38px; font-size: 0.95rem; }
+      .trust-num { font-size: 1rem; }
+      .trust-label { font-size: 0.7rem; line-height: 1.3; }
+
+      /* Section heads */
+      .section-title { font-size: 1.55rem; line-height: 1.2; }
+      .section-eyebrow { font-size: 0.68rem; }
+      .section-sub { font-size: 0.92rem; }
+
+      /* Pillars */
+      .pillars { grid-template-columns: 1fr; gap: 22px; }
+      .pillar { padding: 22px 18px; }
+      .pillar-num { width: 28px; height: 28px; font-size: 0.82rem; top: -12px; left: 18px; }
+      .pillar-icon { width: 46px; height: 46px; font-size: 1.2rem; margin-bottom: 14px; }
+      .pillar h3 { font-size: 1rem; margin-bottom: 10px; }
+      .pillar p { font-size: 0.88rem; }
+
+      /* Roadmap — barre verticale gauche pour donner du sens visuel */
+      .roadmap {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        position: relative;
+        padding-left: 28px;
+      }
+      .roadmap::before {
+        display: block !important;
+        content: "";
+        position: absolute;
+        top: 12px;
+        bottom: 12px;
+        left: 12px;
+        right: auto;
+        width: 2px;
+        height: auto;
+        background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+        opacity: 0.4;
+      }
+      .road-step {
+        text-align: left;
+        padding: 0;
+        position: relative;
+      }
+      .road-step::before {
+        content: "";
+        position: absolute;
+        left: -22px;
+        top: 16px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 2px solid var(--bg-deep);
+      }
+      .road-date {
+        padding: 8px 14px;
+        font-size: 0.78rem;
+        margin-bottom: 8px;
+      }
+
+      /* For You / Not For You */
+      .col-box { padding: 24px 18px; }
+      .col-box h3 { font-size: 1.05rem; margin-bottom: 18px; }
+      .col-list li { font-size: 0.9rem; }
+
+      /* Offer card */
+      .offer-section { padding-top: 40px; }
+      .offer-card { padding: 26px 18px; }
+      .offer-card h3 { font-size: 0.95rem; margin-bottom: 22px; }
+      .offer-list li {
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-start;
+        padding: 10px 0;
+      }
+      .offer-list li .value { font-size: 0.82rem; color: var(--accent); font-weight: 800; }
+      .offer-list li.sub { padding: 3px 0 3px 22px; font-size: 0.83rem; }
+      .offer-total .val { font-size: 1.5rem; }
+      .offer-total .strike { font-size: 1.05rem; margin-right: 8px; }
+      .offer-price .big { font-size: 2.6rem; }
+      .offer-price .pretitle { font-size: 0.72rem; letter-spacing: 0.12em; }
+      .offer-meta { font-size: 0.82rem; gap: 10px; }
+      .guarantee {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 14px 16px;
+        font-size: 0.84rem;
+      }
+      .guarantee i { font-size: 1.2rem; }
+
+      /* FAQ */
+      details.faq-item summary {
+        padding: 16px 18px;
+        font-size: 0.88rem;
+        gap: 10px;
+      }
+      details.faq-item summary::after { font-size: 1.3rem; }
+      .faq-body { padding: 0 18px 16px; font-size: 0.88rem; }
+
+      /* Buttons */
+      .btn { width: 100%; padding: 15px 18px; font-size: 0.95rem; }
+      .btn-whatsapp { font-size: 0.88rem; padding: 12px 18px; }
+      .cta-stack { gap: 10px; }
+
+      /* App showcase phones — encore plus petits sur mobile */
+      .app-showcase-section .phone { zoom: 0.55; }
+      .app-showcase-section .showcase { gap: 22px; margin-top: 24px; }
+
+      /* Demo video */
+      .demo-video-wrap { border-radius: 12px; margin-bottom: 28px; }
+      .demo-video-caption { font-size: 9px; margin: -24px auto 24px; }
+
+      /* Final CTA */
+      .final-cta { padding: 52px 16px; }
+      .final-cta h2 { font-size: 1.55rem; }
+      .final-cta p { font-size: 0.92rem; margin-bottom: 22px; }
+
+      /* Footer */
+      .site-footer { padding: 32px 18px; }
+      .footer-links {
+        flex-wrap: wrap;
+        gap: 14px 18px;
+      }
+    }
+
+    /* Touch optimizations */
+    .btn, details.faq-item summary, .card {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ── APP SHOWCASE (3 phones inlined) ───── */
+    .app-showcase-section {
+      background: linear-gradient(180deg, #F5F7FA 0%, #EAEEF2 100%);
+      padding: 80px 20px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-showcase-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 0%, rgba(0,230,118,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(0,230,118,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .app-showcase-section .section-head { color: #0F1419; position: relative; z-index: 1; }
+    .app-showcase-section .section-title { color: #0F1419; }
+    .app-showcase-section .section-eyebrow { color: #00A848; }
+    .app-showcase-section .section-sub { color: #6B7280; }
+
+    .demo-video-wrap {
+      max-width: 640px;
+      margin: 0 auto 50px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 16 / 9;
+      box-shadow:
+        0 30px 60px -20px rgba(15,20,25,0.3),
+        0 15px 30px -10px rgba(15,20,25,0.18);
+      position: relative;
+      z-index: 1;
+    }
+    .demo-video-wrap video,
+    .demo-video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border: 0;
+    }
+    .demo-video-caption {
+      text-align: center;
+      max-width: 640px;
+      margin: -34px auto 44px;
+      position: relative;
+      z-index: 1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: #00A848;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .app-showcase-section .showcase {
+      --green: #00E676;
+      --green-dark: #00C853;
+      --green-soft: #D8FBE6;
+      --green-pill: #B8F5D0;
+      --green-pill-text: #00A848;
+      --orange: #FF8A3D;
+      --orange-pill: #FF7A2A;
+      --yellow: #FFD93D;
+      --blue: #5BA8F5;
+      --teal: #4DD4AC;
+      --ink: #0F1419;
+      --ink-2: #1F2937;
+      --gray-1: #6B7280;
+      --gray-2: #9CA3AF;
+      --gray-3: #D1D5DB;
+      --gray-4: #E5E7EB;
+      --gray-5: #F3F4F6;
+      --gray-6: #F5F7FA;
+      --white: #FFFFFF;
+      --bg-app: #F4F6F8;
+      max-width: 1200px;
+      margin: 40px auto 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: nowrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-showcase-section .phone-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+    }
+    .app-showcase-section .phone-wrapper:nth-child(1) { transform: translateY(15px); }
+    .app-showcase-section .phone-wrapper:nth-child(2) { transform: translateY(-12px); }
+    .app-showcase-section .phone-wrapper:nth-child(3) { transform: translateY(8px); }
+
+    /* Phone : dimensions ORIGINALES — on shrink le tout via zoom pour ne rien déformer */
+    .app-showcase-section .phone {
+      zoom: 0.62;
+      width: 340px;
+      height: 700px;
+      background: #1a1a1a;
+      border-radius: 54px;
+      padding: 11px;
+      box-shadow:
+        0 0 0 2px #2a2a2a,
+        0 40px 80px -20px rgba(15,20,25,0.3),
+        0 20px 40px -10px rgba(15,20,25,0.18),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+      position: relative;
+    }
+
+    .app-showcase-section .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 44px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Inter', sans-serif;
+    }
+    .app-showcase-section .phone-screen.bg-app { background: var(--bg-app); }
+    .app-showcase-section .phone-screen.bg-white { background: var(--white); }
+
+    .app-showcase-section .notch {
+      position: absolute;
+      top: 11px; left: 50%;
+      transform: translateX(-50%);
+      width: 108px; height: 32px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 100;
+    }
+    .app-showcase-section .status-bar {
+      height: 54px;
+      padding: 0 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      flex-shrink: 0;
+    }
+    .app-showcase-section .status-icons { display: flex; gap: 6px; align-items: center; }
+    .app-showcase-section .status-icons svg { width: 15px; height: 15px; }
+    .app-showcase-section .app-content {
+      flex: 1; padding: 0 20px; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .app-showcase-section .tab-bar {
+      height: 72px;
+      background: var(--white);
+      border-top: 1px solid var(--gray-4);
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      padding-top: 10px;
+      padding-bottom: 20px;
+      flex-shrink: 0;
+    }
+    .app-showcase-section .tab {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      color: var(--gray-2); font-size: 11px; font-weight: 500;
+    }
+    .app-showcase-section .tab.active { color: var(--green-pill-text); font-weight: 600; }
+    .app-showcase-section .tab svg { width: 24px; height: 24px; }
+
+    .app-showcase-section .caption { text-align: center; max-width: 320px; }
+    .app-showcase-section .caption-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 700;
+      color: var(--green-dark);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .app-showcase-section .caption-title {
+      font-size: 17px; font-weight: 700;
+      color: var(--ink); letter-spacing: -0.02em; line-height: 1.3;
+    }
+
+    /* Screen 1 specifics — sizes ORIGINALES */
+    .app-showcase-section .top-nav {
+      padding: 4px 20px 14px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-shrink: 0;
+    }
+    .app-showcase-section .nav-back { display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 500; color: var(--ink-2); }
+    .app-showcase-section .nav-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+    .app-showcase-section .nav-close { color: var(--ink-2); }
+    .app-showcase-section .coach-pill {
+      display: inline-block; font-size: 10px; font-weight: 800;
+      color: var(--green-pill-text); background: var(--green-pill);
+      padding: 5px 12px; border-radius: 20px; letter-spacing: 0.12em;
+      margin-bottom: 8px; align-self: flex-start;
+    }
+    .app-showcase-section .session-name {
+      font-size: 26px; font-weight: 800; color: var(--ink);
+      letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 6px;
+    }
+    .app-showcase-section .session-meta { font-size: 13px; color: var(--gray-1); font-weight: 500; margin-bottom: 14px; }
+    .app-showcase-section .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+    .app-showcase-section .stat-card { background: var(--white); border-radius: 14px; padding: 10px 12px; border: 1px solid var(--gray-4); }
+    .app-showcase-section .stat-card-label { font-size: 9px; color: var(--gray-2); font-weight: 700; letter-spacing: 0.12em; margin-bottom: 4px; }
+    .app-showcase-section .stat-card-value { font-size: 19px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1; }
+    .app-showcase-section .stat-card-value.green { color: var(--green-dark); }
+    .app-showcase-section .stat-card-value .small { font-size: 13px; color: var(--gray-3); font-weight: 600; }
+    .app-showcase-section .stat-card-value .orange { color: var(--orange-pill); }
+    .app-showcase-section .section-label { font-size: 10px; font-weight: 700; color: var(--gray-2); letter-spacing: 0.12em; margin-bottom: 8px; padding-left: 2px; }
+    .app-showcase-section .section-label .accent { color: var(--gray-3); }
+    .app-showcase-section .chart-card { background: var(--white); border-radius: 16px; padding: 14px 14px 12px; margin-bottom: 12px; border: 1px solid var(--gray-4); }
+    .app-showcase-section .chart-zone { height: 100px; position: relative; margin-bottom: 8px; }
+    .app-showcase-section .ftp-line { position: absolute; top: 18%; left: 0; right: 0; border-top: 1.5px dashed var(--gray-3); }
+    .app-showcase-section .ftp-label { position: absolute; top: -2px; right: 0; font-size: 8px; color: var(--gray-2); font-weight: 700; letter-spacing: 0.1em; background: var(--white); padding: 0 2px; }
+    .app-showcase-section .bars { height: 100%; display: flex; align-items: flex-end; gap: 4px; }
+    .app-showcase-section .bar { border-radius: 3px 3px 0 0; }
+    .app-showcase-section .bar.endurance { background: var(--teal); }
+    .app-showcase-section .bar.threshold { background: var(--orange); }
+    .app-showcase-section .bar.warmup { background: var(--yellow); }
+    .app-showcase-section .bar.cooldown { background: var(--blue); }
+    .app-showcase-section .legend-pills { display: flex; gap: 8px; margin-bottom: 12px; }
+    .app-showcase-section .legend-pill { font-size: 9px; font-weight: 800; letter-spacing: 0.1em; padding: 5px 12px; border-radius: 20px; color: var(--white); }
+    .app-showcase-section .legend-pill.endurance { background: var(--teal); }
+    .app-showcase-section .legend-pill.threshold { background: var(--orange-pill); }
+    .app-showcase-section .selected-block { background: var(--green-soft); border: 1.5px solid var(--green); border-radius: 12px; padding: 10px 14px; }
+    .app-showcase-section .selected-label { font-size: 9px; font-weight: 800; color: var(--green-pill-text); letter-spacing: 0.12em; margin-bottom: 4px; }
+    .app-showcase-section .selected-power { display: flex; align-items: baseline; gap: 8px; }
+    .app-showcase-section .selected-power-val { font-size: 22px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+    .app-showcase-section .selected-power-val .unit { font-size: 14px; }
+    .app-showcase-section .selected-power-meta { font-size: 11px; color: var(--gray-1); font-weight: 500; }
+    .app-showcase-section .desc-label { font-size: 10px; font-weight: 700; color: var(--gray-2); letter-spacing: 0.12em; margin-bottom: 8px; padding-left: 2px; }
+    .app-showcase-section .desc-card { background: var(--white); border: 1px solid var(--gray-4); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; }
+    .app-showcase-section .desc-line { font-size: 11px; color: var(--ink-2); line-height: 1.55; font-weight: 500; }
+    .app-showcase-section .desc-line strong { font-weight: 800; color: var(--ink); }
+    .app-showcase-section .cta-area { padding: 0 20px 12px; flex-shrink: 0; }
+    .app-showcase-section .cta-primary {
+      width: 100%; padding: 15px; background: var(--green); color: var(--ink); border: none;
+      border-radius: 14px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 800;
+      letter-spacing: -0.01em; box-shadow: 0 6px 16px -4px rgba(0,200,83,0.35); margin-bottom: 8px;
+    }
+    .app-showcase-section .cta-secondary {
+      width: 100%; padding: 13px; background: var(--white); color: var(--ink);
+      border: 1px solid var(--gray-4); border-radius: 14px; font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 700;
+    }
+
+    /* Screen 2 */
+    .app-showcase-section .week-selector { display: flex; justify-content: center; align-items: center; gap: 14px; padding: 8px 0 16px; flex-shrink: 0; }
+    .app-showcase-section .week-arrow { color: var(--gray-2); display: flex; }
+    .app-showcase-section .week-text { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--gray-1); letter-spacing: 0.12em; }
+    .app-showcase-section .week-text .current { color: var(--ink); font-weight: 700; }
+    .app-showcase-section .week-text .sep { color: var(--gray-3); margin: 0 6px; }
+    .app-showcase-section .main-card { background: var(--white); border-radius: 18px; padding: 8px; margin-bottom: 16px; flex: 1; display: flex; flex-direction: column; box-shadow: 0 1px 3px rgba(15,20,25,0.04); }
+    .app-showcase-section .tabs-toggle { display: flex; background: var(--gray-6); border-radius: 12px; padding: 4px; margin-bottom: 10px; }
+    .app-showcase-section .tab-toggle { flex: 1; padding: 10px; text-align: center; font-size: 14px; font-weight: 600; color: var(--gray-1); border-radius: 9px; }
+    .app-showcase-section .tab-toggle.active { background: var(--white); color: var(--ink); font-weight: 700; box-shadow: 0 1px 3px rgba(15,20,25,0.08); }
+    .app-showcase-section .day-list { display: flex; flex-direction: column; gap: 7px; padding: 4px; }
+    .app-showcase-section .day-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--white); border: 1px solid var(--gray-4); border-radius: 12px; }
+    .app-showcase-section .day-row.today { background: var(--green-soft); border-color: var(--green); box-shadow: 0 2px 8px -2px rgba(0,200,83,0.15); }
+    .app-showcase-section .day-row.rest { opacity: 0.55; }
+    .app-showcase-section .day-label-mini { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; color: var(--gray-1); width: 28px; text-transform: uppercase; flex-shrink: 0; }
+    .app-showcase-section .day-row.today .day-label-mini { color: var(--green-pill-text); }
+    .app-showcase-section .day-content { flex: 1; min-width: 0; }
+    .app-showcase-section .day-name { font-size: 12.5px; font-weight: 700; color: var(--ink); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .app-showcase-section .day-detail { font-size: 10px; color: var(--gray-1); font-weight: 500; margin-top: 1px; }
+    .app-showcase-section .day-badge { flex-shrink: 0; }
+    .app-showcase-section .day-pending { width: 18px; height: 18px; border-radius: 50%; border: 1.5px dashed var(--gray-3); }
+    .app-showcase-section .day-today-badge { font-size: 8.5px; font-weight: 800; color: var(--green-pill-text); background: var(--green-pill); padding: 3px 7px; border-radius: 10px; letter-spacing: 0.08em; }
+    .app-showcase-section .day-rest-badge { font-size: 9px; color: var(--gray-2); font-style: italic; font-weight: 500; }
+
+    /* Screen 3 */
+    .app-showcase-section .stats-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-top: 8px; }
+    .app-showcase-section .header-title-block { display: flex; flex-direction: column; gap: 2px; }
+    .app-showcase-section .header-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: var(--gray-2); letter-spacing: 0.15em; }
+    .app-showcase-section .header-title { font-size: 22px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1; }
+    .app-showcase-section .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--green-pill); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--green-pill-text); }
+    .app-showcase-section .top-tabs { display: flex; background: var(--gray-6); border-radius: 12px; padding: 4px; margin-bottom: 14px; }
+    .app-showcase-section .top-tab { flex: 1; padding: 10px; text-align: center; font-size: 13px; font-weight: 600; color: var(--gray-1); border-radius: 9px; }
+    .app-showcase-section .top-tab.active { background: var(--white); color: var(--ink); font-weight: 700; box-shadow: 0 1px 3px rgba(15,20,25,0.08); }
+    .app-showcase-section .filter-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .app-showcase-section .filter-btn { display: flex; align-items: center; gap: 6px; padding: 7px 12px; background: var(--white); border: 1px solid var(--gray-4); border-radius: 20px; font-size: 11px; font-weight: 600; color: var(--ink-2); }
+    .app-showcase-section .filter-btn svg { width: 13px; height: 13px; }
+    .app-showcase-section .section-mini-label { font-size: 10px; font-weight: 700; color: var(--gray-2); letter-spacing: 0.15em; margin-bottom: 8px; }
+    .app-showcase-section .activity-card { background: var(--gray-6); border-radius: 16px; padding: 14px; margin-bottom: 14px; }
+    .app-showcase-section .activity-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+    .app-showcase-section .activity-date-range { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: var(--gray-2); letter-spacing: 0.12em; margin-bottom: 4px; }
+    .app-showcase-section .activity-stats { display: flex; align-items: baseline; gap: 12px; flex-wrap: nowrap; white-space: nowrap; }
+    .app-showcase-section .activity-stat-big { font-size: 22px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1; }
+    .app-showcase-section .activity-stat-big .unit { font-size: 11px; font-weight: 600; color: var(--gray-1); margin-left: 2px; }
+    .app-showcase-section .activity-stat-small { font-size: 14px; font-weight: 700; color: var(--ink-2); letter-spacing: -0.01em; line-height: 1; }
+    .app-showcase-section .period-select { display: flex; align-items: center; gap: 4px; padding: 5px 9px; background: var(--white); border: 1px solid var(--gray-4); border-radius: 8px; font-size: 10px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
+    .app-showcase-section .period-select svg { width: 9px; height: 9px; }
+    .app-showcase-section .main-chart { height: 110px; position: relative; margin-bottom: 8px; }
+    .app-showcase-section .y-axis-labels { position: absolute; left: 0; top: 0; bottom: 0; width: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+    .app-showcase-section .y-label { font-family: 'JetBrains Mono', monospace; font-size: 7px; color: var(--gray-2); font-weight: 600; }
+    .app-showcase-section .chart-area { margin-left: 22px; height: 100%; border-top: 1px solid var(--gray-4); border-bottom: 1px solid var(--gray-4); position: relative; }
+    .app-showcase-section .bars-row { height: 100%; display: flex; align-items: flex-end; gap: 1.5px; padding: 2px 0; }
+    .app-showcase-section .month-bar { flex: 1; background: var(--green); border-radius: 1.5px 1.5px 0 0; min-height: 2px; }
+    .app-showcase-section .x-axis-labels { margin-left: 22px; display: flex; margin-top: 4px; }
+    .app-showcase-section .x-label { flex: 1; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 7px; color: var(--gray-1); font-weight: 600; }
+    .app-showcase-section .week-month-toggle { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--gray-4); }
+    .app-showcase-section .toggle-label { font-size: 12px; font-weight: 600; color: var(--gray-2); }
+    .app-showcase-section .toggle-label.active { color: var(--ink); font-weight: 800; }
+    .app-showcase-section .toggle-switch { width: 38px; height: 22px; background: var(--green); border-radius: 12px; position: relative; }
+    .app-showcase-section .toggle-knob { position: absolute; right: 2px; top: 2px; width: 18px; height: 18px; background: var(--white); border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+    .app-showcase-section .stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 14px; }
+    .app-showcase-section .stat-mini { background: var(--white); border: 1px solid var(--gray-4); border-radius: 12px; padding: 10px 8px; }
+    .app-showcase-section .stat-mini.active { background: var(--green-soft); border-color: var(--green); }
+    .app-showcase-section .stat-mini-label { font-size: 9px; font-weight: 600; color: var(--gray-1); margin-bottom: 4px; border-bottom: 1px solid var(--gray-3); padding-bottom: 3px; }
+    .app-showcase-section .stat-mini.active .stat-mini-label { color: var(--ink-2); border-bottom-color: var(--green-dark); }
+    .app-showcase-section .stat-mini-value { font-size: 16px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1; }
+    .app-showcase-section .stat-mini-value .unit { font-size: 9px; font-weight: 600; color: var(--gray-1); }
+    .app-showcase-section .stat-mini-delta { font-size: 9px; font-weight: 700; color: var(--green-pill-text); margin-top: 4px; }
+    .app-showcase-section .stat-mini-sub { font-size: 9px; color: var(--gray-1); font-weight: 500; margin-top: 4px; }
+
+    @media (max-width: 1100px) {
+      .app-showcase-section .showcase { flex-wrap: wrap; gap: 30px; }
+      .app-showcase-section .phone-wrapper { transform: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── TOP BANNER ── -->
+  <div class="top-banner">
+    <i class="fa-solid fa-bolt"></i>
+    <strong>Offre de lancement</strong> — Pré-vente JustPush · Fin de l'offre le <strong>07/06 à minuit</strong>
+  </div>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <a href="https://lascienceducyclisme.com" class="brand">
+      <img src="../lsdc-logo-blanc.svg" alt="LSDC">
+      <span class="brand-name">JustPush</span>
+    </a>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <span class="eyebrow">Pour les cyclistes amateurs · 6-12h / semaine</span>
+    <h1>
+      Voici comment t'entraîner pour progresser <span class="accent">sur le long terme</span>
+      <br>— sans te prendre la tête.
+    </h1>
+    <p class="sub">
+      Regarde cette vidéo pour découvrir l'application Just-Push et obtient ton copilote d'entraînement à vie.
+    </p>
+
+    <!-- VSL placeholder — espace pour upload une vidéo hero -->
+    <div class="vsl">
+      <div class="vsl-placeholder">
+        <div class="play"><i class="fa-solid fa-play"></i></div>
+        <span>Espace VSL — upload la vidéo ici</span>
+      </div>
+      <!-- <video controls playsinline preload="metadata">
+        <source src="assets/ma-vsl.mp4" type="video/mp4">
+      </video> -->
+    </div>
+
+    <div class="cta-stack">
+      <a href="#offre" class="btn btn-primary">
+        Accède à Just-Push à vie <i class="fa-solid fa-arrow-right"></i>
+      </a>
+      <div class="cta-note">
+        Tarif de prévente · Pas d'abonnement · Accès à vie · 100 places
+      </div>
+      <a href="https://wa.me/" class="btn btn-whatsapp" target="_blank" rel="noopener">
+        <i class="fa-brands fa-whatsapp"></i> Pose toutes tes questions sur WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- ── TRUST STRIP ── -->
+  <div class="trust">
+    <div class="trust-inner">
+      <p class="trust-title">Par <strong>La Science du Cyclisme</strong> — Établie depuis 2021</p>
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-brands fa-youtube"></i></div>
+          <div class="trust-num">22 000</div>
+          <div class="trust-label">Abonnés YouTube</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="trust-num">8 800</div>
+          <div class="trust-label">Newsletter</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="trust-num">2 700</div>
+          <div class="trust-label">Clients méthode watt/kg</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="trust-num">5 ans</div>
+          <div class="trust-label">D'expertise terrain</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6 PILLARS ── -->
+  <section id="piliers">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-eyebrow">Comment ça marche</span>
+        <h2 class="section-title">Les 6 piliers de <span class="accent">Just-Push</span></h2>
+        <p class="section-sub">
+          Toute la science de l'entraînement, condensée dans une app qui décide à ta place.
+        </p>
+      </div>
+
+      <div class="pillars">
+
+        <!-- Pillar 1 -->
+        <article class="pillar">
+          <span class="pillar-num">1</span>
+          <div class="pillar-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3>Gestion dynamique de budget d'entraînement en kJ</h3>
+          <p>
+            Ta progression dépend à 80 % d'une seule chose : réaliser la bonne dose d'entraînement chaque semaine. Trop peu, tu stagnes. Trop, tu t'épuises.
+          </p>
+          <p>
+            Just-Push calcule chaque dimanche ton budget en kJ à partir de ton niveau, ta fatigue et tes paramètres de vie. Ta seule mission : dépenser ce budget.
+          </p>
+        </article>
+
+        <!-- Pillar 2 -->
+        <article class="pillar">
+          <span class="pillar-num">2</span>
+          <div class="pillar-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+          <h3>Une planification qui se rééquilibre toute seule</h3>
+          <p>
+            Un plan rigide ne survit pas trois semaines. Just-Push génère la meilleure planification possible, semaine après semaine.
+          </p>
+          <p>
+            Tu rates mardi ? Ta semaine se réajuste. Tu roules trop long samedi ? Dimanche s'allège. Tu ne cours plus jamais derrière un plan obsolète.
+          </p>
+        </article>
+
+        <!-- Pillar 3 -->
+        <article class="pillar">
+          <span class="pillar-num">3</span>
+          <div class="pillar-icon"><i class="fa-solid fa-bicycle"></i></div>
+          <h3>Le Mode Libre</h3>
+          <p>
+            Ceux qui tiennent 5 ans gardent l'équilibre entre cadre et plaisir. Un plan 100 % cadré finit toujours par t'étouffer.
+          </p>
+          <p>
+            Enclenche le Mode Libre : roule avec tes potes, où tu veux, à l'allure que tu veux. L'app analyse et réadapte le reste de ta semaine. Sans culpabilité.
+          </p>
+        </article>
+
+        <!-- Pillar 4 -->
+        <article class="pillar">
+          <span class="pillar-num">4</span>
+          <div class="pillar-icon"><i class="fa-solid fa-trophy"></i></div>
+          <h3>Un entraînement transformé en jeu</h3>
+          <p>
+            Ton cerveau a besoin de récompenses régulières pour rester motivé. Les apps classiques gamifient ce que tu ne contrôles pas (ta FTP, tes classements Strava).
+          </p>
+          <p>
+            Just-Push transforme en jeu ce que tu fais : tes kJ cumulés, tes séances enchaînées, ta régularité sur 30, 60, 90 jours. Tu trackes ce qui te fait progresser, pas l'inverse.
+          </p>
+        </article>
+
+        <!-- Pillar 5 -->
+        <article class="pillar">
+          <span class="pillar-num">5</span>
+          <div class="pillar-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h3>La détection de victoire</h3>
+          <p>
+            Tu peux faire 8 semaines parfaites pour gagner 5 watts. C'est là que la majorité abandonne — par manque de retour visible.
+          </p>
+          <p>
+            Bien avant ta puissance pure, ton corps envoie des signaux : FC qui baisse, durabilité qui monte, capacité à répéter les efforts. Just-Push les capte et te les restitue. Plus besoin de faire un test FTP pour valider ta progression.
+          </p>
+        </article>
+
+        <!-- Pillar 6 -->
+        <article class="pillar">
+          <span class="pillar-num">6</span>
+          <div class="pillar-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+          <h3>Une interface qui décide à ta place</h3>
+          <p>
+            Avec une vie bien chargée + tes entraînements, tu n'as plus la marge mentale pour interpréter 6 graphiques. C'est pour ça que 50 % des utilisateurs Training Peaks lâchent en 3 mois.
+          </p>
+          <p>
+            Trois écrans. Aucun paramètre à régler. L'algorithme décide à ta place. Toute la science reste sous le capot et tu n'as qu'à appuyer sur les pédales.
+          </p>
+        </article>
+
+      </div>
+
+      <div class="pillars-cta">
+        <a href="#offre" class="btn btn-primary">Accède à Just-Push à vie <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="cta-note" style="margin-top:10px;">Tarif de prévente · Accès à vie · 100 places</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── APP SHOWCASE — 3 phones ── -->
+  <section class="app-showcase-section">
+    <div class="section-head">
+      <span class="section-eyebrow">Aperçu de l'application</span>
+      <h2 class="section-title">Trois fenêtres. <span style="font-style:italic; color:#00A848;">Zéro complexité.</span></h2>
+      <p class="section-sub">
+        Toute la science de l'entraînement, condensée en trois fenêtres. Tous les jours, tu découvres ta séance et tu pédales.
+      </p>
+    </div>
+
+    <!-- Vidéo démo de la maquette — YouTube embed -->
+    <div class="demo-video-wrap">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/g4s2JFf_2pA?rel=0&modestbranding=1"
+        title="JustPush — Démo de la maquette par Antonin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+    </div>
+    <div class="demo-video-caption">▸ Démo · 2 min avec Antonin</div>
+
+    <div class="showcase">
+
+      <!-- SCREEN 1 : SÉANCE -->
+      <div class="phone-wrapper">
+        <div class="phone">
+          <div class="phone-screen bg-app">
+            <div class="notch"></div>
+            <div class="status-bar">
+              <span>7:42</span>
+              <div class="status-icons">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 4h2v8H1zm4-2h2v10H5zm4-1h2v11H9zm4 3h2v8h-2z"/></svg>
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a8 8 0 016.3 3l-1.4 1.4A6 6 0 008 5a6 6 0 00-4.9 2.4L1.7 6A8 8 0 018 3zm0 4a4 4 0 013.2 1.6l-1.4 1.4A2 2 0 008 9a2 2 0 00-1.8 1L4.8 8.6A4 4 0 018 7zm0 4a1.5 1.5 0 11.001 3 1.5 1.5 0 010-3z"/></svg>
+                <svg viewBox="0 0 24 12" fill="currentColor"><rect x="1" y="1" width="20" height="10" rx="2.5" fill="none" stroke="currentColor"/><rect x="3" y="3" width="15" height="6" rx="1"/></svg>
+              </div>
+            </div>
+
+            <div class="top-nav">
+              <div class="nav-back">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+                <span>Retour</span>
+              </div>
+              <div class="nav-title">Séance du jour</div>
+              <div class="nav-close">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              </div>
+            </div>
+
+            <div class="app-content">
+              <div class="coach-pill">INTERVAL COACH</div>
+              <div class="session-name">Intervalle moyenne<br>intensité 3×20</div>
+              <div class="session-meta">Lundi · 4 mai · Outdoor</div>
+
+              <div class="stats-grid">
+                <div class="stat-card"><div class="stat-card-label">DURÉE</div><div class="stat-card-value">2h 10</div></div>
+                <div class="stat-card"><div class="stat-card-label">kJ</div><div class="stat-card-value green">~718</div></div>
+                <div class="stat-card"><div class="stat-card-label">DIFFICULTÉ</div><div class="stat-card-value"><span class="orange">7</span><span class="small"> / 10</span></div></div>
+              </div>
+
+              <div class="section-label">STRUCTURE <span class="accent">·  CLIQUE UN BLOC</span></div>
+
+              <div class="chart-card">
+                <div class="chart-zone">
+                  <div class="ftp-line"></div>
+                  <div class="ftp-label">FTP</div>
+                  <div class="bars">
+                    <div class="bar endurance" style="width: 11%; height: 48%;"></div>
+                    <div class="bar warmup" style="width: 6%; height: 62%;"></div>
+                    <div class="bar threshold" style="width: 18%; height: 88%;"></div>
+                    <div class="bar endurance" style="width: 7%; height: 45%;"></div>
+                    <div class="bar threshold" style="width: 18%; height: 88%;"></div>
+                    <div class="bar endurance" style="width: 7%; height: 45%;"></div>
+                    <div class="bar threshold" style="width: 18%; height: 88%;"></div>
+                    <div class="bar cooldown" style="width: 11%; height: 55%;"></div>
+                  </div>
+                </div>
+                <div class="legend-pills">
+                  <span class="legend-pill endurance">ENDURANCE</span>
+                  <span class="legend-pill threshold">THRESHOLD</span>
+                </div>
+                <div class="selected-block">
+                  <div class="selected-label">BLOC SÉLECTIONNÉ · 3</div>
+                  <div class="selected-power">
+                    <span class="selected-power-val">362<span class="unit">W</span></span>
+                    <span class="selected-power-meta">· 102% FTP · 20 min</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="desc-label">DESCRIPTION</div>
+              <div class="desc-card">
+                <div class="desc-line">
+                  <strong>Warmup</strong> · 12 min easy Z2, puis 5 min progressifs Z3.<br>
+                  <strong>Main set</strong> · 3 × 20 min @ 102% FTP, RI 5 min Z2.<br>
+                  <strong>Cool down</strong> · 10 min Z1.
+                </div>
+              </div>
+            </div>
+
+            <div class="cta-area">
+              <button class="cta-primary">Envoyer sur intervals.icu</button>
+              <button class="cta-secondary">Modifier la séance</button>
+            </div>
+
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-8 9 8M5 10v10h4v-6h6v6h4V10"/></svg><span>Home</span></div>
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M16 3v4M8 3v4M3 10h18" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg><span>Ma semaine</span></div>
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span>Mes stats</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="caption-tag">SÉANCE</div>
+          <div class="caption-title">Visualise ta séance du jour et exécute-la.</div>
+        </div>
+      </div>
+
+      <!-- SCREEN 2 : MA SEMAINE -->
+      <div class="phone-wrapper">
+        <div class="phone">
+          <div class="phone-screen bg-app">
+            <div class="notch"></div>
+            <div class="status-bar">
+              <span>7:42</span>
+              <div class="status-icons">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 4h2v8H1zm4-2h2v10H5zm4-1h2v11H9zm4 3h2v8h-2z"/></svg>
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a8 8 0 016.3 3l-1.4 1.4A6 6 0 008 5a6 6 0 00-4.9 2.4L1.7 6A8 8 0 018 3zm0 4a4 4 0 013.2 1.6l-1.4 1.4A2 2 0 008 9a2 2 0 00-1.8 1L4.8 8.6A4 4 0 018 7zm0 4a1.5 1.5 0 11.001 3 1.5 1.5 0 010-3z"/></svg>
+                <svg viewBox="0 0 24 12" fill="currentColor"><rect x="1" y="1" width="20" height="10" rx="2.5" fill="none" stroke="currentColor"/><rect x="3" y="3" width="15" height="6" rx="1"/></svg>
+              </div>
+            </div>
+
+            <div class="week-selector">
+              <div class="week-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div>
+              <div class="week-text"><span>SEMAINE 18</span><span class="sep">·</span><span class="current">SEMAINE 19</span></div>
+              <div class="week-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></div>
+            </div>
+
+            <div class="app-content">
+              <div class="main-card">
+                <div class="tabs-toggle">
+                  <div class="tab-toggle active">Plan</div>
+                  <div class="tab-toggle">Résultat</div>
+                </div>
+
+                <div class="day-list">
+                  <div class="day-row today"><div class="day-label-mini">Lun</div><div class="day-content"><div class="day-name">Intervalle moyenne intensité</div><div class="day-detail">~718 kJ · 2h 10</div></div><div class="day-badge"><span class="day-today-badge">AUJ.</span></div></div>
+                  <div class="day-row"><div class="day-label-mini">Mar</div><div class="day-content"><div class="day-name">Basse intensité facile</div><div class="day-detail">~280 kJ · 1h</div></div><div class="day-badge"><div class="day-pending"></div></div></div>
+                  <div class="day-row rest"><div class="day-label-mini">Mer</div><div class="day-content"><div class="day-name">Jour de repos</div><div class="day-detail">Récupération</div></div><div class="day-badge"><span class="day-rest-badge">—</span></div></div>
+                  <div class="day-row"><div class="day-label-mini">Jeu</div><div class="day-content"><div class="day-name">Intervalles VO2max</div><div class="day-detail">~520 kJ · 1h 30m</div></div><div class="day-badge"><div class="day-pending"></div></div></div>
+                  <div class="day-row rest"><div class="day-label-mini">Ven</div><div class="day-content"><div class="day-name">Jour de repos</div><div class="day-detail">Récupération</div></div><div class="day-badge"><span class="day-rest-badge">—</span></div></div>
+                  <div class="day-row"><div class="day-label-mini">Sam</div><div class="day-content"><div class="day-name">Basse intensité facile</div><div class="day-detail">~480 kJ · 1h 20m</div></div><div class="day-badge"><div class="day-pending"></div></div></div>
+                  <div class="day-row"><div class="day-label-mini">Dim</div><div class="day-content"><div class="day-name">Sortie longue</div><div class="day-detail">~1 200 kJ · 3h 30m</div></div><div class="day-badge"><div class="day-pending"></div></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cta-area">
+              <button class="cta-primary">Découvrir le bilan de ma semaine</button>
+            </div>
+
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-8 9 8M5 10v10h4v-6h6v6h4V10"/></svg><span>Home</span></div>
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M16 3v4M8 3v4M3 10h18" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg><span>Ma semaine</span></div>
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span>Mes stats</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="caption-tag">MA SEMAINE</div>
+          <div class="caption-title">Découvre ton plan optimisé chaque semaine.</div>
+        </div>
+      </div>
+
+      <!-- SCREEN 3 : MES STATS -->
+      <div class="phone-wrapper">
+        <div class="phone">
+          <div class="phone-screen bg-white">
+            <div class="notch"></div>
+            <div class="status-bar">
+              <span>7:42</span>
+              <div class="status-icons">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 4h2v8H1zm4-2h2v10H5zm4-1h2v11H9zm4 3h2v8h-2z"/></svg>
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a8 8 0 016.3 3l-1.4 1.4A6 6 0 008 5a6 6 0 00-4.9 2.4L1.7 6A8 8 0 018 3zm0 4a4 4 0 013.2 1.6l-1.4 1.4A2 2 0 008 9a2 2 0 00-1.8 1L4.8 8.6A4 4 0 018 7zm0 4a1.5 1.5 0 11.001 3 1.5 1.5 0 010-3z"/></svg>
+                <svg viewBox="0 0 24 12" fill="currentColor"><rect x="1" y="1" width="20" height="10" rx="2.5" fill="none" stroke="currentColor"/><rect x="3" y="3" width="15" height="6" rx="1"/></svg>
+              </div>
+            </div>
+
+            <div class="app-content">
+              <div class="stats-header">
+                <div class="header-title-block">
+                  <div class="header-label">MES STATS</div>
+                  <div class="header-title">Moi</div>
+                </div>
+                <div class="avatar">AA</div>
+              </div>
+
+              <div class="top-tabs">
+                <div class="top-tab active">Progrès</div>
+                <div class="top-tab">Profil</div>
+                <div class="top-tab">Records</div>
+              </div>
+
+              <div class="filter-row">
+                <div class="filter-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>30 derniers jours</span></div>
+                <div class="filter-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4 12.5-12.5z"/></svg><span>Personnaliser</span></div>
+              </div>
+
+              <div class="section-mini-label">ACTIVITÉS · 12 MOIS</div>
+
+              <div class="activity-card">
+                <div class="activity-header">
+                  <div>
+                    <div class="activity-date-range">4 MAI — 10 MAI 2026</div>
+                    <div class="activity-stats">
+                      <span class="activity-stat-big">1&nbsp;850<span class="unit">kJ</span></span>
+                      <span class="activity-stat-small">1h&nbsp;15</span>
+                      <span class="activity-stat-small">216m</span>
+                    </div>
+                  </div>
+                  <div class="period-select">avr. 2025 — mai 2026<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+                </div>
+
+                <div class="main-chart">
+                  <div class="y-axis-labels">
+                    <span class="y-label">1500</span>
+                    <span class="y-label">1000</span>
+                    <span class="y-label">500</span>
+                    <span class="y-label">0</span>
+                  </div>
+                  <div class="chart-area">
+                    <div class="bars-row">
+                      <div class="month-bar" style="height: 45%;"></div><div class="month-bar" style="height: 78%;"></div><div class="month-bar" style="height: 35%;"></div><div class="month-bar" style="height: 52%;"></div><div class="month-bar" style="height: 40%;"></div><div class="month-bar" style="height: 28%;"></div><div class="month-bar" style="height: 25%;"></div><div class="month-bar" style="height: 38%;"></div><div class="month-bar" style="height: 42%;"></div><div class="month-bar" style="height: 55%;"></div><div class="month-bar" style="height: 22%;"></div><div class="month-bar" style="height: 30%;"></div><div class="month-bar" style="height: 18%;"></div><div class="month-bar" style="height: 35%;"></div><div class="month-bar" style="height: 12%;"></div><div class="month-bar" style="height: 20%;"></div><div class="month-bar" style="height: 32%;"></div><div class="month-bar" style="height: 50%;"></div><div class="month-bar" style="height: 65%;"></div><div class="month-bar" style="height: 82%;"></div><div class="month-bar" style="height: 55%;"></div><div class="month-bar" style="height: 70%;"></div><div class="month-bar" style="height: 60%;"></div><div class="month-bar" style="height: 48%;"></div><div class="month-bar" style="height: 75%;"></div><div class="month-bar" style="height: 52%;"></div><div class="month-bar" style="height: 68%;"></div><div class="month-bar" style="height: 58%;"></div><div class="month-bar" style="height: 40%;"></div><div class="month-bar" style="height: 62%;"></div><div class="month-bar" style="height: 55%;"></div><div class="month-bar" style="height: 48%;"></div><div class="month-bar" style="height: 38%;"></div><div class="month-bar" style="height: 30%;"></div><div class="month-bar" style="height: 22%;"></div><div class="month-bar" style="height: 15%;"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="x-axis-labels">
+                  <span class="x-label">mai</span><span class="x-label">juin</span><span class="x-label">juil</span><span class="x-label">août</span><span class="x-label">sept</span><span class="x-label">oct</span><span class="x-label">nov</span><span class="x-label">déc</span><span class="x-label">janv</span><span class="x-label">févr</span><span class="x-label">mars</span><span class="x-label">avr</span>
+                </div>
+
+                <div class="week-month-toggle">
+                  <span class="toggle-label">Semaine</span>
+                  <div class="toggle-switch"><div class="toggle-knob"></div></div>
+                  <span class="toggle-label active">Mois</span>
+                </div>
+              </div>
+
+              <div class="section-mini-label">30 DERNIERS JOURS</div>
+
+              <div class="stats-row">
+                <div class="stat-mini active"><div class="stat-mini-label">Travail kJ</div><div class="stat-mini-value">30 000<span class="unit">kJ</span></div><div class="stat-mini-delta">↗ +12%</div></div>
+                <div class="stat-mini"><div class="stat-mini-label">Volume</div><div class="stat-mini-value">40<span class="unit">h</span></div><div class="stat-mini-delta">↗ +8%</div></div>
+                <div class="stat-mini"><div class="stat-mini-label">Ratio kJ/vol.</div><div class="stat-mini-value">200<span class="unit">w</span></div><div class="stat-mini-sub">moy.</div></div>
+              </div>
+            </div>
+
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-8 9 8M5 10v10h4v-6h6v6h4V10"/></svg><span>Home</span></div>
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg><span>Ma semaine</span></div>
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7H4z"/></svg><span>Mes stats</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="caption-tag">MES STATS</div>
+          <div class="caption-title">On transforme ton entraînement en jeu.<br>Ta progression en watts suit.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── ROADMAP ── -->
+  <section class="roadmap-section">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-eyebrow">La roadmap de développement</span>
+        <h2 class="section-title">Du 08/06 au <span class="accent">15/09</span></h2>
+        <p class="section-sub">
+          Voici exactement ce que tu reçois, semaine après semaine.
+        </p>
+      </div>
+
+      <div class="roadmap">
+
+        <div class="road-step">
+          <div class="road-date">08/06</div>
+          <h4>Lancement de la communauté</h4>
+          <p>Communauté Just-Push en cohorte, appel de bienvenue, accès aux formations LSDC.</p>
+        </div>
+
+        <div class="road-step">
+          <div class="road-date">15/06</div>
+          <h4>Accès à l'application</h4>
+          <p>Synchronisation des données et outils statistiques. On transforme ton entraînement en jeu.</p>
+        </div>
+
+        <div class="road-step">
+          <div class="road-date">Juillet</div>
+          <h4>Fonctionnalités principales</h4>
+          <p>Gestion dynamique du budget d'entraînement et planification à la semaine.</p>
+        </div>
+
+        <div class="road-step">
+          <div class="road-date">15/09</div>
+          <h4>Application V1 finalisée</h4>
+          <p>Suggestions de séances, détection de progrès avancés, réadaptation du plan. Prêt pour ta prépa hiver.</p>
+        </div>
+
+      </div>
+
+      <div class="roadmap-note">
+        <i class="fa-solid fa-shield-halved"></i>
+        <strong>Garantie 15/09 :</strong> si l'application n'est pas prête à 100 % à cette date, tu reçois un remboursement intégral.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOR / NOT FOR ── -->
+  <section>
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-eyebrow">Avant de t'inscrire</span>
+        <h2 class="section-title">C'est <span class="accent">pour toi</span> si...</h2>
+      </div>
+
+      <div class="twocol">
+
+        <div class="col-box for">
+          <h3><i class="fa-solid fa-circle-check"></i> Just-Push est pour toi si :</h3>
+          <ul class="col-list for">
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Tu roules 6 à 12h par semaine</strong> et tu veux structurer ton entraînement sans y passer ta vie.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Tu jongles entre boulot, famille et vélo</strong> et un plan rigide ne tient jamais.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Tu veux progresser sur le long terme</strong>, pas exploser sur 8 semaines pour abandonner ensuite.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Tu en as marre des apps trop complexes</strong> où il faut être coach pour comprendre les graphiques.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Tu veux faire confiance à la science</strong> et déléguer la complexité à un copilote intelligent.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-box against">
+          <h3><i class="fa-solid fa-circle-xmark"></i> Ce n'est PAS pour toi si :</h3>
+          <ul class="col-list against">
+            <li>
+              <i class="fa-solid fa-xmark"></i>
+              <span><strong>Tu roules moins de 4h par semaine</strong> — la méthodologie est pensée pour des cyclistes engagés.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-xmark"></i>
+              <span><strong>Tu n'as pas de capteur de puissance</strong> ou de moyen de mesurer ton entraînement objectivement.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-xmark"></i>
+              <span><strong>Tu cherches une solution magique</strong> pour gagner 30 watts en un mois sans rien changer à ton hygiène.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-xmark"></i>
+              <span><strong>Tu refuses de faire confiance à l'algorithme</strong> et tu veux tout micro-gérer toi-même.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-xmark"></i>
+              <span><strong>Tu es coach pro</strong> et tu cherches un outil pour gérer 30 athlètes en parallèle.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="twocol-cta">
+        <a href="#offre" class="btn btn-primary">Je rejoins la pré-vente <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="cta-note" style="margin-top:10px;">100 places · Accès à vie · Pas d'abonnement</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OFFER / PRICING ── -->
+  <section class="offer-section" id="offre">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-eyebrow">L'offre de pré-vente</span>
+        <h2 class="section-title">Voici exactement <span class="accent">ce que tu reçois</span></h2>
+        <p class="section-sub">
+          Tu me fais confiance avant que l'app soit finalisée — il te faut donc des avantages supplémentaires.
+        </p>
+      </div>
+
+      <div class="offer-card">
+        <h3><i class="fa-solid fa-gift"></i> Ta proposition de pré-vente</h3>
+
+        <ul class="offer-list">
+          <li>
+            <span class="label"><i class="fa-solid fa-infinity"></i> JustPush — Accès <strong>À VIE</strong></span>
+            <span class="value">valeur 1 800 €</span>
+          </li>
+          <li class="sub">Prix de sortie prévu : 29 €/mois — soit 1 800 € sur 5 ans</li>
+
+          <li>
+            <span class="label"><i class="fa-solid fa-users"></i> 1 an de communauté LSDC privée</span>
+            <span class="value">valeur 500 €</span>
+          </li>
+          <li class="sub">Canal exclusif avec Antonin pendant 12 mois</li>
+          <li class="sub">Accès à l'ensemble des formations LSDC</li>
+          <li class="sub">Formation « JustPush pour comprendre ton entraînement »</li>
+          <li class="sub">Lives mensuels bêta exclusifs</li>
+          <li class="sub">Accès bêta progressive</li>
+          <li class="sub">Badge Founding Member à vie</li>
+        </ul>
+
+        <div class="offer-total">
+          <div class="label">Valeur totale</div>
+          <div class="val"><span class="strike">2 300 €+</span></div>
+        </div>
+
+        <div class="offer-price">
+          <div class="pretitle">Tarif de pré-vente</div>
+          <div class="big">349 €</div>
+          <div class="sub">Un seul paiement · Accès à vie · Sans abonnement</div>
+        </div>
+
+        <div class="offer-meta">
+          <div><i class="fa-solid fa-user-group"></i> Seulement <strong>100 places</strong> disponibles</div>
+          <div class="deadline"><i class="fa-solid fa-clock"></i> La pré-vente se termine le <strong>7 juin à minuit</strong></div>
+        </div>
+
+        <div class="offer-cta">
+          <a href="https://buy.stripe.com/6oU28s5x36Tp6QY2P1bo40f" class="btn btn-primary" style="width:100%; max-width:420px;" target="_blank" rel="noopener">
+            Réserver ma place à 349 € <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="https://wa.me/" class="btn btn-whatsapp" target="_blank" rel="noopener" style="width:100%; max-width:420px;">
+            <i class="fa-brands fa-whatsapp"></i> Une question ? Écris-moi sur WhatsApp
+          </a>
+        </div>
+
+        <div class="guarantee">
+          <i class="fa-solid fa-shield-halved"></i>
+          <div>
+            <strong>Garantie 15/09 :</strong> si l'application n'est pas prête à 100 % à cette date, tu reçois un remboursement intégral. Sans questions.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section>
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-eyebrow">Foire aux questions</span>
+        <h2 class="section-title">Tes <span class="accent">questions</span>, mes réponses</h2>
+      </div>
+
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary>Je n'ai jamais structuré mon entraînement, ça va me convenir ?</summary>
+          <div class="faq-body">
+            Oui. Just-Push est pensé exactement pour ça : décider à ta place. Tu n'as aucun paramètre à régler, aucune connaissance préalable nécessaire. Tu te connectes, tu suis la séance du jour. L'algorithme s'occupe du reste.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Quel matériel je dois avoir pour utiliser l'application ?</summary>
+          <div class="faq-body">
+            Un capteur de puissance (vélo ou home-trainer) et un cardio. C'est tout. Pas besoin d'abonnement TrainingPeaks ou autre — Just-Push se synchronise directement avec tes données.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Pourquoi un accès à vie plutôt qu'un abonnement ?</summary>
+          <div class="faq-body">
+            Parce que c'est une pré-vente. Tu prends le risque avec moi avant que l'app soit finalisée — il est normal que tu reçoives un deal qui n'existera plus jamais après. Le prix de sortie sera de 29 €/mois (1 800 € sur 5 ans).
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Que se passe-t-il si l'app n'est pas prête au 15/09 ?</summary>
+          <div class="faq-body">
+            Tu reçois un remboursement intégral. C'est la garantie. La roadmap est claire et publique : 08/06 communauté, 15/06 app + stats, juillet planification dynamique, août fonctionnalités avancées, 15/09 V1 complète.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Pourquoi seulement 100 places ?</summary>
+          <div class="faq-body">
+            Parce que je n'ai pas besoin de plus de Founding Members pour tester l'app, et parce que Just-Push deviendra une entreprise à part entière. Proposer un accès à vie à tout le monde n'est pas rentable — ce deal est réservé aux 100 premiers qui me font confiance.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Est-ce que je peux poser des questions avant d'acheter ?</summary>
+          <div class="faq-body">
+            Évidemment. Clique sur le bouton WhatsApp en bas de la page, je te réponds personnellement.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Qu'est-ce qui rend Just-Push différent de TrainingPeaks ou Intervals.icu ?</summary>
+          <div class="faq-body">
+            Ces apps sont conçues pour les coachs : elles te montrent des graphiques et te demandent de décider. Just-Push fait l'inverse — toute la complexité scientifique reste sous le capot, tu reçois la séance du jour.
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ── -->
+  <section class="final-cta">
+    <h2>Ton copilote d'entraînement <span class="accent">à vie</span> commence ici.</h2>
+    <p>
+      Rejoins les 100 Founding Members et débloque Just-Push à un tarif qui n'existera plus jamais.
+    </p>
+    <div class="cta-stack" style="align-items:center;">
+      <a href="#offre" class="btn btn-primary">Accède à Just-Push à 349 € <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="cta-note">Pas d'abonnement · Accès à vie · 100 places · Garantie 15/09</div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="brand">
+      <img src="../lsdc-logo-blanc.svg" alt="LSDC" style="height:24px;">
+      <span class="brand-name" style="font-size:0.9rem;">JustPush</span>
+    </div>
+    <div>© 2026 La Science du Cyclisme · Tous droits réservés</div>
+    <div class="footer-links">
+      <a href="https://lascienceducyclisme.com">Site LSDC</a>
+      <a href="#">Mentions légales</a>
+      <a href="#">CGV</a>
+    </div>
+  </footer>
+
+</body>
+</html>

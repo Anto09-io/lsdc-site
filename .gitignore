@@ -1,0 +1,29 @@
+# Mac OS
+.DS_Store
+**/.DS_Store
+
+# Claude Code (local config)
+.claude/
+**/.claude/
+
+# Fichiers vidéo lourds (hébergés sur YouTube/Vimeo)
+**/*.mov
+**/*.mp4
+assets/
+
+# Editeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Cycling-lab : repo séparé, géré indépendamment
+cycling-lab/
