@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="JustPush — Le copilote d'entraînement pour cyclistes amateurs qui roulent 6-12h par semaine. Pré-vente accès à vie.">
-  <title>JustPush — Pré-vente accès à vie | La Science du Cyclisme</title>
+  <meta name="description" content="JustPush — Le copilote d'entraînement pour cyclistes amateurs qui roulent 6-12h par semaine. Pré-vente clôturée — inscris-toi à la liste d'attente.">
+  <title>JustPush — Liste d'attente | La Science du Cyclisme</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
   <!-- Meta Pixel Code -->
@@ -1091,6 +1091,106 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    /* ── WAITLIST FORM ──────────────────────── */
+    .waitlist-card .offer-list { margin-bottom: 24px; }
+    .waitlist-card .offer-list li {
+      border-bottom: 1px dashed var(--border);
+      padding: 12px 0;
+    }
+    .waitlist-card .offer-list li:last-child { border-bottom: none; }
+
+    .waitlist-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .waitlist-input {
+      width: 100%;
+      padding: 16px 20px;
+      background: var(--bg-deep);
+      border: 1px solid var(--border-mid);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      outline: none;
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+    .waitlist-input::placeholder { color: var(--dim); }
+    .waitlist-input:focus {
+      border-color: var(--accent);
+      background: var(--card);
+    }
+    .waitlist-input:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .waitlist-submit {
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--accent);
+      color: #0a0e1f;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 14px 40px -10px rgba(245,225,0,0.35);
+    }
+    .waitlist-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      background: #fff200;
+    }
+    .waitlist-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .waitlist-message {
+      max-width: 480px;
+      margin: 14px auto 0;
+      text-align: center;
+      font-size: 0.92rem;
+      font-weight: 600;
+      min-height: 1.4em;
+      line-height: 1.4;
+    }
+    .waitlist-message.error { color: #ef4444; }
+    .waitlist-message.success {
+      color: var(--green);
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .waitlist-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--dim);
+      margin-top: 14px;
+    }
+
+    @media (hover: none) {
+      .waitlist-submit:hover:not(:disabled) { transform: none; }
+    }
+    @media (max-width: 480px) {
+      .waitlist-input { font-size: 16px; padding: 14px 18px; } /* 16px évite le zoom iOS */
+      .waitlist-submit { padding: 15px 18px; font-size: 0.95rem; }
+    }
+
     /* ── WHATSAPP FLOATING BUTTON ──────────── */
     .wa-fab {
       position: fixed;
@@ -1473,8 +1573,8 @@
 
   <!-- ── TOP BANNER ── -->
   <div class="top-banner">
-    <i class="fa-solid fa-bolt"></i>
-    <strong>Offre de lancement</strong> — Pré-vente JustPush · Fin de l'offre le <strong>07/06 à minuit</strong>
+    <i class="fa-solid fa-lock"></i>
+    <strong>Préventes clôturées</strong> — Inscris-toi à la liste d'attente pour le prochain lancement
   </div>
 
   <!-- ── HEADER ── -->
@@ -1487,13 +1587,13 @@
 
   <!-- ── HERO ── -->
   <section class="hero">
-    <span class="eyebrow">Pour les cyclistes amateurs · 6-12h / semaine</span>
+    <span class="eyebrow">Les 100 places de pré-vente sont parties</span>
     <h1>
-      Voici comment t'entraîner pour progresser <span class="accent">sur le long terme</span>
-      <br>— sans te prendre la tête.
+      Les préventes Just-Push <span class="accent">sont closes.</span>
+      <br>On rouvre dès que l'app est prête.
     </h1>
     <p class="sub">
-      Regarde cette vidéo pour découvrir l'application Just-Push et obtient ton copilote d'entraînement à vie.
+      Inscris-toi à la liste d'attente : dès que Just-Push ouvre ses portes au grand public, tu es averti <strong>en premier</strong>, avec une offre prioritaire réservée à la liste.
     </p>
 
     <!-- VSL — Vidéo Sales Letter hero (YouTube non répertoriée) -->
@@ -1507,15 +1607,12 @@
     </div>
 
     <div class="cta-stack">
-      <a href="#offre" class="btn btn-primary">
-        Accède à Just-Push à vie <i class="fa-solid fa-arrow-right"></i>
+      <a href="#waitlist" class="btn btn-primary">
+        Rejoins la liste d'attente <i class="fa-solid fa-arrow-right"></i>
       </a>
       <div class="cta-note">
-        Tarif de prévente · Pas d'abonnement · Accès à vie · 100 places
+        Notifié en premier · Offre prioritaire · Désinscription en 1 clic
       </div>
-      <a href="https://wa.me/33744887938" class="btn btn-whatsapp" target="_blank" rel="noopener">
-        <i class="fa-brands fa-whatsapp"></i> Pose toutes tes questions sur WhatsApp
-      </a>
     </div>
   </section>
 
@@ -1642,8 +1739,8 @@
       </div>
 
       <div class="pillars-cta">
-        <a href="#offre" class="btn btn-primary">Accède à Just-Push à vie <i class="fa-solid fa-arrow-right"></i></a>
-        <div class="cta-note" style="margin-top:10px;">Tarif de prévente · Accès à vie · 100 places</div>
+        <a href="#waitlist" class="btn btn-primary">Rejoins la liste d'attente <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="cta-note" style="margin-top:10px;">Sois averti en premier dès l'ouverture publique</div>
       </div>
     </div>
   </section>
@@ -2031,74 +2128,63 @@
       </div>
 
       <div class="twocol-cta">
-        <a href="#offre" class="btn btn-primary">Je rejoins la pré-vente <i class="fa-solid fa-arrow-right"></i></a>
-        <div class="cta-note" style="margin-top:10px;">100 places · Accès à vie · Pas d'abonnement</div>
+        <a href="#waitlist" class="btn btn-primary">Je rejoins la liste d'attente <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="cta-note" style="margin-top:10px;">Notifié en premier · Offre prioritaire à l'ouverture</div>
       </div>
     </div>
   </section>
 
-  <!-- ── OFFER / PRICING ── -->
-  <section class="offer-section" id="offre">
+  <!-- ── WAITLIST FORM ── -->
+  <section class="offer-section" id="waitlist">
     <div class="section-inner">
       <div class="section-head">
-        <span class="section-eyebrow">L'offre de pré-vente</span>
-        <h2 class="section-title">Voici exactement <span class="accent">ce que tu reçois</span></h2>
+        <span class="section-eyebrow">Liste d'attente</span>
+        <h2 class="section-title">Sois averti <span class="accent">en premier</span></h2>
         <p class="section-sub">
-          Tu me fais confiance avant que l'app soit finalisée — il te faut donc des avantages supplémentaires.
+          La pré-vente est terminée — les 100 Founding Members ont leur accès à vie. Mais l'application ouvrira au grand public dès qu'elle sera finalisée. Inscris-toi pour ne pas rater ce moment.
         </p>
       </div>
 
-      <div class="offer-card">
-        <h3><i class="fa-solid fa-gift"></i> Ta proposition de pré-vente</h3>
+      <div class="offer-card waitlist-card">
+        <h3><i class="fa-solid fa-bell"></i> Ce que tu reçois en t'inscrivant</h3>
 
-        <ul class="offer-list">
+        <ul class="offer-list waitlist-benefits">
           <li>
-            <span class="label"><i class="fa-solid fa-infinity"></i> JustPush — Accès <strong>À VIE</strong></span>
-            <span class="value">valeur 1 800 €</span>
+            <span class="label"><i class="fa-solid fa-bolt"></i> <strong>Notification en avant-première</strong> dès l'ouverture publique</span>
           </li>
-          <li class="sub">Prix de sortie prévu : 29 €/mois — soit 1 800 € sur 5 ans</li>
-
           <li>
-            <span class="label"><i class="fa-solid fa-users"></i> 1 an de communauté LSDC privée</span>
-            <span class="value">valeur 500 €</span>
+            <span class="label"><i class="fa-solid fa-tag"></i> <strong>Offre prioritaire</strong> réservée aux inscrits de la liste</span>
           </li>
-          <li class="sub">Canal exclusif avec Antonin pendant 12 mois</li>
-          <li class="sub">Accès à l'ensemble des formations LSDC</li>
-          <li class="sub">Formation « JustPush pour comprendre ton entraînement »</li>
-          <li class="sub">Lives mensuels bêta exclusifs</li>
-          <li class="sub">Accès bêta progressive</li>
-          <li class="sub">Badge Founding Member à vie</li>
+          <li>
+            <span class="label"><i class="fa-solid fa-video"></i> <strong>Mises à jour exclusives</strong> sur le développement (devlog, démos)</span>
+          </li>
+          <li>
+            <span class="label"><i class="fa-solid fa-gift"></i> <strong>Bonus à l'ouverture</strong> : guides offerts pour bien démarrer</span>
+          </li>
         </ul>
 
-        <div class="offer-total">
-          <div class="label">Valeur totale</div>
-          <div class="val"><span class="strike">2 300 €+</span></div>
+        <form class="waitlist-form" id="waitlist-form" novalidate>
+          <input
+            type="email"
+            class="waitlist-input"
+            id="waitlist-email"
+            placeholder="ton@email.com"
+            required
+            autocomplete="email"
+            inputmode="email">
+          <button type="submit" class="waitlist-submit" id="waitlist-submit">
+            Je rejoins la liste <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+        <div class="waitlist-message" id="waitlist-message" role="status" aria-live="polite"></div>
+        <div class="waitlist-note">
+          Pas de spam. Désinscription en 1 clic. Tu peux aussi nous écrire sur WhatsApp.
         </div>
 
-        <div class="offer-price">
-          <div class="pretitle">Tarif de pré-vente</div>
-          <div class="big">349 €</div>
-          <div class="sub">Un seul paiement · Accès à vie · Sans abonnement</div>
-        </div>
-
-        <div class="offer-meta">
-          <div><i class="fa-solid fa-user-group"></i> Seulement <strong>100 places</strong> disponibles</div>
-          <div class="deadline"><i class="fa-solid fa-clock"></i> La pré-vente se termine le <strong>7 juin à minuit</strong></div>
-        </div>
-
-        <div class="offer-cta">
-          <a href="https://buy.stripe.com/6oU28s5x36Tp6QY2P1bo40f" class="btn btn-primary" style="width:100%; max-width:420px;" target="_blank" rel="noopener">
-            Réserver ma place à 349 € <i class="fa-solid fa-arrow-right"></i>
-          </a>
-          <a href="https://wa.me/33744887938" class="btn btn-whatsapp" target="_blank" rel="noopener" style="width:100%; max-width:420px;">
-            <i class="fa-brands fa-whatsapp"></i> Une question ? Écris-moi sur WhatsApp
-          </a>
-        </div>
-
-        <div class="guarantee">
-          <i class="fa-solid fa-shield-halved"></i>
+        <div class="guarantee" style="margin-top:28px;">
+          <i class="fa-solid fa-circle-info"></i>
           <div>
-            <strong>Garantie 15/09 :</strong> si l'application n'est pas prête à 100 % à cette date, tu reçois un remboursement intégral. Sans questions.
+            <strong>Pour info :</strong> les 100 Founding Members ont eu un accès à vie à 349 € (valeur 2 300 €). Cette offre ne reviendra pas, mais l'offre prioritaire de la liste d'attente sera la plus avantageuse au lancement public.
           </div>
         </div>
       </div>
@@ -2130,9 +2216,9 @@
         </details>
 
         <details class="faq-item">
-          <summary>Pourquoi un accès à vie plutôt qu'un abonnement ?</summary>
+          <summary>Quand l'application ouvre-t-elle au grand public ?</summary>
           <div class="faq-body">
-            Parce que c'est une pré-vente. Tu prends le risque avec moi avant que l'app soit finalisée — il est normal que tu reçoives un deal qui n'existera plus jamais après. Le prix de sortie sera de 29 €/mois (1 800 € sur 5 ans).
+            La V1 est prévue pour le 15/09. Les Founding Members ont l'app en premier et nous aident à la roder pendant l'été. L'ouverture publique suivra dans la foulée. En t'inscrivant à la liste d'attente, tu es averti dès que les portes rouvrent.
           </div>
         </details>
 
@@ -2144,9 +2230,9 @@
         </details>
 
         <details class="faq-item">
-          <summary>Pourquoi seulement 100 places ?</summary>
+          <summary>L'offre prévente reviendra-t-elle ?</summary>
           <div class="faq-body">
-            Parce que je n'ai pas besoin de plus de Founding Members pour tester l'app, et parce que Just-Push deviendra une entreprise à part entière. Proposer un accès à vie à tout le monde n'est pas rentable — ce deal est réservé aux 100 premiers qui me font confiance.
+            Non. L'accès à vie à 349 € était réservé aux 100 Founding Members qui ont pris le risque avant que l'app soit finalisée. À l'ouverture publique, le modèle sera un abonnement mensuel (29 €/mois prévus). Les inscrits de la liste d'attente bénéficieront cependant d'une offre prioritaire — la meilleure disponible après les Founding Members.
           </div>
         </details>
 
@@ -2170,13 +2256,13 @@
 
   <!-- ── FINAL CTA ── -->
   <section class="final-cta">
-    <h2>Ton copilote d'entraînement <span class="accent">à vie</span> commence ici.</h2>
+    <h2>Sois averti <span class="accent">en premier</span> dès l'ouverture publique.</h2>
     <p>
-      Rejoins les 100 Founding Members et débloque Just-Push à un tarif qui n'existera plus jamais.
+      Les 100 Founding Members sont passés. La prochaine étape, c'est toi — si tu rejoins la liste d'attente maintenant.
     </p>
     <div class="cta-stack" style="align-items:center;">
-      <a href="#offre" class="btn btn-primary">Accède à Just-Push à 349 € <i class="fa-solid fa-arrow-right"></i></a>
-      <div class="cta-note">Pas d'abonnement · Accès à vie · 100 places · Garantie 15/09</div>
+      <a href="#waitlist" class="btn btn-primary">Rejoins la liste d'attente <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="cta-note">Notifié en premier · Offre prioritaire · Désinscription en 1 clic</div>
     </div>
   </section>
 
@@ -2193,6 +2279,70 @@
       <a href="#">CGV</a>
     </div>
   </footer>
+
+  <!-- Waitlist Form Submission -->
+  <script>
+    (function () {
+      const form = document.getElementById('waitlist-form');
+      const input = document.getElementById('waitlist-email');
+      const btn = document.getElementById('waitlist-submit');
+      const msg = document.getElementById('waitlist-message');
+      if (!form) return;
+
+      const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const originalBtnHTML = btn.innerHTML;
+
+      function setMessage(text, type) {
+        msg.textContent = text;
+        msg.className = 'waitlist-message' + (type ? ' ' + type : '');
+      }
+
+      async function submit (e) {
+        e.preventDefault();
+        const email = input.value.trim();
+
+        if (!email || !EMAIL_RE.test(email)) {
+          setMessage('Email invalide. Vérifie le format.', 'error');
+          input.focus();
+          return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = 'Inscription...';
+        setMessage('', '');
+
+        try {
+          const res = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, list: 'waitinglist' })
+          });
+
+          if (res.ok || res.status === 201) {
+            // Track Meta Pixel conversion (Lead event)
+            if (typeof fbq === 'function') {
+              try { fbq('track', 'Lead', { content_name: 'JustPush Waitlist' }); } catch (_) {}
+            }
+
+            form.style.display = 'none';
+            setMessage(
+              '✓ Inscription confirmée. Tu seras averti en premier dès l\'ouverture publique de JustPush.',
+              'success'
+            );
+          } else {
+            throw new Error('API error ' + res.status);
+          }
+        } catch (err) {
+          console.error('Waitlist submission error:', err);
+          setMessage('Une erreur est survenue. Réessaie dans quelques secondes.', 'error');
+          btn.disabled = false;
+          btn.innerHTML = originalBtnHTML;
+        }
+      }
+
+      form.addEventListener('submit', submit);
+    })();
+  </script>
 
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/33744887938"
