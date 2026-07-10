@@ -1,0 +1,6 @@
+# Archives de l'ancien site statique — jamais déployées
+legacy
+
+# Médias lourds
+*.mov
+*.mp4
