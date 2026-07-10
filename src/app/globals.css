@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --green: #22c55e;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink text-cream font-sans antialiased;
+  }
+
+  /* Titres éditoriaux : Barlow Condensed, italique = signature visuelle LSDC */
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  /* Gradient vert animé (accent décoratif) */
+  .text-gradient-green {
+    @apply bg-gradient-to-r from-green via-green-light to-green bg-clip-text text-transparent;
+    background-size: 200% auto;
+    @apply animate-gradient;
+  }
+
+  /* Lien souligné animé pour la navigation */
+  .nav-link {
+    @apply relative text-cream/70 transition-colors hover:text-green;
+  }
+
+  /* Rangée scrollable sans barre de défilement visible (nav mobile) */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ── Styles du rendu MDX (prose) ── */
+.prose-lsdc {
+  @apply prose prose-lg prose-invert max-w-none;
+  /* Couleur d'accent verte pour titres, liens, citations */
+  --tw-prose-headings: #f5f1e8;
+  --tw-prose-links: #22c55e;
+  --tw-prose-quote-borders: #22c55e;
+  --tw-prose-bullets: #22c55e;
+  --tw-prose-counters: #22c55e;
+}
+
+.prose-lsdc :where(h2, h3) {
+  @apply font-display tracking-tight;
+}
+
+.prose-lsdc :where(blockquote) {
+  @apply not-italic font-medium text-cream/80;
+}
+
+.prose-lsdc :where(a) {
+  @apply font-medium underline-offset-2;
+}
+
+.prose-lsdc :where(table) {
+  @apply text-base;
+}
+
+.prose-lsdc :where(thead) {
+  @apply border-b-2 border-green/30;
+}

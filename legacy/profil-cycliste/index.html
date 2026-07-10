@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="Découvre ton profil de cycliste en 2 minutes : ton point de blocage n°1 et le levier qui débloque ta progression. Bilan personnalisé offert.">
+<title>Quel est ton profil de cycliste ? — La Science du Cyclisme</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:           #0A0A0A;
+    --bg-raise:     rgba(255,255,255,0.025);
+    --bg-hover:     rgba(255,255,255,0.05);
+    --bg-sel:       rgba(255,255,255,0.07);
+    --text:         #F4F4F4;
+    --text-dim:     #C9C9C9;
+    --muted:        #8C8C8C;
+    --muted-2:      #6A6A6A;
+    --border:       rgba(255,255,255,0.10);
+    --border-mid:   rgba(255,255,255,0.22);
+    --border-str:   rgba(255,255,255,0.34);
+    --white:        #FFFFFF;
+    --radius:       14px;
+    --font:         "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    background-image:
+      radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,0.06), rgba(255,255,255,0) 55%);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: rgba(255,255,255,0.18); }
+
+  /* ── TOP PROGRESS LINE ───────────────────── */
+  .prog { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.07); z-index: 200; }
+  .prog-fill { height: 100%; width: 0%; background: var(--white); transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+  .prog.hidden { opacity: 0; }
+
+  /* ── BRAND ───────────────────────────────── */
+  .topbar {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 26px clamp(20px, 5vw, 44px);
+  }
+  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; opacity: 0.85; transition: opacity .15s; }
+  .brand:hover { opacity: 1; }
+  .brand img { height: 22px; width: auto; display: block; }
+  .topbar-tag { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-2); }
+
+  /* ── STAGE ───────────────────────────────── */
+  .stage {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: clamp(110px, 16vh, 180px) clamp(20px, 5vw, 28px) 120px;
+  }
+
+  /* ── KICKER / HEADINGS ───────────────────── */
+  .kicker { font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 22px; }
+
+  h1, .q-title, .result-name {
+    font-weight: 700; letter-spacing: -0.025em; line-height: 1.02; color: var(--white);
+  }
+  h1 { font-size: clamp(40px, 7vw, 68px); margin-bottom: 20px; text-wrap: balance; }
+  .q-title { font-size: clamp(32px, 5.2vw, 52px); margin-bottom: 14px; text-wrap: balance; }
+
+  .lead, .q-hint { color: var(--muted); font-weight: 400; }
+  .lead { font-size: clamp(17px, 2.6vw, 21px); line-height: 1.5; max-width: 600px; margin-bottom: 40px; text-wrap: balance; }
+  .q-hint { font-size: clamp(16px, 2.4vw, 18px); margin-bottom: 40px; }
+
+  /* ── OPTIONS ─────────────────────────────── */
+  .options { display: flex; flex-direction: column; gap: 14px; }
+  .opt {
+    display: flex; align-items: flex-start; gap: 20px;
+    width: 100%; text-align: left;
+    background: var(--bg-raise); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: clamp(20px, 3vw, 26px) clamp(20px, 3vw, 28px); cursor: pointer; color: var(--text);
+    transition: border-color .15s ease, background .15s ease, transform .08s ease;
+  }
+  .opt:hover { background: var(--bg-hover); border-color: var(--border-mid); }
+  .opt:active { transform: scale(0.992); }
+  .opt.selected { border-color: var(--white); background: var(--bg-sel); }
+
+  .radio {
+    flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%;
+    border: 1.6px solid var(--border-str); margin-top: 3px; position: relative;
+    transition: border-color .15s ease;
+  }
+  .opt:hover .radio { border-color: var(--border-mid); }
+  .opt.selected .radio { border-color: var(--white); }
+  .opt.selected .radio::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: var(--white); }
+
+  .opt-body { flex: 1; min-width: 0; }
+  .opt-t { display: block; font-size: clamp(18px, 2.6vw, 21px); font-weight: 600; color: var(--white); line-height: 1.25; letter-spacing: -0.01em; }
+  .opt-d { display: block; font-size: clamp(14px, 2vw, 15.5px); color: var(--muted); line-height: 1.45; margin-top: 7px; }
+
+  /* ── PERF INPUTS ─────────────────────────── */
+  .perf-grid { display: flex; flex-direction: column; gap: 14px; }
+  .perf-field {
+    display: flex; align-items: center; background: var(--bg-raise);
+    border: 1px solid var(--border); border-radius: var(--radius); transition: border-color .15s ease;
+  }
+  .perf-field:focus-within { border-color: var(--white); }
+  .perf-field label {
+    flex: 0 0 auto; min-width: 120px; padding: 0 20px; font-size: 12px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--muted); border-right: 1px solid var(--border); align-self: stretch;
+    display: flex; align-items: center;
+  }
+  .perf-field input {
+    flex: 1; min-width: 0; min-height: 64px; padding: 0 20px; border: none; background: transparent;
+    font-family: var(--font); font-size: 20px; font-weight: 600; color: var(--white); outline: none;
+    -webkit-appearance: none; appearance: none;
+  }
+  .perf-field input::placeholder { color: var(--muted-2); font-weight: 400; }
+  .perf-field .unit { padding: 0 22px; font-size: 14px; font-weight: 500; color: var(--muted-2); }
+  .perf-note { font-size: 14.5px; color: var(--muted-2); margin-top: 14px; }
+  .perf-skip {
+    display: inline-block; margin-top: 22px; background: none; border: none; cursor: pointer;
+    font-family: var(--font); font-size: 14px; color: var(--muted); letter-spacing: 0.02em;
+    border-bottom: 1px solid var(--border-mid); padding-bottom: 2px; transition: color .15s;
+  }
+  .perf-skip:hover { color: var(--white); }
+
+  /* ── BUTTONS ─────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+    min-height: 60px; padding: 18px 34px; border: none; border-radius: var(--radius); cursor: pointer;
+    font-family: var(--font); font-weight: 600; font-size: 17px; letter-spacing: -0.01em; line-height: 1;
+    background: var(--white); color: #0A0A0A; transition: transform .1s ease, opacity .15s ease;
+  }
+  .btn:hover { opacity: 0.9; }
+  .btn:active { transform: translateY(1px); }
+  .btn .arr { font-size: 18px; }
+  .btn-block { width: 100%; }
+
+  /* ── NAV ROW / BACK ──────────────────────── */
+  .nav-row { margin-top: 44px; }
+  .back {
+    display: inline-flex; align-items: center; gap: 12px; background: none; border: none; cursor: pointer;
+    font-family: var(--font); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted-2); transition: color .15s;
+  }
+  .back:hover { color: var(--text); }
+  .back .arr { font-size: 15px; }
+
+  /* ── EMAIL GATE ──────────────────────────── */
+  .gate-card { background: var(--bg-raise); border: 1px solid var(--border); border-radius: 18px; padding: clamp(28px, 5vw, 44px); }
+  .reveal { text-align: center; margin-bottom: 32px; }
+  .reveal .pre { font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .reveal .blur {
+    font-size: clamp(30px, 6vw, 46px); font-weight: 700; letter-spacing: -0.02em; color: var(--white);
+    filter: blur(11px); user-select: none; margin-bottom: 14px;
+  }
+  .reveal .sub { font-size: 16px; color: var(--muted); }
+
+  .field { display: flex; gap: 10px; }
+  .field input {
+    flex: 1; min-width: 0; min-height: 60px; padding: 0 20px; border-radius: var(--radius);
+    border: 1px solid var(--border); background: rgba(0,0,0,0.25); color: var(--white);
+    font-family: var(--font); font-size: 16px; outline: none; -webkit-appearance: none; appearance: none;
+    transition: border-color .15s ease;
+  }
+  .field input::placeholder { color: var(--muted-2); }
+  .field input:focus { border-color: var(--white); }
+  .field button {
+    flex: 0 0 auto; min-height: 60px; padding: 0 28px; border: none; border-radius: var(--radius); cursor: pointer;
+    background: var(--white); color: #0A0A0A; font-family: var(--font); font-weight: 600; font-size: 16px;
+    letter-spacing: -0.01em; white-space: nowrap; transition: transform .1s ease, opacity .15s;
+  }
+  .field button:hover { opacity: 0.9; }
+  .field button:active { transform: translateY(1px); }
+  .form-error { display: none; font-size: 13.5px; color: #FF6B6B; margin-top: 12px; }
+  .form-privacy { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--muted-2); margin-top: 18px; }
+  .form-privacy svg { width: 13px; height: 13px; flex: 0 0 auto; }
+
+  /* ── RESULT ──────────────────────────────── */
+  .result-head { margin-bottom: 36px; }
+  .result-name { font-size: clamp(42px, 8vw, 76px); margin: 10px 0 18px; }
+  .result-tagline { font-size: clamp(18px, 3vw, 23px); color: var(--text-dim); font-weight: 400; line-height: 1.4; text-wrap: balance; }
+
+  .card { background: var(--bg-raise); border: 1px solid var(--border); border-radius: 18px; padding: clamp(24px, 4vw, 32px); margin-bottom: 16px; }
+  .card-label { font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .card p { font-size: 16px; line-height: 1.6; color: var(--text-dim); }
+  .card p strong { color: var(--white); font-weight: 600; }
+
+  .card-lever { border-color: var(--border-mid); background: rgba(255,255,255,0.04); }
+  .card-lever .card-label { color: var(--white); }
+  .card-lever .lever-title { font-size: clamp(22px, 3.6vw, 28px); font-weight: 700; letter-spacing: -0.02em; color: var(--white); line-height: 1.12; margin-bottom: 14px; }
+
+  .wkg-row { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .wkg-big { font-size: clamp(52px, 9vw, 68px); font-weight: 700; letter-spacing: -0.03em; color: var(--white); line-height: 0.9; }
+  .wkg-unit { font-size: 22px; font-weight: 500; color: var(--muted); }
+  .wkg-band { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); border: 1px solid var(--border-mid); border-radius: 100px; padding: 6px 14px; }
+  .wkg-scale { margin-top: 22px; height: 6px; border-radius: 100px; background: rgba(255,255,255,0.08); position: relative; }
+  .wkg-marker { position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: var(--white); transform: translate(-50%, -50%); box-shadow: 0 0 0 4px var(--bg); }
+  .wkg-scale-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted-2); margin-top: 10px; letter-spacing: 0.04em; }
+
+  /* ── LOI DE PUISSANCE ────────────────────── */
+  .pl-curve { margin: 22px 0 2px; height: 180px; }
+  .pl-curve svg { width: 100%; height: 100%; display: block; }
+  .pl-stats { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--border); }
+  .pl-stat { flex: 1; min-width: 110px; }
+  .pl-k { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 8px; }
+  .pl-v { font-size: clamp(24px, 4vw, 30px); font-weight: 700; letter-spacing: -0.02em; color: var(--white); line-height: 1; }
+  .pl-sub { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  /* ── CTA (white block) ───────────────────── */
+  .cta { background: var(--white); color: #0A0A0A; border-radius: 18px; padding: clamp(28px, 5vw, 40px); margin-top: 28px; }
+  .cta-label { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6A6A6A; margin-bottom: 14px; }
+  .cta h3 { font-size: clamp(26px, 4.4vw, 36px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.04; color: #0A0A0A; margin-bottom: 14px; }
+  .cta p { font-size: 16px; line-height: 1.55; color: #3A3A3A; margin-bottom: 26px; }
+  .cta-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
+    min-height: 62px; padding: 20px 30px; border: none; border-radius: var(--radius); cursor: pointer;
+    background: #0A0A0A; color: var(--white); text-decoration: none;
+    font-family: var(--font); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; line-height: 1;
+    transition: transform .1s ease, opacity .15s;
+  }
+  .cta-btn:hover { opacity: 0.88; }
+  .cta-btn:active { transform: translateY(1px); }
+  .cta-sub { font-size: 13.5px; color: #6A6A6A; margin-top: 16px; text-align: center; }
+
+  .result-foot { text-align: center; margin-top: 32px; }
+  .result-foot a { color: var(--muted-2); font-size: 14px; text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color .15s; }
+  .result-foot a:hover { color: var(--text); }
+
+  /* ── ANIM ────────────────────────────────── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .anim { animation: fadeUp 0.45s cubic-bezier(.2,.6,.2,1) both; }
+
+  @media (max-width: 540px) {
+    .field { flex-direction: column; }
+    .field button { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="prog hidden" id="prog"><div class="prog-fill" id="prog-fill"></div></div>
+
+<div class="topbar">
+  <a class="brand" href="/"><img src="/lsdc-logo-blanc.svg" alt="La Science du Cyclisme"></a>
+  <span class="topbar-tag">Profil cycliste</span>
+</div>
+
+<main id="stage" class="stage"><!-- injecté en JS --></main>
+
+<script>
+/* ─────────────────────────────────────────────
+   PRODUIT / LIENS
+───────────────────────────────────────────── */
+var PRODUCT_URL = "https://lsdc-newsletter-e6a9c4.beehiiv.com/products/la-m-thode-watt-kg";
+
+/* ─────────────────────────────────────────────
+   QUESTIONS  ({ id, title, hint, options:[{v,t,d}] })
+───────────────────────────────────────────── */
+var QUESTIONS = [
+  {
+    id: "niveau",
+    title: "Tu te décris comment ?",
+    hint: "Sois honnête — sans te survendre, ni te sous-estimer.",
+    options: [
+      { v: "loisir",      t: "Cycliste loisir",  d: "Je roule pour le plaisir et la forme." },
+      { v: "cyclosport",  t: "Cyclosportif",     d: "Je vise des cyclos / Gran Fondo." },
+      { v: "competiteur", t: "Compétiteur",      d: "Je cours : route, gravel, piste…" },
+      { v: "reprise",     t: "En reprise",       d: "Je remonte la pente après une coupure." }
+    ]
+  },
+  {
+    id: "volume",
+    title: "Combien d'heures de vélo par semaine ?",
+    hint: "Sur un mois normal, pas ta meilleure semaine.",
+    options: [
+      { v: "moins3", t: "Moins de 3h",  d: "Quelques sorties, sans régularité." },
+      { v: "3a6",    t: "3 à 6h",       d: "Je roule un peu chaque semaine." },
+      { v: "6a10",   t: "6 à 10h",      d: "Entraînement régulier et sérieux." },
+      { v: "plus10", t: "Plus de 10h",  d: "Gros volume, semaine bien remplie." }
+    ]
+  },
+  {
+    id: "contrainte",
+    title: "Ce qui limite le plus ton entraînement ?",
+    hint: "Le vrai goulot d'étranglement, pas l'excuse facile.",
+    options: [
+      { v: "temps",   t: "Le temps",          d: "Peu de créneaux, et souvent courts." },
+      { v: "recup",   t: "La récupération",   d: "J'accumule la fatigue, je récupère mal." },
+      { v: "methode", t: "La méthode",        d: "Je roule sans vrai plan structuré." },
+      { v: "regul",   t: "La régularité",     d: "J'enchaîne les stop & go." }
+    ]
+  },
+  {
+    id: "faiblesse",
+    title: "Sur le vélo, où ça coince en premier ?",
+    hint: "Le moment où tu sens que tu n'as plus rien.",
+    options: [
+      { v: "bosse",   t: "Dans les bosses",          d: "Je passe dans le rouge dès que ça monte." },
+      { v: "longue",  t: "Sur les sorties longues",  d: "Je m'éteins sur la durée." },
+      { v: "intense", t: "Sur les efforts intenses", d: "Relances, attaques, seuil." },
+      { v: "partout", t: "Un peu partout",           d: "Pas de point fort vraiment marqué." }
+    ]
+  },
+  {
+    id: "frustration",
+    title: "Ce qui te frustre vraiment, c'est…",
+    hint: "Sois cash. C'est cette phrase qui tourne dans ta tête.",
+    options: [
+      { v: "bosse",  t: "Me faire lâcher en montée",    d: "Dès que la route s'élève, je décroche." },
+      { v: "longue", t: "Rentrer cramé",                d: "Épuisé sur chaque sortie longue." },
+      { v: "course", t: "Exploser au mauvais moment",   d: "En course ou sur les relances." },
+      { v: "stagne", t: "Stagner malgré tout",          d: "Je m'entraîne beaucoup et je plafonne." }
+    ]
+  },
+  {
+    id: "trajectoire",
+    title: "Sur les 12 derniers mois, ton niveau…",
+    hint: "Pas sur la dernière sortie. Sur la durée.",
+    options: [
+      { v: "progresse", t: "Je progresse",  d: "Mais je veux accélérer." },
+      { v: "plateau",   t: "Je plafonne",   d: "Je tourne en rond au même niveau." },
+      { v: "regresse",  t: "Je recule",     d: "Je sens que je perds du terrain." },
+      { v: "inconnu",   t: "Aucune idée",   d: "Je ne mesure rien." }
+    ]
+  },
+  {
+    id: "objectif",
+    title: "Ton objectif n°1 pour les 6 prochains mois ?",
+    hint: "Celui qui compte vraiment pour toi.",
+    options: [
+      { v: "grimper", t: "Tenir dans les bosses",         d: "Sans exploser à chaque montée." },
+      { v: "finir",   t: "Finir une cyclo / Gran Fondo",  d: "Arriver en forme, pas à l'agonie." },
+      { v: "courir",  t: "Performer en course",           d: "Sur les segments ou en peloton." },
+      { v: "mieux",   t: "Progresser, tout simplement",   d: "Me sentir plus fort sur le vélo." }
+    ]
+  }
+  /* La perf (poids + puissance) est une étape dédiée, gérée à part. */
+];
+
+/* ─────────────────────────────────────────────
+   PROFILS  (clé = réponse "frustration")
+───────────────────────────────────────────── */
+var PROFILES = {
+  bosse: {
+    key: "grimpeur-bride",
+    name: "Le Grimpeur Bridé",
+    tagline: "Le moteur est là. C'est le rapport poids-puissance qui te plafonne en montée.",
+    diag: "Tu n'es pas “mauvais en bosse” : tu manques de watts par kilo au seuil. Dès que la pente s'installe, tu dépasses ton seuil sans même le savoir, tu produis trop d'acide trop tôt, et tu exploses pendant que les autres tiennent. Le problème n'est pas ton mental. C'est un nombre : tes W/kg au seuil.",
+    leverTitle: "Faire monter tes W/kg au seuil.",
+    lever: "Travailler spécifiquement ta puissance au seuil (FTP) et l'alléger en watts/kg — pas rouler plus, rouler juste. C'est le seul levier qui change ce qui se passe quand ça monte.",
+    angle: "La Méthode Watt/kg construit exactement ça : faire monter ta puissance au seuil sans noyer tes semaines de volume inutile."
+  },
+  longue: {
+    key: "fondeur-fragile",
+    name: "Le Fondeur Fragile",
+    tagline: "Tu as du cœur, mais ton réservoir aérobie se vide trop vite sur la durée.",
+    diag: "Tu tiens 1h, parfois 2. Puis le mur. Ce n'est pas un manque de volonté : ta base aérobie et ta capacité à tenir une intensité dans le temps (ta “durability”) ne sont pas assez construites. Tu roules souvent dans une zone grise — trop dur pour de l'endurance, trop mou pour progresser — et ton corps ne sait pas durer.",
+    leverTitle: "Construire la base, puis ancrer ton seuil.",
+    lever: "Reconstruire une vraie base aérobie ET ancrer ton seuil, pour que ton allure “facile” devienne enfin facile et que la fin de sortie arrête de te coûter cher.",
+    angle: "La Méthode Watt/kg t'apprend à doser tes zones et à monter ton seuil pour que la distance arrête de te casser en deux."
+  },
+  course: {
+    key: "puncheur-court",
+    name: "Le Puncheur à Court de Jus",
+    tagline: "Tu as du punch sur un coup. Mais tu n'as pas la caisse pour le répéter.",
+    diag: "Une relance, ça passe. La troisième, tu es dans le rouge et tu ne reviens plus. Tu as de l'explosivité mais pas la capacité à enchaîner les efforts intenses : ton seuil est trop bas pour “éponger” entre deux coups durs. Résultat, tu te grilles au mauvais moment et la course se décide sans toi.",
+    leverTitle: "Élever ton seuil pour pouvoir répéter.",
+    lever: "Élever ton seuil pour transformer chaque effort intense en effort “sous-maximal” — plus de marge, plus de répétitions, et la lucidité pour placer ton coup au bon moment.",
+    angle: "La Méthode Watt/kg cible ta puissance au seuil : la base qui te permet enfin d'encaisser et de répéter sans te cramer."
+  },
+  stagne: {
+    key: "travailleur-plafond",
+    name: "Le Travailleur au Plafond",
+    tagline: "Tu fais les heures. Mais le volume sans direction ne te fait plus progresser.",
+    diag: "Tu t'entraînes sérieusement, et c'est précisément ça le piège : tu accumules des kilomètres dans une zone confortable qui ne stresse plus assez ton organisme pour le forcer à s'adapter. Plus de volume, mêmes watts. Tu as atteint le plafond de ce que “rouler plus” peut t'apporter. La suite, c'est rouler mieux.",
+    leverTitle: "Structurer autour du seuil, pas du volume.",
+    lever: "Arrêter d'empiler du volume gris et structurer ton entraînement autour de ta puissance au seuil — la variable qui détermine vraiment ton niveau à vélo.",
+    angle: "La Méthode Watt/kg remplace le volume sans cap par un système clair pour faire remonter tes W/kg et débloquer ton plateau."
+  }
+};
+
+/* ─────────────────────────────────────────────
+   ÉTAT
+───────────────────────────────────────────── */
+var state = {
+  step: 0,                 // 0 = intro
+  answers: {},
+  perf: { poids: null, puissance: null, wkg: null },
+  email: null
+};
+var TOTAL_Q = QUESTIONS.length + 1; // +1 = étape perf
+var stageEl = document.getElementById("stage");
+
+/* ─────────────────────────────────────────────
+   HELPERS
+───────────────────────────────────────────── */
+function setProgress(qIndex) {
+  var prog = document.getElementById("prog");
+  if (qIndex === null) { prog.classList.add("hidden"); return; }
+  prog.classList.remove("hidden");
+  var pct = Math.round(((qIndex + 1) / TOTAL_Q) * 100);
+  document.getElementById("prog-fill").style.width = pct + "%";
+}
+function render(html) {
+  stageEl.innerHTML = html;
+  stageEl.classList.remove("anim"); void stageEl.offsetWidth; stageEl.classList.add("anim");
+  window.scrollTo(0, 0);
+}
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
+
+function wkgBand(wkg) {
+  if (wkg == null) return null;
+  if (wkg < 2.5)  return { name: "Découverte",    pos: 8  };
+  if (wkg < 3.2)  return { name: "Intermédiaire", pos: 32 };
+  if (wkg < 3.8)  return { name: "Confirmé",      pos: 55 };
+  if (wkg < 4.5)  return { name: "Performant",    pos: 75 };
+  return            { name: "Élite amateur",    pos: 93 };
+}
+
+/* ── LOI DE PUISSANCE (repris du calculateur Puissance Lim) ──
+   Ajustement log-log de la relation puissance-durée :
+   P(T) = S · T^(E-1).  E = exposant d'endurance.            */
+function powerLawModel(points) {
+  var xs = points.map(function(p){ return Math.log(p.T); });
+  var ys = points.map(function(p){ return Math.log(p.P); });
+  var n = xs.length;
+  var sx = xs.reduce(function(a,b){return a+b;},0);
+  var sy = ys.reduce(function(a,b){return a+b;},0);
+  var sxy = xs.reduce(function(acc,x,i){return acc + x*ys[i];},0);
+  var sx2 = xs.reduce(function(acc,x){return acc + x*x;},0);
+  var slope = (n*sxy - sx*sy) / (n*sx2 - sx*sx);
+  var intercept = (sy - slope*sx) / n;
+  return { E: slope + 1, S: Math.exp(intercept) };
+}
+function powerAtT(T, S, E) { return S * Math.pow(T, E - 1); }
+function tteAt(P, S, E) { if (E >= 1 || P <= 0) return Infinity; return Math.pow(S / P, 1 / (1 - E)); }
+function physioProfile(E) {
+  if (E < 0.88) return { key: "sprinteur",        label: "Sprinteur",        desc: "Ta puissance s'effondre vite avec la durée : gros moteur sur les efforts courts, mais l'endurance est ton chantier." };
+  if (E < 0.92) return { key: "all-round",        label: "All-round",        desc: "Profil équilibré : ni pur sprinteur, ni pur rouleur. Tu peux jouer sur plusieurs terrains, sans pic marqué." };
+  if (E < 0.95) return { key: "rouleur-grimpeur", label: "Rouleur-grimpeur", desc: "Ta puissance tient bien dans le temps. Tu es taillé pour les efforts longs et soutenus, les cols et le tempo." };
+  return                { key: "ultra-endurance", label: "Ultra-endurance",  desc: "Ta courbe est très plate : tu tiens des heures sans t'effondrer. Le long et le très long, c'est ta force." };
+}
+function fmtDur(s) {
+  if (!isFinite(s)) return "—";
+  if (s < 3600) return Math.round(s/60) + " min";
+  var h = Math.floor(s/3600), m = Math.round((s%3600)/60);
+  return m > 0 ? h + "h" + String(m).padStart(2,"0") : h + "h";
+}
+function buildCurveSVG(m, pts) {
+  var W = 600, H = 200, padL = 8, padR = 8, padT = 14, padB = 26;
+  var tMin = 60, tMax = 14400;
+  var lxMin = Math.log(tMin), lxMax = Math.log(tMax);
+  function X(T){ return padL + (Math.log(T)-lxMin)/(lxMax-lxMin)*(W-padL-padR); }
+  var pHi = powerAtT(tMin,m.S,m.E), pLo = powerAtT(tMax,m.S,m.E);
+  pts.forEach(function(p){ pHi = Math.max(pHi,p.P); pLo = Math.min(pLo,p.P); });
+  var span = (pHi - pLo) || 10, padY = span*0.14;
+  var yHi = pHi + padY, yLo = Math.max(0, pLo - padY);
+  function Y(P){ return padT + (yHi-P)/(yHi-yLo)*(H-padT-padB); }
+  var d = "";
+  for (var i=0; i<=60; i++){ var T=Math.exp(lxMin+(lxMax-lxMin)*i/60); d += (i===0?"M":"L") + X(T).toFixed(1) + " " + Y(powerAtT(T,m.S,m.E)).toFixed(1) + " "; }
+  var area = d + "L" + X(tMax).toFixed(1) + " " + Y(yLo).toFixed(1) + " L" + X(tMin).toFixed(1) + " " + Y(yLo).toFixed(1) + " Z";
+  var dots = pts.map(function(p){ return '<circle cx="'+X(p.T).toFixed(1)+'" cy="'+Y(p.P).toFixed(1)+'" r="4.5" fill="#fff" stroke="#0A0A0A" stroke-width="2"/>'; }).join("");
+  var ticks = [{T:60,l:"1min"},{T:300,l:"5min"},{T:1200,l:"20min"},{T:3600,l:"1h"},{T:10800,l:"3h"}];
+  var xl = ticks.map(function(t,i){
+    var anchor = i === 0 ? "start" : (i === ticks.length-1 ? "end" : "middle");
+    return '<text x="'+X(t.T).toFixed(1)+'" y="'+(H-7)+'" fill="#6A6A6A" font-size="12" font-family="Inter, sans-serif" text-anchor="'+anchor+'">'+t.l+'</text>';
+  }).join("");
+  return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="'+area+'" fill="rgba(255,255,255,0.06)"/>' +
+    '<path d="'+d+'" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+    dots + xl + '</svg>';
+}
+
+function currentProfile() {
+  var f = state.answers.frustration || "stagne";
+  return PROFILES[f] || PROFILES.stagne;
+}
+
+/* ─────────────────────────────────────────────
+   ÉCRANS
+───────────────────────────────────────────── */
+function showIntro() {
+  state.step = 0;
+  setProgress(null);
+  render(
+    '<div class="kicker">2 min · 8 questions · bilan offert</div>' +
+    '<h1>Quel est ton profil de cycliste ?</h1>' +
+    '<p class="lead">La plupart des cyclistes stagnent pour une seule raison qu\'ils n\'ont jamais nommée. ' +
+    'Réponds à 8 questions : tu repars avec ton profil, ton rapport W/kg estimé et le levier n°1 pour débloquer ta progression.</p>' +
+    '<button class="btn btn-block" onclick="startQuiz()">Découvrir mon profil <span class="arr">→</span></button>' +
+    '<div class="form-privacy" style="margin-top:20px;justify-content:center;">' +
+      '<svg viewBox="0 0 12 12" fill="none"><rect x="2" y="5" width="8" height="6" rx="1" stroke="#6A6A6A" stroke-width="1"/><path d="M4 5V3.5a2 2 0 014 0V5" stroke="#6A6A6A" stroke-width="1"/></svg>' +
+      'Gratuit. Aucune carte. Désabonnement en 1 clic.</div>'
+  );
+}
+
+function startQuiz() { state.step = 1; showStep(); }
+
+function showStep() {
+  var i = state.step - 1;
+  if (i < QUESTIONS.length) { showQuestion(i); }
+  else if (i === QUESTIONS.length) { showPerf(); }
+  else { showGate(); }
+}
+
+function showQuestion(i) {
+  var q = QUESTIONS[i];
+  setProgress(i);
+  var opts = q.options.map(function(o) {
+    var sel = state.answers[q.id] === o.v ? " selected" : "";
+    return '<button class="opt' + sel + '" onclick="answer(\'' + q.id + '\',\'' + o.v + '\')">' +
+             '<span class="radio"></span>' +
+             '<span class="opt-body"><span class="opt-t">' + esc(o.t) + '</span>' +
+             '<span class="opt-d">' + esc(o.d) + '</span></span>' +
+           '</button>';
+  }).join("");
+  render(
+    '<div class="kicker">Question ' + (i + 1) + ' / ' + TOTAL_Q + '</div>' +
+    '<h2 class="q-title">' + esc(q.title) + '</h2>' +
+    '<p class="q-hint">' + esc(q.hint) + '</p>' +
+    '<div class="options">' + opts + '</div>' +
+    backRow()
+  );
+}
+
+function backRow() {
+  if (state.step <= 1) return "";
+  return '<div class="nav-row"><button class="back" onclick="goBack()"><span class="arr">←</span> Retour</button></div>';
+}
+
+function answer(id, v) {
+  state.answers[id] = v;
+  // marque la sélection visuellement, puis avance
+  var btns = stageEl.querySelectorAll(".opt");
+  btns.forEach(function(b){ b.classList.remove("selected"); });
+  if (event && event.currentTarget) { event.currentTarget.classList.add("selected"); }
+  state.step++;
+  setTimeout(showStep, 180);
+}
+
+function goBack() {
+  if (state.step > 1) { state.step--; showStep(); }
+  else { showIntro(); }
+}
+
+function showPerf() {
+  setProgress(QUESTIONS.length);
+  var p = state.perf;
+  render(
+    '<div class="kicker">Question ' + TOTAL_Q + ' / ' + TOTAL_Q + '</div>' +
+    '<h2 class="q-title">Tes meilleures puissances.</h2>' +
+    '<p class="q-hint">On en déduit ta <strong style="color:var(--text)">loi de puissance</strong> : ton profil physiologique, ton seuil et ton temps limite. Poids + au moins 2 efforts (Strava ou ton capteur te les donnent).</p>' +
+    '<div class="perf-grid">' +
+      '<div class="perf-field"><label>Poids</label>' +
+        '<input id="poids" type="number" inputmode="decimal" min="35" max="160" placeholder="72" value="' + (p.poids||"") + '"><span class="unit">kg</span></div>' +
+      '<div class="perf-field"><label>Max 1 min</label>' +
+        '<input id="p1" type="number" inputmode="numeric" min="80" max="1500" placeholder="480" value="' + (p.p1||"") + '"><span class="unit">W</span></div>' +
+      '<div class="perf-field"><label>Max 5 min</label>' +
+        '<input id="p5" type="number" inputmode="numeric" min="80" max="1000" placeholder="330" value="' + (p.p5||"") + '"><span class="unit">W</span></div>' +
+      '<div class="perf-field"><label>Max 20 min</label>' +
+        '<input id="p20" type="number" inputmode="numeric" min="60" max="800" placeholder="280" value="' + (p.p20||"") + '"><span class="unit">W</span></div>' +
+    '</div>' +
+    '<p class="perf-note">Tes records de puissance sur ces durées. Deux suffisent — trois affinent ta courbe.</p>' +
+    '<div class="nav-row" style="margin-top:32px;">' +
+      '<button class="btn" onclick="submitPerf()">Voir mon profil <span class="arr">→</span></button>' +
+      '<div><button class="perf-skip" onclick="skipPerf()">Je n\'ai pas de capteur de puissance</button></div>' +
+    '</div>' +
+    '<div class="nav-row" style="margin-top:24px;"><button class="back" onclick="goBack()"><span class="arr">←</span> Retour</button></div>'
+  );
+}
+
+function submitPerf() {
+  var num = function(id){ var v = parseFloat(document.getElementById(id).value); return (v > 0) ? v : null; };
+  var poids = num("poids");
+  var p1 = num("p1"), p5 = num("p5"), p20 = num("p20");
+
+  var pts = [];
+  if (p1)  pts.push({ T: 60,   P: p1,  label: "1 min"  });
+  if (p5)  pts.push({ T: 300,  P: p5,  label: "5 min"  });
+  if (p20) pts.push({ T: 1200, P: p20, label: "20 min" });
+
+  state.perf = {
+    poids: (poids && poids >= 35 && poids <= 160) ? poids : null,
+    p1: p1, p5: p5, p20: p20, points: pts,
+    model: null, profile: null, ftp: null, p3h: null, wkg: null, puissance: null
+  };
+
+  if (pts.length >= 2) {
+    var m = powerLawModel(pts);
+    state.perf.model = m;
+    state.perf.profile = physioProfile(m.E);
+    state.perf.ftp = Math.round(powerAtT(3600, m.S, m.E));
+    state.perf.p3h = Math.round(powerAtT(10800, m.S, m.E));
+    if (state.perf.poids) state.perf.wkg = Math.round((state.perf.ftp / state.perf.poids) * 100) / 100;
+  } else if (pts.length === 1 && state.perf.poids) {
+    // Un seul effort : pas de courbe, simple ratio indicatif
+    state.perf.puissance = pts[0].P;
+    state.perf.wkg = Math.round((pts[0].P / state.perf.poids) * 100) / 100;
+  }
+
+  state.step++;
+  showStep();
+}
+function skipPerf() {
+  state.perf = { poids: null, p1: null, p5: null, p20: null, points: [], model: null, profile: null, ftp: null, p3h: null, wkg: null, puissance: null };
+  state.step++;
+  showStep();
+}
+
+function showGate() {
+  setProgress(null);
+  var prof = currentProfile();
+  render(
+    '<div class="gate-card">' +
+      '<div class="reveal">' +
+        '<div class="pre">✓ Ton bilan est prêt</div>' +
+        '<div class="blur">' + esc(prof.name) + '</div>' +
+        '<div class="sub">Ton profil, ton W/kg et ton levier n°1 t\'attendent.</div>' +
+      '</div>' +
+      '<div id="gate-form">' +
+        '<div class="field">' +
+          '<input id="email-input" type="email" placeholder="ton@email.com" autocomplete="email" aria-label="Adresse email">' +
+          '<button id="submit-btn" onclick="submitEmail()">Débloquer</button>' +
+        '</div>' +
+        '<div id="form-error" class="form-error"></div>' +
+        '<div class="form-privacy">' +
+          '<svg viewBox="0 0 12 12" fill="none"><rect x="2" y="5" width="8" height="6" rx="1" stroke="#6A6A6A" stroke-width="1"/><path d="M4 5V3.5a2 2 0 014 0V5" stroke="#6A6A6A" stroke-width="1"/></svg>' +
+          'Je t\'envoie ton bilan + des conseils utiles. Pas de spam, désabo en 1 clic.</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="nav-row"><button class="back" onclick="goBack()"><span class="arr">←</span> Retour</button></div>'
+  );
+  var input = document.getElementById("email-input");
+  input.addEventListener("keydown", function(e){ if (e.key === "Enter") submitEmail(); });
+}
+
+function submitEmail() {
+  var email = document.getElementById("email-input").value.trim();
+  var btn = document.getElementById("submit-btn");
+  var errorEl = document.getElementById("form-error");
+  errorEl.style.display = "none";
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errorEl.textContent = "Merci d'entrer une adresse email valide.";
+    errorEl.style.display = "block";
+    return;
+  }
+  state.email = email;
+
+  btn.innerHTML = "…"; btn.disabled = true; btn.style.opacity = "0.6";
+
+  var prof = currentProfile();
+  var payload = {
+    email: email,
+    list: "quiz",
+    fields: {
+      profil:      prof.key,
+      niveau:      state.answers.niveau || "",
+      volume:      state.answers.volume || "",
+      contrainte:  state.answers.contrainte || "",
+      faiblesse:   state.answers.faiblesse || "",
+      frustration: state.answers.frustration || "",
+      objectif:    state.answers.objectif || "",
+      wkg:         state.perf.wkg != null ? String(state.perf.wkg) : "",
+      profil_physio: state.perf.profile ? state.perf.profile.key : ""
+    }
+  };
+
+  fetch("/api/subscribe", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).then(function(){ showResult(); }).catch(function(){ showResult(); });
+}
+
+function showResult() {
+  setProgress(null);
+  var prof = currentProfile();
+  var pf = state.perf;
+  var perfPanel;
+
+  if (pf.model) {
+    // ── Loi de puissance complète ──
+    var m = pf.model, phys = pf.profile;
+    var bigVal = (pf.wkg != null) ? pf.wkg.toFixed(2) : pf.ftp;
+    var bigUnit = (pf.wkg != null) ? "W/kg" : "W";
+    var ftpLine = pf.ftp + " W" + (pf.wkg != null ? " · " + pf.wkg.toFixed(2) + " W/kg" : "");
+    perfPanel =
+      '<div class="card">' +
+        '<div class="card-label">Ta loi de puissance</div>' +
+        '<div class="wkg-row">' +
+          '<span class="wkg-big">' + bigVal + '</span>' +
+          '<span class="wkg-unit">' + bigUnit + '</span>' +
+          '<span class="wkg-band">' + phys.label + '</span>' +
+        '</div>' +
+        '<p style="margin-top:16px;">Ton exposant d\'endurance est de <strong>' + m.E.toFixed(2) + '</strong>. ' + esc(phys.desc) + '</p>' +
+        '<div class="pl-curve">' + buildCurveSVG(m, pf.points) + '</div>' +
+        '<div class="pl-stats">' +
+          '<div class="pl-stat"><div class="pl-k">Seuil ~1h</div><div class="pl-v">' + pf.ftp + ' W</div><div class="pl-sub">' + (pf.wkg != null ? pf.wkg.toFixed(2) + ' W/kg' : 'ta FTP estimée') + '</div></div>' +
+          '<div class="pl-stat"><div class="pl-k">Endurance 3h</div><div class="pl-v">' + pf.p3h + ' W</div><div class="pl-sub">' + Math.round(pf.p3h / pf.ftp * 100) + '% de ton seuil</div></div>' +
+          '<div class="pl-stat"><div class="pl-k">Exposant</div><div class="pl-v">' + m.E.toFixed(2) + '</div><div class="pl-sub">profil ' + phys.label.toLowerCase() + '</div></div>' +
+        '</div>' +
+      '</div>';
+  } else if (pf.wkg != null) {
+    // ── Un seul effort : W/kg indicatif ──
+    var band = wkgBand(pf.wkg);
+    perfPanel =
+      '<div class="card">' +
+        '<div class="card-label">Ton rapport poids-puissance</div>' +
+        '<div class="wkg-row">' +
+          '<span class="wkg-big">' + pf.wkg.toFixed(2) + '</span>' +
+          '<span class="wkg-unit">W/kg</span>' +
+          '<span class="wkg-band">' + band.name + '</span>' +
+        '</div>' +
+        '<div class="wkg-scale"><div class="wkg-marker" style="left:' + band.pos + '%"></div></div>' +
+        '<div class="wkg-scale-labels"><span>2.0</span><span>3.0</span><span>4.0</span><span>5.0+</span></div>' +
+        '<p style="margin-top:18px;">À ' + pf.puissance + ' W pour ' + pf.poids + ' kg. ' +
+        'Avec un deuxième record de puissance, on traçait ta loi de puissance complète — mais ton W/kg dit déjà l\'essentiel : c\'est le chiffre qui se travaille en priorité.</p>' +
+      '</div>';
+  } else {
+    // ── Aucun chiffre ──
+    perfPanel =
+      '<div class="card">' +
+        '<div class="card-label">Ta loi de puissance</div>' +
+        '<p>Sans capteur de puissance, on ne peut pas encore tracer ta courbe — et c\'est justement le premier angle mort à lever. ' +
+        'Ta <strong>loi de puissance</strong> (ton W/kg au seuil et ta capacité à le tenir dans la durée) est ce qui dicte ton niveau réel à vélo. ' +
+        'La mesurer, puis la faire grimper, c\'est le point de départ de toute vraie progression.</p>' +
+      '</div>';
+  }
+
+  render(
+    '<div class="result-head">' +
+      '<div class="kicker">Ton profil de cycliste</div>' +
+      '<h1 class="result-name">' + esc(prof.name) + '</h1>' +
+      '<p class="result-tagline">' + esc(prof.tagline) + '</p>' +
+    '</div>' +
+
+    '<div class="card">' +
+      '<div class="card-label">Le diagnostic</div>' +
+      '<p>' + esc(prof.diag) + '</p>' +
+    '</div>' +
+
+    perfPanel +
+
+    '<div class="card card-lever">' +
+      '<div class="card-label">Ton levier n°1</div>' +
+      '<div class="lever-title">' + esc(prof.leverTitle) + '</div>' +
+      '<p>' + esc(prof.lever) + '</p>' +
+    '</div>' +
+
+    '<div class="cta">' +
+      '<div class="cta-label">L\'étape suivante</div>' +
+      '<h3>Fais grimper tes W/kg, méthodiquement.</h3>' +
+      '<p>' + esc(prof.angle) + ' Un système clair, basé sur la science, pour arrêter de rouler au hasard et faire monter le seul chiffre qui compte.</p>' +
+      '<a class="cta-btn" href="' + PRODUCT_URL + '" target="_blank" rel="noopener" onclick="trackCTA()">Découvrir La Méthode Watt/kg →</a>' +
+      '<div class="cta-sub">Ton bilan détaillé arrive aussi par mail dans quelques minutes.</div>' +
+    '</div>' +
+
+    '<div class="result-foot"><a href="/">Retour à La Science du Cyclisme</a></div>'
+  );
+}
+
+function trackCTA() {
+  if (typeof fbq === "function") { try { fbq("track", "Lead", { content_name: currentProfile().key }); } catch(e){} }
+}
+
+/* GO */
+showIntro();
+</script>
+
+</body>
+</html>
