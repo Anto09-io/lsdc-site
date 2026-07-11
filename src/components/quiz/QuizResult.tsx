@@ -77,16 +77,15 @@ export default function QuizResult() {
           {profile.angle} Un système clair, basé sur la science, pour arrêter
           de rouler au hasard et faire monter le seul chiffre qui compte.
         </p>
-        <a
+        <Link
           href={siteConfig.links.methode}
-          target="_blank"
-          rel="noopener noreferrer"
           className="mt-6 flex min-h-[62px] w-full items-center justify-center rounded-2xl bg-ink px-8 text-base font-semibold text-white transition-opacity hover:opacity-90"
         >
           Découvrir La Méthode Watt/kg →
-        </a>
+        </Link>
         <p className="mt-4 text-center text-xs text-ink/50">
-          Ton bilan détaillé arrive aussi par mail dans quelques minutes.
+          Tu vas aussi recevoir mes conseils d'entraînement chaque semaine par
+          mail.
         </p>
       </div>
 

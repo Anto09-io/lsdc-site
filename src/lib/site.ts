@@ -20,10 +20,10 @@ export const siteConfig = {
     youtube: "https://www.youtube.com/@lascienceducyclisme9032",
     instagram: "https://www.instagram.com/lascienceducyclisme_/",
   },
-  // Liens externes (offres / ressources). À ajuster si les URLs changent.
+  // Liens offres / ressources. À ajuster si les URLs changent.
   links: {
-    methode:
-      "https://lsdc-newsletter-e6a9c4.beehiiv.com/products/la-m-thode-watt-kg",
+    // Page de vente de la méthode watt/kg, sur le site.
+    methode: "/systeme-watt-kg",
   },
   // Catégories éditoriales du blog (ordre = ordre d'affichage des filtres).
   categories: ["Entraînement", "Physiologie", "Nutrition", "Matériel"] as const,

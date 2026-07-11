@@ -135,9 +135,8 @@ export default function QuizFlow() {
           </h1>
           <p className="mt-5 max-w-lg text-lg text-cream/60">
             La plupart des cyclistes stagnent pour une seule raison qu'ils n'ont
-            jamais nommée. Réponds à 8 questions&nbsp;: tu repars avec ton
-            profil, ton rapport W/kg estimé et le levier n°1 pour débloquer ta
-            progression.
+            jamais nommée. Réponds à 8 questions. Tu repars avec ton profil afin
+            d'estimer le levier n°1 pour débloquer ta progression.
           </p>
           <div className="mt-10">
             <Button onClick={() => setStep(1)} className="w-full sm:w-auto">
