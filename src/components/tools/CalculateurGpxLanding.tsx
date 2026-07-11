@@ -1,16 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/Button";
-import GpxCalculator from "./GpxCalculator";
 
 // Landing page portée depuis legacy/acces-calculateur/index.html, réhabillée
-// avec le design system dark + vert du site. Le gate email est intégré
-// (Beehiiv, liste "default") et révèle l'outil directement, sans email de
-// lien à part comme sur l'ancienne page.
+// avec le design system dark + vert du site. Le gate email (Beehiiv, liste
+// "default") ne débloque PAS l'outil sur place : l'accès arrive par email
+// (lien vers /outils/calculateur-gpx/acces dans l'automation), pour forcer
+// l'ouverture du mail.
 
-const STORAGE_KEY = "lsdc_tool_unlocked_calculateur-gpx";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const FEATURES = [
@@ -50,14 +49,9 @@ const BONUSES = [
 ];
 
 export default function CalculateurGpxLanding() {
-  const [unlocked, setUnlocked] = useState(false);
+  const [sent, setSent] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.localStorage.getItem(STORAGE_KEY) === "1") setUnlocked(true);
-  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -73,8 +67,7 @@ export default function CalculateurGpxLanding() {
         body: JSON.stringify({ email, list: "default" }),
       });
       if (res.ok) {
-        window.localStorage.setItem(STORAGE_KEY, "1");
-        setUnlocked(true);
+        setSent(true);
       } else {
         setStatus("error");
       }
@@ -88,9 +81,24 @@ export default function CalculateurGpxLanding() {
       {/* ── Hero ── */}
       <section className="border-b border-white/10">
         <div className="mx-auto grid max-w-5xl gap-12 px-5 py-16 md:grid-cols-2 md:items-center md:py-24">
-          {unlocked ? (
-            <div className="md:col-span-2">
-              <GpxCalculator />
+          {sent ? (
+            /* Thank-you : l'accès arrive par email, pas sur la page. */
+            <div className="mx-auto max-w-lg text-center md:col-span-2" role="status">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green/15 text-3xl">
+                🎉
+              </div>
+              <h1 className="mt-6 font-display text-4xl italic sm:text-5xl">
+                Bravo, ton accès est en route !
+              </h1>
+              <p className="mt-5 text-lg leading-relaxed text-cream/70">
+                Le lien du calculateur vient d'être envoyé dans{" "}
+                <strong className="text-cream">ta boîte mail</strong>. Ouvre
+                l'email et clique sur le lien pour accéder à l'outil.
+              </p>
+              <p className="mt-4 text-sm text-cream/50">
+                Rien reçu d'ici 2-3 minutes ? Vérifie l'onglet Promotions ou
+                tes spams — et ajoute-moi à tes contacts pour ne rien rater.
+              </p>
             </div>
           ) : (
             <>
@@ -147,7 +155,8 @@ export default function CalculateurGpxLanding() {
                     Accède au calculateur gratuitement
                   </p>
                   <p className="mt-1 text-sm text-cream/60">
-                    Entre ton email — l'accès se débloque immédiatement.
+                    Entre ton email — tu reçois ton lien d'accès directement
+                    dans ta boîte mail.
                   </p>
                   <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row">
                     <label htmlFor="gpx-gate-email" className="sr-only">
