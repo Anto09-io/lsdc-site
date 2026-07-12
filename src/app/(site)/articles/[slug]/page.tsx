@@ -15,6 +15,7 @@ import {
 import { siteConfig, absoluteUrl } from "@/lib/site";
 import { formatDate, readingLabel } from "@/lib/format";
 import { mdxComponents } from "@/components/MdxComponents";
+import ArticleGate from "@/components/ArticleGate";
 import Container from "@/components/Container";
 import CategoryBadge from "@/components/CategoryBadge";
 import AuthorBox from "@/components/AuthorBox";
@@ -161,9 +162,11 @@ export default async function ArticlePage({
           </Container>
         )}
 
-        {/* Corps MDX */}
+        {/* Corps MDX — flouté tant que le lecteur n'est pas abonné */}
         <Container size="prose" className="mt-12">
-          <div className="prose-lsdc">{content}</div>
+          <ArticleGate>
+            <div className="prose-lsdc">{content}</div>
+          </ArticleGate>
 
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
