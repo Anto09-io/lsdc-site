@@ -1,14 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Le link-in-bio historique vit en statique dans public/linkinbio/.
+  // Pages statiques héritées servies depuis public/ : link-in-bio et
+  // calculateur complet 3 volets (GPX / perf segment / puissance lim).
   async rewrites() {
-    return [{ source: "/linkinbio", destination: "/linkinbio/index.html" }];
+    return [
+      { source: "/linkinbio", destination: "/linkinbio/index.html" },
+      { source: "/calculateur", destination: "/calculateur/calculateurlsdc.html" },
+    ];
   },
-  // Anciennes URLs du site statique encore présentes dans des bios/descriptions.
   async redirects() {
     return [
+      // Ancienne URL du site statique encore présente dans des bios/descriptions.
       { source: "/acces-calculateur", destination: "/outils", permanent: true },
+      // L'accès envoyé par email pointe désormais sur le calculateur complet.
+      {
+        source: "/outils/calculateur-gpx/acces",
+        destination: "/calculateur",
+        permanent: false,
+      },
     ];
   },
   images: {
