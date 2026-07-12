@@ -20,7 +20,7 @@ import Container from "@/components/Container";
 import CategoryBadge from "@/components/CategoryBadge";
 import AuthorBox from "@/components/AuthorBox";
 import ArticleCard from "@/components/ArticleCard";
-import NewsletterForm from "@/components/NewsletterForm";
+import MethodeCta from "@/components/MethodeCta";
 import JsonLd from "@/components/JsonLd";
 
 // Génère les pages statiquement au build (1 page par article publié).
@@ -187,9 +187,10 @@ export default async function ArticlePage({
             <AuthorBox />
           </div>
 
-          {/* CTA newsletter en fin d'article */}
+          {/* CTA Système Watt/kg en fin d'article — le lecteur a déjà donné
+              son email pour débloquer l'article, on pousse l'offre. */}
           <div className="mt-12">
-            <NewsletterForm variant="card" />
+            <MethodeCta />
           </div>
         </Container>
       </article>
