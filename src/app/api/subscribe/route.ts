@@ -54,10 +54,33 @@ const ALLOWED_FIELDS = [
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// ── Anti-spam ──
+// Rate limiting en mémoire par IP (fenêtre glissante). Par instance
+// serverless — pas parfait en multi-instances, mais suffit à casser les
+// soumissions en rafale d'un même bot.
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX = 5;
+const hits = new Map<string, number[]>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const stamps = (hits.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+  stamps.push(now);
+  hits.set(ip, stamps);
+  // Purge opportuniste pour borner la mémoire.
+  if (hits.size > 5000) {
+    for (const [key, value] of hits) {
+      if (value.every((t) => now - t >= RATE_WINDOW_MS)) hits.delete(key);
+    }
+  }
+  return stamps.length > RATE_MAX;
+}
+
 export async function POST(request: Request) {
   let email: string;
   let list: string | undefined;
   let fields: Record<string, unknown> | undefined;
+  let honeypot: string;
 
   try {
     const body = await request.json();
@@ -65,8 +88,24 @@ export async function POST(request: Request) {
     list = typeof body.list === "string" ? body.list : undefined;
     fields =
       body.fields && typeof body.fields === "object" ? body.fields : undefined;
+    honeypot = String(body.website || "");
   } catch {
     return NextResponse.json({ error: "Requête invalide." }, { status: 400 });
+  }
+
+  // Honeypot rempli = bot. On répond « succès » sans rien créer, pour ne
+  // pas donner de signal au spammeur.
+  if (honeypot) {
+    return NextResponse.json({ success: true }, { status: 200 });
+  }
+
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "inconnue";
+  if (rateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Trop de tentatives. Réessaie dans quelques minutes." },
+      { status: 429 },
+    );
   }
 
   if (!EMAIL_RE.test(email)) {

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/Button";
+import HoneypotField from "@/components/HoneypotField";
 
 // Landing page portée depuis legacy/acces-calculateur/index.html, réhabillée
 // avec le design system dark + vert du site. Le gate email (Beehiiv, liste
@@ -52,6 +53,7 @@ export default function CalculateurGpxLanding() {
   const [sent, setSent] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [website, setWebsite] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -64,7 +66,7 @@ export default function CalculateurGpxLanding() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, list: "default" }),
+        body: JSON.stringify({ email, list: "default", website }),
       });
       if (res.ok) {
         setSent(true);
@@ -159,6 +161,7 @@ export default function CalculateurGpxLanding() {
                     dans ta boîte mail.
                   </p>
                   <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <HoneypotField value={website} onChange={setWebsite} />
                     <label htmlFor="gpx-gate-email" className="sr-only">
                       Ton adresse email
                     </label>

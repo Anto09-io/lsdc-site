@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/Button";
+import HoneypotField from "@/components/HoneypotField";
 import {
   computePerf,
   currentProfile,
@@ -34,6 +35,7 @@ export default function QuizFlow() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [website, setWebsite] = useState("");
 
   const stage = stageFor(step);
   const progressPct = stage === "question" ? Math.round(((step) / TOTAL_STEPS) * 100) : null;
@@ -78,6 +80,7 @@ export default function QuizFlow() {
 
     const payload = {
       email,
+      website,
       list: "quiz",
       fields: {
         profil: profile.key,
@@ -213,6 +216,7 @@ export default function QuizFlow() {
             </div>
 
             <form onSubmit={submitEmail} className="flex flex-col gap-2 sm:flex-row">
+            <HoneypotField value={website} onChange={setWebsite} />
               <label htmlFor="quiz-email" className="sr-only">
                 Adresse email
               </label>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/Button";
+import HoneypotField from "@/components/HoneypotField";
 
 /**
  * Gate newsletter sur le corps des articles : le contenu reste dans le DOM
@@ -23,6 +24,7 @@ export default function ArticleGate({
   const [unlocked, setUnlocked] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const [website, setWebsite] = useState("");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -40,7 +42,7 @@ export default function ArticleGate({
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, list: "newsletter" }),
+        body: JSON.stringify({ email, list: "newsletter", website }),
       });
       if (res.ok) {
         window.localStorage.setItem(STORAGE_KEY, "1");
@@ -85,6 +87,7 @@ export default function ArticleGate({
               </p>
             ) : (
               <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
+            <HoneypotField value={website} onChange={setWebsite} />
                 <label htmlFor="article-gate-email" className="sr-only">
                   Ton adresse email
                 </label>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/Button";
+import HoneypotField from "@/components/HoneypotField";
 
 type Status = "idle" | "loading" | "error";
 
@@ -24,6 +25,7 @@ export default function ToolGate({
   const [unlocked, setUnlocked] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const [website, setWebsite] = useState("");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -43,7 +45,7 @@ export default function ToolGate({
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, list: "default" }),
+        body: JSON.stringify({ email, list: "default", website }),
       });
       if (res.ok) {
         window.localStorage.setItem(STORAGE_PREFIX + toolSlug, "1");
@@ -68,6 +70,7 @@ export default function ToolGate({
       </p>
 
       <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
+            <HoneypotField value={website} onChange={setWebsite} />
         <label htmlFor="tool-gate-email" className="sr-only">
           Ton adresse email
         </label>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "./Button";
+import HoneypotField from "@/components/HoneypotField";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -25,6 +26,7 @@ export default function NewsletterForm({
 }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const [website, setWebsite] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -33,7 +35,7 @@ export default function NewsletterForm({
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, list: "newsletter" }),
+        body: JSON.stringify({ email, list: "newsletter", website }),
       });
 
       if (res.ok) {
@@ -65,6 +67,7 @@ export default function NewsletterForm({
             onSubmit={handleSubmit}
             className="flex flex-col gap-2 rounded-3xl bg-surface p-2 shadow-card ring-1 ring-white/10 sm:flex-row sm:items-center sm:rounded-full"
           >
+            <HoneypotField value={website} onChange={setWebsite} />
             <label htmlFor="newsletter-hero" className="sr-only">
               Ton adresse e-mail
             </label>
@@ -112,6 +115,7 @@ export default function NewsletterForm({
           onSubmit={handleSubmit}
           className="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row"
         >
+            <HoneypotField value={website} onChange={setWebsite} />
           <label htmlFor="newsletter-card" className="sr-only">
             Ton adresse email
           </label>
