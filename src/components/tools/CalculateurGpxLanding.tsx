@@ -170,7 +170,7 @@ export default function CalculateurGpxLanding() {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="ton@email.com"
                       autoComplete="email"
-                      className="min-h-[52px] flex-1 rounded-xl border-0 bg-ink px-4 text-sm text-cream shadow-sm ring-1 ring-inset ring-white/10 focus:outline-none focus:ring-2 focus:ring-green-light"
+                      className="min-h-[52px] flex-1 rounded-xl border-0 bg-ink px-4 text-base text-cream shadow-sm ring-1 ring-inset ring-white/10 focus:outline-none focus:ring-2 focus:ring-green-light"
                     />
                     <Button type="submit" disabled={status === "loading"} className="min-h-[52px]">
                       {status === "loading" ? "…" : "Accès offert →"}

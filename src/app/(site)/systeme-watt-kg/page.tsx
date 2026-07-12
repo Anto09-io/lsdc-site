@@ -294,7 +294,7 @@ export default function SystemeWattKgPage() {
 
           <div className="relative mx-auto mt-8 aspect-[16/10] w-full max-w-2xl">
             <Image
-              src="/images/methode-watt-kg/systeme-mockup.png"
+              src="/images/methode-watt-kg/systeme-mockup.jpg"
               alt="Le Système Watt/KG — cours, librairie de séances, tracker, challenge 60 jours"
               fill
               sizes="(max-width: 768px) 100vw, 672px"

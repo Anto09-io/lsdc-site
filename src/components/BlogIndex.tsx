@@ -43,7 +43,7 @@ export default function BlogIndex({
               setVisible(PER_PAGE);
             }}
             className={cn(
-              "rounded-full px-4 py-2 text-sm font-medium transition-colors",
+              "rounded-full px-4 py-2.5 text-sm font-medium transition-colors",
               active === cat
                 ? "bg-green text-ink"
                 : "bg-surface text-cream/70 ring-1 ring-inset ring-white/10 hover:bg-green/5 hover:text-green",

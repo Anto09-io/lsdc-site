@@ -138,6 +138,8 @@
   .global-warn { background: #FFF7ED; border: 1px solid #FED7AA; border-radius: var(--radius); padding: 8px 14px; font-size: 11px; color: #92400E; font-weight: 600; margin-bottom: 0.75rem; display: none; }
   .global-warn.show { display: flex; align-items: center; gap: 6px; }
   .header-app-name { font-family: 'Barlow Condensed', var(--font); font-style: italic; font-size: 18px; text-transform: uppercase; letter-spacing: 0.02em; }
+  /* Mobile : header scrollable pour atteindre tous les onglets */
+  @media (max-width: 680px) { header { overflow-x: auto; scrollbar-width: none; } header::-webkit-scrollbar { display: none; } .nav-tab { padding: 12px 14px; } input, select, textarea { font-size: 16px !important; } }
 </style>
 </head>
 <body>

@@ -14,7 +14,7 @@ const nav = [
  * sticky à partir de md avec fond ink translucide + blur pour que le contenu
  * ne passe jamais « à travers » le logo au scroll.
  *
- * ⚠️ Hauteurs totales — mobile ≈134px, md ≈174px. La section hero de
+ * ⚠️ Hauteurs totales — mobile ≈146px, md ≈174px. La section hero de
  * l'accueil compense ces valeurs (-mt/pt) pour faire remonter son halo
  * derrière le header : les garder synchronisées si on change les dimensions.
  */
@@ -46,7 +46,7 @@ export default function Header() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block whitespace-nowrap rounded-full px-3.5 py-1.5 text-cream transition-colors hover:bg-white/5 hover:text-green md:px-5 md:py-2"
+                    className="block whitespace-nowrap rounded-full px-4 py-3 text-cream transition-colors hover:bg-white/5 hover:text-green md:px-5 md:py-2"
                   >
                     {item.label}
                   </Link>

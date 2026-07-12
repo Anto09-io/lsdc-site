@@ -79,7 +79,7 @@ export default function ToolGate({
           onChange={(e) => setEmail(e.target.value)}
           placeholder="ton@email.com"
           autoComplete="email"
-          className="rounded-full border-0 bg-ink px-5 py-3 text-sm text-cream shadow-sm ring-1 ring-inset ring-white/10 focus:outline-none focus:ring-2 focus:ring-green-light"
+          className="rounded-full border-0 bg-ink px-5 py-3 text-base text-cream shadow-sm ring-1 ring-inset ring-white/10 focus:outline-none focus:ring-2 focus:ring-green-light"
         />
         <Button type="submit" disabled={status === "loading"}>
           {status === "loading" ? "Vérification…" : "Accès offert →"}

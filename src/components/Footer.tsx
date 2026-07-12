@@ -23,7 +23,7 @@ export default function Footer() {
                 href={siteConfig.social.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-cream/70 transition-colors hover:text-white"
+                className="inline-block py-2 text-cream/70 transition-colors hover:text-white"
               >
                 YouTube
               </a>
@@ -31,7 +31,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/articles#newsletter"
-                className="text-cream/70 transition-colors hover:text-white"
+                className="inline-block py-2 text-cream/70 transition-colors hover:text-white"
               >
                 Newsletter
               </Link>
@@ -41,7 +41,7 @@ export default function Footer() {
                 href={siteConfig.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-cream/70 transition-colors hover:text-white"
+                className="inline-block py-2 text-cream/70 transition-colors hover:text-white"
               >
                 Instagram
               </a>

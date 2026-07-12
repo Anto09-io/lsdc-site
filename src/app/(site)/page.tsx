@@ -168,8 +168,8 @@ export default function HomePage() {
           derrière lui, la section remonte de la hauteur du header (-mt) et
           compense avec un padding-top égal, afin que le contenu visible ne
           bouge pas mais que le fond, lui, remonte jusqu'en haut de la page.
-          (hauteurs synchronisées avec Header.tsx : ≈134px mobile, ≈174px md) */}
-      <section className="relative -mt-[134px] overflow-hidden pt-[134px] md:-mt-[174px] md:pt-[174px]">
+          (hauteurs synchronisées avec Header.tsx : ≈146px mobile, ≈174px md) */}
+      <section className="relative -mt-[146px] overflow-hidden pt-[146px] md:-mt-[174px] md:pt-[174px]">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_0%,rgba(34,197,94,0.10),transparent_70%)]"
