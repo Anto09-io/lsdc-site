@@ -8,25 +8,25 @@
 <title>Calculateur d'effort GPX — La Science du Cyclisme</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,600;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
   :root {
-    --bg:          #FFFFFF;
-    --surface:     #FAFAFA;
-    --surface2:    #F4F4F4;
-    --border:      #E8E8E8;
-    --border2:     #D0D0D0;
-    --text:        #111111;
-    --muted:       #555555;
-    --dim:         #999999;
-    --accent:      #F5E100;
-    --accent-dark: #C8B800;
-    --accent-soft: rgba(245,225,0,0.15);
-    --accent2:     #16A34A;
-    --accent2-soft:rgba(22,163,74,0.10);
-    --accent3:     #2563EB;
-    --accent3-soft:rgba(37,99,235,0.10);
+    --bg:          #0B0B0C;
+    --surface:     #18181B;
+    --surface2:    #202024;
+    --border:      #2A2A2E;
+    --border2:     #3F3F46;
+    --text:        #F5F1E8;
+    --muted:       #B5B1A6;
+    --dim:         #8A867C;
+    --accent:      #22C55E;
+    --accent-dark: #16A34A;
+    --accent-soft: rgba(34,197,94,0.14);
+    --accent2:     #4ADE80;
+    --accent2-soft:rgba(74,222,128,0.12);
+    --accent3:     #3B82F6;
+    --accent3-soft:rgba(59,130,246,0.14);
     --font: 'Inter', sans-serif;
     --radius: 10px;
     --radius-lg: 16px;
@@ -46,7 +46,7 @@
 
   header {
     padding: 0 2rem;
-    background: #0D0D0D;
+    background: #0B0B0C;
     border-bottom: 1px solid #222;
     display: flex;
     align-items: center;
@@ -117,7 +117,7 @@
 
   .header-cta-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 18px rgba(245,225,0,0.45);
+    box-shadow: 0 4px 18px rgba(34,197,94,0.45);
   }
 
   .layout {
@@ -160,7 +160,7 @@
     cursor: pointer;
     transition: border-color 0.2s, background 0.2s;
     position: relative;
-    background: #fff;
+    background: var(--surface);
   }
 
   .upload-zone:hover, .upload-zone.drag-over {
@@ -208,7 +208,7 @@
     background: var(--accent-soft);
   }
 
-  .upload-zone.loaded .upload-title { color: #111; }
+  .upload-zone.loaded .upload-title { color: var(--text); }
 
   /* Sliders */
   .slider-group { display: flex; flex-direction: column; gap: 10px; }
@@ -253,7 +253,7 @@
     border-radius: 50%;
     background: var(--accent);
     cursor: pointer;
-    border: 2px solid #111;
+    border: 2px solid var(--bg);
     transition: transform 0.15s;
   }
 
@@ -267,7 +267,7 @@
   }
 
   .stat-pill {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 8px 10px;
@@ -289,7 +289,7 @@
   }
 
   .result-card {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 1rem 1.1rem;
@@ -315,7 +315,7 @@
 
   /* Phase bars */
   .phase-section {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 1.1rem 1.25rem;
@@ -347,14 +347,14 @@
 
   .phase-fill.up   { background: var(--accent3); }
   .phase-fill.flat { background: var(--accent2); }
-  .phase-fill.down { background: #111; }
+  .phase-fill.down { background: #F5F1E8; }
 
   .phase-kj  { font-size: 11px; color: var(--text); text-align: right; font-weight: 600; }
   .phase-dur { font-size: 11px; color: var(--muted); text-align: right; }
 
   /* Effort breakdown */
   .breakdown-section {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 1.1rem 1.25rem;
@@ -386,13 +386,13 @@
 
   .b-fill.grav { background: var(--accent2); }
   .b-fill.aero { background: var(--accent3); }
-  .b-fill.roll { background: #111; }
+  .b-fill.roll { background: #F5F1E8; }
 
   .b-kj { font-size: 11px; color: var(--text); text-align: right; font-weight: 600; }
 
   /* Chart */
   .chart-section {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 1.1rem 1.25rem;
@@ -452,7 +452,7 @@
 
   .cta-gf90:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(245,225,0,0.5);
+    box-shadow: 0 6px 20px rgba(34,197,94,0.5);
   }
 
   .cta-gf90 .cta-question {
@@ -512,6 +512,7 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
+  .header-app-name { font-family: 'Barlow Condensed', var(--font); font-style: italic; font-size: 18px; text-transform: uppercase; letter-spacing: 0.02em; }
 </style>
 </head>
 <body>
@@ -520,9 +521,9 @@
   <a class="header-left" href="#">
     <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="0" y="13" width="5" height="9" rx="1.5" fill="#22C55E"/>
-      <rect x="6.5" y="7" width="5" height="15" rx="1.5" fill="#F5E100"/>
-      <rect x="13" y="10" width="5" height="12" rx="1.5" fill="#3B82F6"/>
-      <rect x="19.5" y="2" width="4.5" height="20" rx="1.5" fill="#EF4444"/>
+      <rect x="6.5" y="7" width="5" height="15" rx="1.5" fill="#4ADE80"/>
+      <rect x="13" y="10" width="5" height="12" rx="1.5" fill="#16A34A"/>
+      <rect x="19.5" y="2" width="4.5" height="20" rx="1.5" fill="#86EFAC"/>
     </svg>
     <span class="header-app-name">LSDC Calculator</span>
   </a>
@@ -936,8 +937,8 @@ function drawProfile(points, segs) {
       datasets: [{
         data,
         fill: true,
-        backgroundColor: 'rgba(245,225,0,0.12)',
-        borderColor: '#111111',
+        backgroundColor: 'rgba(34,197,94,0.12)',
+        borderColor: '#F5F1E8',
         borderWidth: 1.5,
         pointRadius: 0,
         tension: 0.3
@@ -950,10 +951,10 @@ function drawProfile(points, segs) {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: '#111111',
-          borderColor: 'rgba(245,225,0,0.5)',
+          backgroundColor: '#26262B',
+          borderColor: 'rgba(34,197,94,0.5)',
           borderWidth: 1,
-          titleColor: '#999999',
+          titleColor: '#8A867C',
           bodyColor: '#ffffff',
           titleFont: { family: 'Inter', size: 10 },
           bodyFont: { family: 'Inter', size: 12 },
@@ -966,22 +967,22 @@ function drawProfile(points, segs) {
       scales: {
         x: {
           ticks: {
-            color: '#999999',
+            color: '#8A867C',
             font: { family: 'Inter', size: 10 },
             maxTicksLimit: 8,
             callback: v => labels[v] + ' km'
           },
           grid: { color: 'rgba(0,0,0,0.05)' },
-          border: { color: '#E8E8E8' }
+          border: { color: '#2A2A2E' }
         },
         y: {
           ticks: {
-            color: '#999999',
+            color: '#8A867C',
             font: { family: 'Inter', size: 10 },
             callback: v => v + ' m'
           },
           grid: { color: 'rgba(0,0,0,0.05)' },
-          border: { color: '#E8E8E8' }
+          border: { color: '#2A2A2E' }
         }
       }
     }
