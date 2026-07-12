@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Inter, Barlow_Condensed, Caveat } from "next/font/google";
 import "./globals.css";
@@ -69,6 +70,8 @@ export default function RootLayout({
       <body className="min-h-screen">
         <CursorGlow />
         {children}
+        {/* Mesure d'audience sans cookies (exempte de consentement CNIL) */}
+        <Analytics />
       </body>
     </html>
   );

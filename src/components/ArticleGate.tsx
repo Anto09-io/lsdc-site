@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@vercel/analytics";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/Button";
 import HoneypotField from "@/components/HoneypotField";
@@ -47,6 +48,7 @@ export default function ArticleGate({
       if (res.ok) {
         window.localStorage.setItem(STORAGE_KEY, "1");
         setStatus("success");
+        track("subscribe", { source: "article-gate" });
         // Petit délai pour laisser lire la confirmation avant de défloutter.
         window.setTimeout(() => setUnlocked(true), 900);
       } else {

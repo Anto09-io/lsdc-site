@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@vercel/analytics";
 import { useState } from "react";
 import { Button } from "./Button";
 import HoneypotField from "@/components/HoneypotField";
@@ -40,6 +41,7 @@ export default function NewsletterForm({
 
       if (res.ok) {
         setStatus("success");
+        track("subscribe", { source: "newsletter" });
         setEmail("");
       } else {
         setStatus("error");

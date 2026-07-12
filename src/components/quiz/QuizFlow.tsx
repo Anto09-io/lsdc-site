@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/Button";
 import HoneypotField from "@/components/HoneypotField";
+import { track } from "@vercel/analytics";
 import {
   computePerf,
   currentProfile,
@@ -96,6 +97,7 @@ export default function QuizFlow() {
     };
 
     const reveal = () => {
+      track("subscribe", { source: "quiz" });
       if (typeof window !== "undefined") {
         window.sessionStorage.setItem(
           QUIZ_RESULT_STORAGE_KEY,

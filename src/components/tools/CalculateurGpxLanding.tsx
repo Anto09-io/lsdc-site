@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@vercel/analytics";
 import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/Button";
@@ -70,6 +71,7 @@ export default function CalculateurGpxLanding() {
       });
       if (res.ok) {
         setSent(true);
+        track("subscribe", { source: "calculateur" });
       } else {
         setStatus("error");
       }

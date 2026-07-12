@@ -51,7 +51,26 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10 py-5 text-center text-xs text-cream/40">
-        © {year} {siteConfig.name}
+        <p>
+          © {year} {siteConfig.name}
+        </p>
+        <ul className="mt-2 flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+          <li>
+            <Link href="/mentions-legales" className="inline-block py-1.5 hover:text-cream/70">
+              Mentions légales
+            </Link>
+          </li>
+          <li>
+            <Link href="/confidentialite" className="inline-block py-1.5 hover:text-cream/70">
+              Confidentialité
+            </Link>
+          </li>
+          <li>
+            <Link href="/cgv" className="inline-block py-1.5 hover:text-cream/70">
+              CGV
+            </Link>
+          </li>
+        </ul>
       </div>
     </footer>
   );
