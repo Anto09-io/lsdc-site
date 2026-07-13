@@ -174,7 +174,7 @@ export default function HomePage() {
           aria-hidden
           className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_0%,rgba(34,197,94,0.10),transparent_70%)]"
         />
-        <Container className="py-20 text-center sm:py-28">
+        <Container className="py-12 text-center sm:py-28">
           <p className="mx-auto inline-block rounded-full bg-green/10 px-4 py-1.5 text-xs font-semibold text-green sm:text-sm">
             Pour les cyclistes amateurs qui veulent progresser
           </p>
@@ -229,7 +229,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Teasers ── */}
-      <Container className="flex flex-col gap-20 py-20">
+      <Container className="flex flex-col gap-14 py-12 sm:gap-20 sm:py-20">
         {teasers.map((teaser, index) => (
           <div key={teaser.title} className="contents">
             <section className="flex flex-col gap-8 md:flex-row md:items-center">
