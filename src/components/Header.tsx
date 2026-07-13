@@ -38,15 +38,16 @@ export default function Header() {
           />
         </Link>
 
-        {/* Navigation en pilule — scrollable horizontalement sur mobile */}
+        {/* Navigation en pilule — sur 2 lignes centrées en mobile, une
+            seule ligne à partir de md (rien ne déborde de l'écran) */}
         <nav aria-label="Navigation principale" className="mt-3 md:mt-4">
-          <div className="no-scrollbar -mx-5 overflow-x-auto px-5 md:mx-0 md:flex md:justify-center md:overflow-visible md:px-0">
-            <ul className="mx-auto flex w-max items-center gap-1 rounded-full border border-white/15 bg-surface/60 p-1 text-sm font-medium md:p-1.5 md:text-base">
+          <div className="flex justify-center">
+            <ul className="flex max-w-full flex-wrap items-center justify-center gap-1 rounded-3xl border border-white/15 bg-surface/60 p-1 text-sm font-medium md:w-max md:flex-nowrap md:rounded-full md:p-1.5 md:text-base">
               {nav.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block whitespace-nowrap rounded-full px-4 py-3 text-cream transition-colors hover:bg-white/5 hover:text-green md:px-5 md:py-2"
+                    className="block whitespace-nowrap rounded-full px-3.5 py-2.5 text-cream transition-colors hover:bg-white/5 hover:text-green md:px-5 md:py-2"
                   >
                     {item.label}
                   </Link>

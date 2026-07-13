@@ -111,28 +111,34 @@ function YouTubeLogo({ className }: { className?: string }) {
 function StatsBand() {
   return (
     <section className="rounded-2xl bg-surface px-6 py-8 ring-1 ring-white/10 sm:px-10">
-      <div className="flex flex-col items-center justify-center gap-8 sm:flex-row sm:gap-16">
+      {/* Mobile : les deux lignes partagent la même colonne d'icônes
+          (w-fit centré, icônes en boîte fixe) pour rester alignées. */}
+      <div className="mx-auto flex w-fit flex-col gap-8 sm:mx-0 sm:w-auto sm:flex-row sm:items-center sm:justify-center sm:gap-16">
         <div className="flex items-center gap-4">
-          <YouTubeLogo className="h-10 w-14" />
+          <div className="flex w-14 flex-shrink-0 justify-center">
+            <YouTubeLogo className="h-10 w-14" />
+          </div>
           <div>
             <p className="text-3xl font-extrabold sm:text-4xl">+22,5k</p>
             <p className="text-sm text-cream/60">abonnés YouTube</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={1.8}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-10 w-10 text-green"
-          >
-            <rect x="2" y="4" width="20" height="16" rx="3" />
-            <path d="m3 6 9 7 9-7" />
-          </svg>
+          <div className="flex w-14 flex-shrink-0 justify-center">
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.8}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-10 w-10 text-green"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="3" />
+              <path d="m3 6 9 7 9-7" />
+            </svg>
+          </div>
           <div>
             <p className="text-3xl font-extrabold sm:text-4xl">8,5k</p>
             <p className="text-sm text-cream/60">lecteurs de la newsletter</p>
@@ -168,8 +174,10 @@ export default function HomePage() {
           derrière lui, la section remonte de la hauteur du header (-mt) et
           compense avec un padding-top égal, afin que le contenu visible ne
           bouge pas mais que le fond, lui, remonte jusqu'en haut de la page.
-          (hauteurs synchronisées avec Header.tsx : ≈146px mobile, ≈174px md) */}
-      <section className="relative -mt-[146px] overflow-hidden pt-[146px] md:-mt-[174px] md:pt-[174px]">
+          Compensation desktop uniquement : en mobile la nav passe sur 2
+          lignes (hauteur variable), on laisse le flux normal.
+          (hauteur md synchronisée avec Header.tsx : ≈174px) */}
+      <section className="relative overflow-hidden md:-mt-[174px] md:pt-[174px]">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_0%,rgba(34,197,94,0.10),transparent_70%)]"
