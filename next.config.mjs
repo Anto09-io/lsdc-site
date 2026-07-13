@@ -55,6 +55,13 @@ const nextConfig = {
         destination: "/calculateur",
         permanent: false,
       },
+      // Ancien chemin du calculateur (encore présent dans un lien d'email
+      // Beehiiv et potentiellement d'anciens contenus).
+      {
+        source: "/lsdc-calculator/:path*",
+        destination: "/calculateur/:path*",
+        permanent: true,
+      },
     ];
   },
   images: {
