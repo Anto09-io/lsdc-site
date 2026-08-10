@@ -135,18 +135,22 @@ export default function GlucidesLanding() {
           </div>
 
           <div>
-            {/* Aperçu stylisé de l'outil (mock statique, non interactif) */}
+            {/* Aperçu stylisé de l'outil (mock statique, non interactif).
+                Le résultat est flouté : on voit qu'il y a une dose, pas
+                laquelle — c'est l'inscription qui la révèle. */}
             <div
               aria-hidden
-              className="pointer-events-none mb-8 select-none rounded-2xl bg-surface p-6 ring-1 ring-white/10"
+              className="pointer-events-none relative mb-8 select-none rounded-2xl bg-surface p-6 ring-1 ring-white/10"
             >
               <p className="text-[11px] font-semibold uppercase tracking-wider text-cream/50">
                 Ta dose recommandée
               </p>
-              <p className="mt-1 font-display text-6xl font-bold italic leading-none text-green">
+              <p className="mt-1 font-display text-6xl font-bold italic leading-none text-green blur-md">
                 75<span className="text-2xl text-cream"> g/h</span>
               </p>
-              <p className="mt-1 text-xs text-cream/50">fourchette 70–85 g/h</p>
+              <p className="mt-1 text-xs text-cream/50 blur-sm">
+                fourchette 70–85 g/h
+              </p>
               <div className="mt-4 flex flex-col gap-2">
                 {[
                   ["Ton besoin utilisable", "75", true],
@@ -157,15 +161,19 @@ export default function GlucidesLanding() {
                     <span className={`w-40 flex-none ${isMin ? "font-bold text-green" : "text-cream/60"}`}>
                       {label}
                     </span>
-                    <span className="h-2 flex-1 overflow-hidden rounded-full bg-ink">
+                    <span className="h-2 flex-1 overflow-hidden rounded-full bg-ink blur-[3px]">
                       <span
                         className={`block h-full rounded-full ${isMin ? "bg-green" : "bg-cream/25"}`}
                         style={{ width: `${(Number(v) / 120) * 100}%` }}
                       />
                     </span>
-                    <span className="w-12 text-right text-cream/70">{v} g/h</span>
+                    <span className="w-12 text-right text-cream/70 blur-sm">{v} g/h</span>
                   </div>
                 ))}
+              </div>
+              {/* Cadenas : rend le floutage intentionnel, pas un bug */}
+              <div className="absolute right-5 top-5 flex items-center gap-2 rounded-full bg-ink/80 px-3 py-1.5 text-xs font-semibold text-cream ring-1 ring-white/15">
+                <span aria-hidden>🔒</span> Ta dose s'affiche après inscription
               </div>
             </div>
 
