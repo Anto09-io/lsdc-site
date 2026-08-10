@@ -1,20 +1,17 @@
 "use client";
 
 import { track } from "@vercel/analytics";
-import { useEffect, useState } from "react";
-import Container from "@/components/Container";
+import { useState } from "react";
 import { Button } from "@/components/Button";
 import HoneypotField from "@/components/HoneypotField";
-import GlucidesCalculator from "@/components/tools/GlucidesCalculator";
 
 // Page de capture du calculateur de glucides, sur le modèle de
-// CalculateurGpxLanding. Différence assumée : le gate débloque l'outil SUR
-// PLACE après un succès confirmé de /api/subscribe (liste
-// "calculateur-glucides" → base Beehiiv), et le déverrouillage est mémorisé
-// en localStorage — pas besoin d'automation email pour accéder à l'outil.
+// CalculateurGpxLanding : le gate ne débloque PAS l'outil sur place.
+// L'opt-in (liste "calculateur-glucides" → base Beehiiv) affiche une
+// thank-you page qui renvoie vers la boîte mail — l'accès arrive par email
+// (lien vers /outils/calculateur-glucides/acces dans l'automation).
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const STORAGE_KEY = "lsdc_tool_unlocked_calculateur-glucides";
 
 const FEATURES = [
   "Ta dose exacte en g/h, calculée sur TES watts et TON gabarit",
@@ -44,15 +41,10 @@ const SCIENCE = [
 ];
 
 export default function GlucidesLanding() {
-  const [unlocked, setUnlocked] = useState(false);
+  const [sent, setSent] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [website, setWebsite] = useState("");
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.localStorage.getItem(STORAGE_KEY) === "1") setUnlocked(true);
-  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -68,8 +60,8 @@ export default function GlucidesLanding() {
         body: JSON.stringify({ email, list: "calculateur-glucides", website }),
       });
       if (res.ok) {
-        window.localStorage.setItem(STORAGE_KEY, "1");
-        setUnlocked(true);
+        setSent(true);
+        window.scrollTo({ top: 0 });
         track("subscribe", { source: "calculateur-glucides" });
       } else {
         setStatus("error");
@@ -79,27 +71,46 @@ export default function GlucidesLanding() {
     }
   }
 
-  // ── Outil débloqué : le calculateur remplace la landing ──
-  if (unlocked) {
+  // ── Thank-you : l'accès arrive par email, pas sur la page ──
+  if (sent) {
     return (
-      <Container className="py-16">
-        <header className="mx-auto max-w-2xl text-center">
-          <h1 className="font-display text-5xl italic">
-            Ta dose optimale de <span className="text-green">glucides</span>{" "}
-            pendant l'effort
+      <section className="border-b border-white/10">
+        <div className="mx-auto max-w-lg px-5 py-24 text-center" role="status">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green/15 text-3xl">
+            🎉
+          </div>
+          <h1 className="mt-6 font-display text-4xl italic sm:text-5xl">
+            Bravo, ton accès est en route !
           </h1>
-          <p className="mt-4 text-lg text-cream/60">
-            Un algorithme basé sur la littérature scientifique (Jeukendrup,
-            Smith, King, Ijaz, Podlogar…) qui croise ta puissance, ton gabarit,
-            la durée et l'intensité de ta sortie pour calculer ce que ton corps
-            peut <em>réellement utiliser</em> — pas ce que le marketing te vend.
+          <p className="mt-5 text-lg leading-relaxed text-cream/70">
+            Le lien du calculateur vient d'être envoyé dans{" "}
+            <strong className="text-cream">ta boîte mail</strong>. Ouvre
+            l'email et clique sur le lien pour accéder à l'outil.
           </p>
-        </header>
-
-        <div className="mx-auto mt-12 max-w-3xl">
-          <GlucidesCalculator />
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="https://mail.google.com/mail/u/0/#search/lascienceducyclisme"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-cream/25 px-5 py-2.5 text-sm font-semibold text-cream transition-colors hover:border-green/60 hover:text-green"
+            >
+              Ouvrir Gmail →
+            </a>
+            <a
+              href="https://outlook.live.com/mail/0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-cream/25 px-5 py-2.5 text-sm font-semibold text-cream transition-colors hover:border-green/60 hover:text-green"
+            >
+              Ouvrir Outlook →
+            </a>
+          </div>
+          <p className="mt-6 text-sm text-cream/50">
+            Rien reçu d'ici 2-3 minutes ? Vérifie l'onglet Promotions ou tes
+            spams — et ajoute-moi à tes contacts pour ne rien rater.
+          </p>
         </div>
-      </Container>
+      </section>
     );
   }
 
@@ -182,7 +193,8 @@ export default function GlucidesLanding() {
                 Accède au calculateur gratuitement
               </p>
               <p className="mt-1 text-sm text-cream/60">
-                Entre ton email — l'outil se débloque immédiatement.
+                Entre ton email — tu reçois ton lien d'accès directement dans
+                ta boîte mail.
               </p>
               <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <HoneypotField value={website} onChange={setWebsite} />
