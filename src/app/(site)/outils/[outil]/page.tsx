@@ -4,6 +4,7 @@ import Container from "@/components/Container";
 import ToolGate from "@/components/tools/ToolGate";
 import GpxCalculator from "@/components/tools/GpxCalculator";
 import CalculateurGpxLanding from "@/components/tools/CalculateurGpxLanding";
+import GlucidesLanding from "@/components/tools/GlucidesLanding";
 import { TOOLS, getTool } from "@/lib/tools";
 
 export function generateStaticParams() {
@@ -39,6 +40,12 @@ export default async function ToolPage({
   // retombent sur le gate générique.
   if (tool.slug === "calculateur-gpx") {
     return <CalculateurGpxLanding />;
+  }
+
+  // Calculateur de glucides : landing de capture (gate email Beehiiv) qui
+  // débloque l'outil sur place après inscription.
+  if (tool.slug === "calculateur-glucides") {
+    return <GlucidesLanding />;
   }
 
   return (

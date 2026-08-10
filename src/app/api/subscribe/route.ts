@@ -31,6 +31,13 @@ const LISTS: Record<string, ListConfig> = {
     utm_source: "articles",
     utm_medium: "newsletter-optin",
   },
+  "calculateur-glucides": {
+    // Automation dédiée si configurée, sinon l'automation par défaut.
+    automationEnv: "BEEHIIV_AUTOMATION_GLUCIDES_ID",
+    automationFallbackEnv: "BEEHIIV_AUTOMATION_ID",
+    utm_source: "calculateur-glucides",
+    utm_medium: "landing-page",
+  },
   default: {
     automationEnv: "BEEHIIV_AUTOMATION_ID",
     utm_source: "calculateur-gpx",

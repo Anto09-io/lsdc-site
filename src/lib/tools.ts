@@ -14,6 +14,12 @@ export const TOOLS: ToolConfig[] = [
     description:
       "Charge ton parcours GPX et calcule le travail mécanique, la dépense énergétique et le temps estimé, segment par segment (montée, plat, descente).",
   },
+  {
+    slug: "calculateur-glucides",
+    title: "Calculateur de glucides",
+    description:
+      "Calcule ta dose optimale de glucides pendant l'effort (g/h) selon ta puissance, ton gabarit, la durée et l'intensité de ta sortie — basé sur la littérature scientifique.",
+  },
 ];
 
 export function getTool(slug: string): ToolConfig | undefined {

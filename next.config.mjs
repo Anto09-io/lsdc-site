@@ -1,9 +1,13 @@
 // CSP : couvre Next (inline runtime), le calculateur statique (scripts
 // inline + Chart.js cdnjs + Google Fonts), les embeds YouTube, les vidéos
 // Mux et les avatars Senja (témoignages).
+// 'unsafe-eval' requis par le runtime de dev de Next (source maps) — jamais
+// ajouté en production.
+const isDev = process.env.NODE_ENV === "development";
+
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://cdnjs.cloudflare.com`,
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
   "font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com",
   "img-src 'self' data: https:",
