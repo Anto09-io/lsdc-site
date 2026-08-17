@@ -410,7 +410,7 @@ export default function SystemeWattKgPage() {
 
             <div className="mt-8">
               <ButtonLink
-                href="https://lascienceducyclisme.thrivecart.com/la-mthode-wattkg/"
+                href="https://lsdc-newsletter-e6a9c4.beehiiv.com/products/la-m-thode-watt-kg"
                 external
                 variant="outline"
                 withArrow
