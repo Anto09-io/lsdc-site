@@ -71,9 +71,10 @@ export async function POST(request: Request) {
 
   try {
     // Les line items ne sont pas inclus dans l'événement : il faut les demander.
+    // Sans expand : `price.product` reste un identifiant, ce qui suffit à la
+    // comparaison et permet une clé restreinte limitée aux Checkout Sessions.
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
       limit: 100,
-      expand: ["data.price.product"],
     });
 
     const containsEbook = lineItems.data.some((item) => {
