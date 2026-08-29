@@ -45,8 +45,8 @@ export default function BlogIndex({
             className={cn(
               "rounded-full px-4 py-2.5 text-sm font-medium transition-colors",
               active === cat
-                ? "bg-green text-ink"
-                : "bg-surface text-cream/70 ring-1 ring-inset ring-white/10 hover:bg-green/5 hover:text-green",
+                ? "bg-violet text-paper"
+                : "bg-surface text-carbon/70 ring-1 ring-inset ring-carbon/10 hover:bg-violet/5 hover:text-violet",
             )}
           >
             {cat}
@@ -55,7 +55,7 @@ export default function BlogIndex({
       </div>
 
       {filtered.length === 0 ? (
-        <p className="text-cream/60">Aucun article dans cette catégorie pour l'instant.</p>
+        <p className="text-carbon/60">Aucun article dans cette catégorie pour l'instant.</p>
       ) : (
         <>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -69,7 +69,7 @@ export default function BlogIndex({
               <Button
                 variant="outline"
                 onClick={() => setVisible((v) => v + PER_PAGE)}
-                className="border-green/30 text-green"
+                className="border-violet/30 text-violet"
               >
                 Charger plus d'articles
               </Button>

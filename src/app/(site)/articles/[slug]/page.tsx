@@ -122,7 +122,7 @@ export default async function ArticlePage({
         <Container size="prose" className="pt-12 sm:pt-16">
           <Link
             href="/articles"
-            className="text-sm font-medium text-green hover:underline"
+            className="text-sm font-medium text-violet hover:underline"
           >
             ← Tous les articles
           </Link>
@@ -135,9 +135,9 @@ export default async function ArticlePage({
             {post.title}
           </h1>
 
-          <p className="mt-4 text-lg text-cream/60">{post.description}</p>
+          <p className="mt-4 text-lg text-carbon/60">{post.description}</p>
 
-          <p className="mt-6 flex flex-wrap items-center gap-2 text-sm text-cream/50">
+          <p className="mt-6 flex flex-wrap items-center gap-2 text-sm text-carbon/50">
             <span>{siteConfig.author.signature}</span>
             <span aria-hidden>·</span>
             <time dateTime={post.date}>{formatDate(post.date)}</time>
@@ -149,7 +149,7 @@ export default async function ArticlePage({
         {/* Image de couverture */}
         {post.coverImage && (
           <Container size="prose" className="mt-8">
-            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-green/5">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-violet/5">
               <Image
                 src={post.coverImage}
                 alt={post.title}
@@ -174,7 +174,7 @@ export default async function ArticlePage({
               {post.tags.map((tag) => (
                 <li
                   key={tag}
-                  className="rounded-full bg-ink/5 px-3 py-1 text-xs text-cream/60"
+                  className="rounded-full bg-carbon/5 px-3 py-1 text-xs text-carbon/60"
                 >
                   #{tag}
                 </li>

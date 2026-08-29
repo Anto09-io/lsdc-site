@@ -16,7 +16,7 @@ export default function AProposPage() {
   return (
     <>
       <Container size="prose" className="py-16">
-        <p className="text-sm font-semibold uppercase tracking-widest text-green">
+        <p className="text-sm font-semibold uppercase tracking-widest text-violet">
           {siteConfig.author.signature}
         </p>
         <h1 className="mt-4 font-display text-4xl italic leading-tight sm:text-5xl">
@@ -32,16 +32,16 @@ export default function AProposPage() {
             className="h-32 w-32 flex-shrink-0 rounded-2xl object-cover object-top"
             priority
           />
-          <div className="space-y-4 text-lg leading-relaxed text-cream/70">
+          <div className="space-y-4 text-lg leading-relaxed text-carbon/70">
             <p>
-              Salut, moi c'est <strong className="text-cream">Antonin Albouy</strong>.
+              Salut, moi c'est <strong className="text-carbon">Antonin Albouy</strong>.
               Depuis plus de cinq ans, je vulgarise l'approche scientifique de
               l'entraînement cycliste sur YouTube et par newsletter.
             </p>
             <p>
               Aujourd'hui, plus de {""}
-              <strong className="text-cream">22 000 abonnés</strong> me suivent sur
-              YouTube et <strong className="text-cream">8 500 cyclistes</strong>{" "}
+              <strong className="text-carbon">22 000 abonnés</strong> me suivent sur
+              YouTube et <strong className="text-carbon">8 500 cyclistes</strong>{" "}
               reçoivent mes recommandations chaque dimanche.
             </p>
           </div>

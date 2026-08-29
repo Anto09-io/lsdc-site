@@ -86,7 +86,7 @@ export default function GpxCalculator() {
           onClick={() => fileInputRef.current?.click()}
           className={cn(
             "cursor-pointer rounded-2xl border-2 border-dashed p-6 text-center transition-colors",
-            dragOver ? "border-green bg-green/5" : "border-white/15 bg-surface hover:border-white/30",
+            dragOver ? "border-violet bg-violet/5" : "border-carbon/15 bg-surface hover:border-carbon/30",
           )}
         >
           <input
@@ -96,10 +96,10 @@ export default function GpxCalculator() {
             className="hidden"
             onChange={(e) => handleFile(e.target.files?.[0])}
           />
-          <p className="font-medium text-cream">
+          <p className="font-medium text-carbon">
             {fileName || "Dépose ton fichier GPX"}
           </p>
-          <p className="mt-1 text-xs text-cream/50">
+          <p className="mt-1 text-xs text-carbon/50">
             {points ? `${points.length.toLocaleString("fr-FR")} points GPS` : "ou clique pour parcourir"}
           </p>
         </div>
@@ -110,12 +110,12 @@ export default function GpxCalculator() {
           </p>
         )}
 
-        <div className="flex flex-col gap-5 rounded-2xl bg-surface p-5 ring-1 ring-white/10">
+        <div className="flex flex-col gap-5 rounded-2xl bg-surface p-5 ring-1 ring-carbon/10">
           {SLIDERS.map((s) => (
             <label key={s.key} className="flex flex-col gap-1.5 text-sm">
-              <span className="flex items-center justify-between text-cream/70">
+              <span className="flex items-center justify-between text-carbon/70">
                 <span>{s.label}</span>
-                <span className="font-semibold text-cream">
+                <span className="font-semibold text-carbon">
                   {s.step < 1 ? inputs[s.key].toFixed(1) : inputs[s.key]} {s.unit}
                 </span>
               </span>
@@ -128,13 +128,13 @@ export default function GpxCalculator() {
                 onChange={(e) =>
                   setInputs((prev) => ({ ...prev, [s.key]: parseFloat(e.target.value) }))
                 }
-                className="accent-green"
+                className="accent-violet"
               />
             </label>
           ))}
         </div>
 
-        <p className="text-xs leading-relaxed text-cream/40">
+        <p className="text-xs leading-relaxed text-carbon/40">
           CdA = 0,35 m² · Cr = 0,004 · ρ = 1,2 kg/m³ · rendement = 23%
           <br />
           Seuil montée/descente : pente &gt; ±2%. En descente : travail pédalé
@@ -145,8 +145,8 @@ export default function GpxCalculator() {
       {/* ── Résultats ── */}
       <div>
         {!result ? (
-          <div className="flex h-full min-h-[300px] items-center justify-center rounded-2xl bg-surface p-10 text-center ring-1 ring-white/10">
-            <p className="text-cream/50">
+          <div className="flex h-full min-h-[300px] items-center justify-center rounded-2xl bg-surface p-10 text-center ring-1 ring-carbon/10">
+            <p className="text-carbon/50">
               Charge un parcours GPX pour voir l'estimation d'effort.
             </p>
           </div>
@@ -171,40 +171,40 @@ export default function GpxCalculator() {
             </div>
 
             {/* Répartition par phase */}
-            <div className="rounded-2xl bg-surface p-5 ring-1 ring-white/10">
-              <h3 className="text-sm font-semibold text-cream">Répartition du parcours</h3>
+            <div className="rounded-2xl bg-surface p-5 ring-1 ring-carbon/10">
+              <h3 className="text-sm font-semibold text-carbon">Répartition du parcours</h3>
               <div className="mt-4 flex flex-col gap-3">
                 <PhaseBar
                   label="Montée"
                   distKm={result.distUp}
                   duration={result.durUp}
                   total={result.totalDistKm}
-                  color="bg-green"
+                  color="bg-violet"
                 />
                 <PhaseBar
                   label="Plat"
                   distKm={result.distFlat}
                   duration={result.durFlat}
                   total={result.totalDistKm}
-                  color="bg-cream/50"
+                  color="bg-carbon/50"
                 />
                 <PhaseBar
                   label="Descente"
                   distKm={result.distDown}
                   duration={result.durDown}
                   total={result.totalDistKm}
-                  color="bg-green-light"
+                  color="bg-violet-light"
                 />
               </div>
             </div>
 
             {/* Répartition énergétique */}
-            <div className="rounded-2xl bg-surface p-5 ring-1 ring-white/10">
-              <h3 className="text-sm font-semibold text-cream">Répartition de l'effort</h3>
+            <div className="rounded-2xl bg-surface p-5 ring-1 ring-carbon/10">
+              <h3 className="text-sm font-semibold text-carbon">Répartition de l'effort</h3>
               <div className="mt-4 flex flex-col gap-3">
-                <EnergyBar label="Gravité" kj={result.kjGrav} total={result.totalKJ} color="bg-green" />
-                <EnergyBar label="Aérodynamique" kj={result.kjAero} total={result.totalKJ} color="bg-cream/50" />
-                <EnergyBar label="Roulement" kj={result.kjRoll} total={result.totalKJ} color="bg-green-light" />
+                <EnergyBar label="Gravité" kj={result.kjGrav} total={result.totalKJ} color="bg-violet" />
+                <EnergyBar label="Aérodynamique" kj={result.kjAero} total={result.totalKJ} color="bg-carbon/50" />
+                <EnergyBar label="Roulement" kj={result.kjRoll} total={result.totalKJ} color="bg-violet-light" />
               </div>
             </div>
 
@@ -218,9 +218,9 @@ export default function GpxCalculator() {
 
 function Stat({ label, value, big }: { label: string; value: string; big?: boolean }) {
   return (
-    <div className="rounded-2xl bg-surface p-4 ring-1 ring-white/10">
-      <p className="text-xs text-cream/50">{label}</p>
-      <p className={cn("mt-1 font-display italic text-cream", big ? "text-3xl" : "text-xl")}>
+    <div className="rounded-2xl bg-surface p-4 ring-1 ring-carbon/10">
+      <p className="text-xs text-carbon/50">{label}</p>
+      <p className={cn("mt-1 font-display italic text-carbon", big ? "text-3xl" : "text-xl")}>
         {value}
       </p>
     </div>
@@ -243,13 +243,13 @@ function PhaseBar({
   const pct = total > 0 ? (distKm / total) * 100 : 0;
   return (
     <div>
-      <div className="flex items-center justify-between text-xs text-cream/60">
+      <div className="flex items-center justify-between text-xs text-carbon/60">
         <span>{label}</span>
         <span>
           {distKm.toFixed(1)} km · {fmtDuration(duration)}
         </span>
       </div>
-      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-ink">
+      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-carbon/10">
         <div className={cn("h-full rounded-full", color)} style={{ width: `${pct}%` }} />
       </div>
     </div>
@@ -270,11 +270,11 @@ function EnergyBar({
   const pct = total > 0 ? (kj / total) * 100 : 0;
   return (
     <div>
-      <div className="flex items-center justify-between text-xs text-cream/60">
+      <div className="flex items-center justify-between text-xs text-carbon/60">
         <span>{label}</span>
         <span>{fmt(kj)} kJ</span>
       </div>
-      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-ink">
+      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-carbon/10">
         <div className={cn("h-full rounded-full", color)} style={{ width: `${pct}%` }} />
       </div>
     </div>
@@ -307,18 +307,18 @@ function ElevationProfile({
   const areaPath = `${linePath} L${x(profile[profile.length - 1].distKm).toFixed(1)},${H - padB} L${x(0).toFixed(1)},${H - padB} Z`;
 
   return (
-    <div className="rounded-2xl bg-surface p-5 ring-1 ring-white/10">
-      <h3 className="text-sm font-semibold text-cream">Profil d'altitude</h3>
+    <div className="rounded-2xl bg-surface p-5 ring-1 ring-carbon/10">
+      <h3 className="text-sm font-semibold text-carbon">Profil d'altitude</h3>
       <svg viewBox={`0 0 ${W} ${H}`} className="mt-3 w-full" role="img" aria-label="Profil d'altitude du parcours">
-        <path d={areaPath} fill="rgba(34,197,94,0.15)" />
-        <path d={linePath} fill="none" stroke="#22C55E" strokeWidth={2} />
-        <text x={4} y={y(eleMax) + 4} className="fill-current text-cream/50" fontSize={10}>
+        <path d={areaPath} fill="rgba(159,1,255,0.15)" />
+        <path d={linePath} fill="none" stroke="#9F01FF" strokeWidth={2} />
+        <text x={4} y={y(eleMax) + 4} className="fill-current text-carbon/50" fontSize={10}>
           {Math.round(eleMax)} m
         </text>
-        <text x={4} y={H - padB} className="fill-current text-cream/50" fontSize={10}>
+        <text x={4} y={H - padB} className="fill-current text-carbon/50" fontSize={10}>
           {Math.round(eleMin)} m
         </text>
-        <text x={x(distMax) - 24} y={H - 4} className="fill-current text-cream/50" fontSize={10}>
+        <text x={x(distMax) - 24} y={H - 4} className="fill-current text-carbon/50" fontSize={10}>
           {distMax.toFixed(0)} km
         </text>
       </svg>

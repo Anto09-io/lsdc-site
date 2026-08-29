@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Lueur verte qui suit le curseur (effet "lampe torche"), en overlay léger
- * sur le fond sombre du site. Position mise à jour via ref/transform (pas de
+ * Lueur violette qui suit le curseur (effet "lampe torche"), en overlay léger
+ * sur le fond clair du site. Position mise à jour via ref/transform (pas de
  * re-render React) pour rester fluide. Masqué sur tactile (pas de souris).
  */
 export default function CursorGlow() {
@@ -53,7 +53,7 @@ export default function CursorGlow() {
         className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full opacity-0 transition-opacity duration-500"
         style={{
           background:
-            "radial-gradient(circle, rgba(34,197,94,0.16), rgba(34,197,94,0.05) 45%, transparent 70%)",
+            "radial-gradient(circle, rgba(159,1,255,0.18), rgba(159,1,255,0.06) 45%, transparent 70%)",
         }}
       />
     </div>

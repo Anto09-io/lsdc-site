@@ -18,10 +18,10 @@ export default function GlucidesAccesPage() {
     <Container className="py-16">
       <header className="mx-auto max-w-2xl text-center">
         <h1 className="font-display text-5xl italic">
-          Ta dose optimale de <span className="text-green">glucides</span>{" "}
+          Ta dose optimale de <span className="text-violet">glucides</span>{" "}
           pendant l'effort
         </h1>
-        <p className="mt-4 text-lg text-cream/60">
+        <p className="mt-4 text-lg text-carbon/60">
           Un algorithme basé sur la littérature scientifique (Jeukendrup,
           Smith, King, Ijaz, Podlogar…) qui croise ta puissance, ton gabarit,
           la durée et l'intensité de ta sortie pour calculer ce que ton corps

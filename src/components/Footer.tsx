@@ -6,10 +6,10 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-20 border-t border-white/10 bg-ink text-cream">
+    <footer className="mt-20 border-t border-carbon/10 bg-paper text-carbon">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-5 py-14 text-center sm:px-6">
         <Image
-          src="/lsdc-logo-blanc.svg"
+          src="/lsdc-logo-noir.svg"
           alt="La Science du Cyclisme"
           width={150}
           height={42}
@@ -23,7 +23,7 @@ export default function Footer() {
                 href={siteConfig.social.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block py-2 text-cream/70 transition-colors hover:text-white"
+                className="inline-block py-2 text-carbon/70 transition-colors hover:text-violet"
               >
                 YouTube
               </a>
@@ -31,7 +31,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/articles#newsletter"
-                className="inline-block py-2 text-cream/70 transition-colors hover:text-white"
+                className="inline-block py-2 text-carbon/70 transition-colors hover:text-violet"
               >
                 Newsletter
               </Link>
@@ -41,7 +41,7 @@ export default function Footer() {
                 href={siteConfig.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block py-2 text-cream/70 transition-colors hover:text-white"
+                className="inline-block py-2 text-carbon/70 transition-colors hover:text-violet"
               >
                 Instagram
               </a>
@@ -50,23 +50,23 @@ export default function Footer() {
         </nav>
       </div>
 
-      <div className="border-t border-white/10 py-5 text-center text-xs text-cream/40">
+      <div className="border-t border-carbon/10 py-5 text-center text-xs text-carbon/40">
         <p>
           © {year} {siteConfig.name}
         </p>
         <ul className="mt-2 flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
           <li>
-            <Link href="/mentions-legales" className="inline-block py-1.5 hover:text-cream/70">
+            <Link href="/mentions-legales" className="inline-block py-1.5 hover:text-carbon/70">
               Mentions légales
             </Link>
           </li>
           <li>
-            <Link href="/confidentialite" className="inline-block py-1.5 hover:text-cream/70">
+            <Link href="/confidentialite" className="inline-block py-1.5 hover:text-carbon/70">
               Confidentialité
             </Link>
           </li>
           <li>
-            <Link href="/cgv" className="inline-block py-1.5 hover:text-cream/70">
+            <Link href="/cgv" className="inline-block py-1.5 hover:text-carbon/70">
               CGV
             </Link>
           </li>

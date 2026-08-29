@@ -52,7 +52,7 @@ export default async function ToolPage({
     <Container className="py-16">
       <header className="mx-auto max-w-2xl text-center">
         <h1 className="font-display text-5xl italic">{tool.title}</h1>
-        <p className="mt-4 text-lg text-cream/60">{tool.description}</p>
+        <p className="mt-4 text-lg text-carbon/60">{tool.description}</p>
       </header>
 
       <div className="mt-12">

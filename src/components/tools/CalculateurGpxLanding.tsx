@@ -83,23 +83,23 @@ export default function CalculateurGpxLanding() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="border-b border-white/10">
+      <section className="border-b border-carbon/10">
         <div className="mx-auto grid max-w-5xl gap-12 px-5 py-16 md:grid-cols-2 md:items-center md:py-24">
           {sent ? (
             /* Thank-you : l'accès arrive par email, pas sur la page. */
             <div className="mx-auto max-w-lg text-center md:col-span-2" role="status">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green/15 text-3xl">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-violet/15 text-3xl">
                 🎉
               </div>
               <h1 className="mt-6 font-display text-4xl italic sm:text-5xl">
                 Bravo, ton accès est en route !
               </h1>
-              <p className="mt-5 text-lg leading-relaxed text-cream/70">
+              <p className="mt-5 text-lg leading-relaxed text-carbon/70">
                 Le lien du calculateur vient d'être envoyé dans{" "}
-                <strong className="text-cream">ta boîte mail</strong>. Ouvre
+                <strong className="text-carbon">ta boîte mail</strong>. Ouvre
                 l'email et clique sur le lien pour accéder à l'outil.
               </p>
-              <p className="mt-4 text-sm text-cream/50">
+              <p className="mt-4 text-sm text-carbon/50">
                 Rien reçu d'ici 2-3 minutes ? Vérifie l'onglet Promotions ou
                 tes spams — et ajoute-moi à tes contacts pour ne rien rater.
               </p>
@@ -107,7 +107,7 @@ export default function CalculateurGpxLanding() {
           ) : (
             <>
               <div>
-                <span className="inline-flex items-center gap-2 rounded-full bg-green px-3.5 py-1.5 text-xs font-bold uppercase tracking-wide text-ink">
+                <span className="inline-flex items-center gap-2 rounded-full bg-violet px-3.5 py-1.5 text-xs font-bold uppercase tracking-wide text-paper">
                   LSDC Calculator
                 </span>
                 <h1 className="mt-6 font-display text-4xl italic leading-tight sm:text-5xl">
@@ -116,14 +116,14 @@ export default function CalculateurGpxLanding() {
                 <ul className="mt-7 flex flex-col gap-3">
                   {FEATURES.map((f) => (
                     <li key={f} className="flex items-start gap-3">
-                      <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-green text-xs font-bold text-ink">
+                      <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-violet text-xs font-bold text-paper">
                         ✓
                       </span>
-                      <span className="text-sm font-medium text-cream">{f}</span>
+                      <span className="text-sm font-medium text-carbon">{f}</span>
                     </li>
                   ))}
                 </ul>
-                <p className="mt-7 max-w-md text-cream/60">
+                <p className="mt-7 max-w-md text-carbon/60">
                   Arrête de rouler à l'aveugle. Gagner des watts c'est dur,
                   alors commence par utiliser ce que tu as à 100%.
                 </p>
@@ -154,11 +154,11 @@ export default function CalculateurGpxLanding() {
                   />
                 </div>
 
-                <div className="rounded-2xl bg-surface p-7 ring-1 ring-white/10">
-                  <p className="font-display text-xl italic text-cream">
+                <div className="rounded-2xl bg-surface p-7 ring-1 ring-carbon/10">
+                  <p className="font-display text-xl italic text-carbon">
                     Accède au calculateur gratuitement
                   </p>
-                  <p className="mt-1 text-sm text-cream/60">
+                  <p className="mt-1 text-sm text-carbon/60">
                     Entre ton email — tu reçois ton lien d'accès directement
                     dans ta boîte mail.
                   </p>
@@ -175,7 +175,7 @@ export default function CalculateurGpxLanding() {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="ton@email.com"
                       autoComplete="email"
-                      className="min-h-[52px] flex-1 rounded-xl border-0 bg-ink px-4 text-base text-cream shadow-sm ring-1 ring-inset ring-white/10 focus:outline-none focus:ring-2 focus:ring-green-light"
+                      className="min-h-[52px] flex-1 rounded-xl border-0 bg-paper px-4 text-base text-carbon shadow-sm ring-1 ring-inset ring-carbon/10 focus:outline-none focus:ring-2 focus:ring-violet-light"
                     />
                     <Button type="submit" disabled={status === "loading"} className="min-h-[52px]">
                       {status === "loading" ? "…" : "Accès offert →"}
@@ -186,7 +186,7 @@ export default function CalculateurGpxLanding() {
                       Adresse invalide ou erreur réseau. Réessaie dans un instant.
                     </p>
                   )}
-                  <p className="mt-4 text-xs text-cream/40">
+                  <p className="mt-4 text-xs text-carbon/40">
                     Pas de spam. Désabonnement en 1 clic.
                   </p>
                 </div>
@@ -200,14 +200,14 @@ export default function CalculateurGpxLanding() {
       <section className="bg-surface/40 py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-5">
           <div className="text-center">
-            <span className="inline-block rounded-full bg-green px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-ink">
+            <span className="inline-block rounded-full bg-violet px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-paper">
               Aperçu de l'outil
             </span>
             <h2 className="mt-4 font-display text-3xl italic sm:text-4xl">
               Un calculateur pensé pour les{" "}
-              <span className="text-green">cyclistes sérieux</span>
+              <span className="text-violet">cyclistes sérieux</span>
             </h2>
-            <p className="mx-auto mt-3 max-w-xl text-cream/60">
+            <p className="mx-auto mt-3 max-w-xl text-carbon/60">
               Pas d'estimation au doigt mouillé. Des chiffres issus de la
               physique, segment par segment.
             </p>
@@ -225,7 +225,7 @@ export default function CalculateurGpxLanding() {
                     className="object-cover"
                   />
                 </div>
-                <p className="text-center text-sm leading-relaxed text-cream/70">
+                <p className="text-center text-sm leading-relaxed text-carbon/70">
                   {t.desc}
                 </p>
               </div>
@@ -238,7 +238,7 @@ export default function CalculateurGpxLanding() {
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-5">
           <div className="text-center">
-            <span className="inline-block rounded-full bg-green px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-ink">
+            <span className="inline-block rounded-full bg-violet px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-paper">
               Inclus avec le calculateur
             </span>
             <h2 className="mt-4 font-display text-3xl italic sm:text-4xl">
@@ -248,12 +248,12 @@ export default function CalculateurGpxLanding() {
 
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {BONUSES.map((b, i) => (
-              <div key={b.title} className="rounded-2xl bg-surface p-6 ring-1 ring-white/10">
-                <p className="text-xs font-bold uppercase tracking-wide text-cream/40">
+              <div key={b.title} className="rounded-2xl bg-surface p-6 ring-1 ring-carbon/10">
+                <p className="text-xs font-bold uppercase tracking-wide text-carbon/40">
                   Bonus #{i + 1}
                 </p>
-                <p className="mt-3 font-semibold text-cream">{b.title}</p>
-                <p className="mt-2 text-sm text-cream/60">{b.desc}</p>
+                <p className="mt-3 font-semibold text-carbon">{b.title}</p>
+                <p className="mt-2 text-sm text-carbon/60">{b.desc}</p>
               </div>
             ))}
           </div>

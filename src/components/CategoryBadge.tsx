@@ -11,7 +11,7 @@ export default function CategoryBadge({
   return (
     <span
       className={cn(
-        "inline-block rounded-full bg-green/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-green",
+        "inline-block rounded-full bg-violet/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-violet",
         className,
       )}
     >

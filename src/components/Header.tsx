@@ -20,7 +20,7 @@ const nav = [
  */
 export default function Header() {
   return (
-    <header className="z-40 bg-ink/75 backdrop-blur-md md:sticky md:top-0">
+    <header className="z-40 bg-paper/75 backdrop-blur-md md:sticky md:top-0">
       <div className="mx-auto w-full max-w-6xl px-5 py-4 md:px-6 md:py-5">
         {/* Logo, centré */}
         <Link
@@ -29,7 +29,7 @@ export default function Header() {
           aria-label="La Science du Cyclisme — accueil"
         >
           <Image
-            src="/lsdc-logo-blanc.svg"
+            src="/lsdc-logo-noir.svg"
             alt="La Science du Cyclisme"
             width={300}
             height={84}
@@ -42,12 +42,12 @@ export default function Header() {
             seule ligne à partir de md (rien ne déborde de l'écran) */}
         <nav aria-label="Navigation principale" className="mt-3 md:mt-4">
           <div className="flex justify-center">
-            <ul className="flex max-w-full flex-wrap items-center justify-center gap-1 rounded-3xl border border-white/15 bg-surface/60 p-1 text-sm font-medium md:w-max md:flex-nowrap md:rounded-full md:p-1.5 md:text-base">
+            <ul className="flex max-w-full flex-wrap items-center justify-center gap-1 rounded-3xl border border-carbon/15 bg-surface/60 p-1 text-sm font-medium md:w-max md:flex-nowrap md:rounded-full md:p-1.5 md:text-base">
               {nav.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block whitespace-nowrap rounded-full px-3.5 py-2.5 text-cream transition-colors hover:bg-white/5 hover:text-green md:px-5 md:py-2"
+                    className="block whitespace-nowrap rounded-full px-3.5 py-2.5 text-carbon transition-colors hover:bg-carbon/5 hover:text-violet md:px-5 md:py-2"
                   >
                     {item.label}
                   </Link>

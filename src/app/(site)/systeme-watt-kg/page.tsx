@@ -133,7 +133,7 @@ function CtaButton({ children }: { children: React.ReactNode }) {
       >
         {children}
       </ButtonLink>
-      <p className="mt-3 text-sm text-cream/40">Parce que je veux gagner des watts cette année.</p>
+      <p className="mt-3 text-sm text-carbon/40">Parce que je veux gagner des watts cette année.</p>
     </div>
   );
 }
@@ -143,19 +143,19 @@ export default function SystemeWattKgPage() {
     <>
       {/* ── Hero ── */}
       <Container className="py-16 text-center sm:py-20">
-        <p className="text-xs font-semibold uppercase tracking-widest text-cream/40">
+        <p className="text-xs font-semibold uppercase tracking-widest text-carbon/40">
           ★★★★★ — +109 témoignages
         </p>
-        <p className="mx-auto mt-5 inline-block rounded-full bg-green/10 px-4 py-1.5 text-xs font-semibold text-green">
+        <p className="mx-auto mt-5 inline-block rounded-full bg-violet/10 px-4 py-1.5 text-xs font-semibold text-violet">
           Pour les cyclistes amateurs qui refusent de stagner
         </p>
         <h1 className="mx-auto mt-5 max-w-3xl font-display text-4xl italic leading-tight sm:text-5xl">
           Voici la meilleure méthode pour{" "}
-          <span className="text-green">
+          <span className="text-violet">
             gagner des watts et rouler plus vite en 2026
           </span>
         </h1>
-        <p className="mx-auto mt-5 max-w-xl text-cream/60">
+        <p className="mx-auto mt-5 max-w-xl text-carbon/60">
           Suis ce processus simple pour gagner 20, 30, 50w en 2026.
         </p>
 
@@ -171,13 +171,13 @@ export default function SystemeWattKgPage() {
       {/* ── Preuve sociale ── */}
       <Container className="py-16">
         <h2 className="text-center font-display text-3xl italic sm:text-4xl">
-          Oui, ça marche <span className="text-green">vraiment.</span>
+          Oui, ça marche <span className="text-violet">vraiment.</span>
         </h2>
-        <p className="mx-auto mt-3 max-w-xl text-center text-cream/60">
+        <p className="mx-auto mt-3 max-w-xl text-center text-carbon/60">
           Voici les résultats des cyclistes qui ont suivi la méthode watt/kg™.
         </p>
 
-        <div className="mx-auto mt-10 max-w-2xl rounded-2xl bg-surface p-6 ring-1 ring-white/10 sm:p-8">
+        <div className="mx-auto mt-10 max-w-2xl rounded-2xl bg-surface p-6 ring-1 ring-carbon/10 sm:p-8">
           <div className="grid grid-cols-2 gap-6">
             <div>
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
@@ -189,12 +189,12 @@ export default function SystemeWattKgPage() {
                   className="object-cover"
                 />
               </div>
-              <p className="mt-4 text-center text-xs font-semibold uppercase tracking-wide text-cream/40">
+              <p className="mt-4 text-center text-xs font-semibold uppercase tracking-wide text-carbon/40">
                 Septembre 2024
               </p>
             </div>
             <div>
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl ring-2 ring-green">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl ring-2 ring-violet">
                 <Image
                   src="/images/methode-watt-kg/comparatif-apres.jpg"
                   alt="Après — décembre 2024"
@@ -203,7 +203,7 @@ export default function SystemeWattKgPage() {
                   className="object-cover"
                 />
               </div>
-              <p className="mt-4 text-center text-xs font-semibold uppercase tracking-wide text-cream/40">
+              <p className="mt-4 text-center text-xs font-semibold uppercase tracking-wide text-carbon/40">
                 Décembre 2024
               </p>
             </div>
@@ -211,12 +211,12 @@ export default function SystemeWattKgPage() {
 
           <div className="mt-3 grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
             <div className="text-center">
-              <p className="font-display text-3xl italic text-cream">352 W</p>
-              <p className="mt-1 text-xs text-cream/50">Test 20min · Pdc 69 kg</p>
-              <p className="mt-1 text-xs text-cream/50">Rapport 5,1 w/kg</p>
+              <p className="font-display text-3xl italic text-carbon">352 W</p>
+              <p className="mt-1 text-xs text-carbon/50">Test 20min · Pdc 69 kg</p>
+              <p className="mt-1 text-xs text-carbon/50">Rapport 5,1 w/kg</p>
             </div>
 
-            <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 flex-shrink-0 text-green sm:h-9 sm:w-9">
+            <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 flex-shrink-0 text-violet sm:h-9 sm:w-9">
               <path
                 d="M4 12h16m0 0l-6-6m6 6l-6 6"
                 stroke="currentColor"
@@ -227,22 +227,22 @@ export default function SystemeWattKgPage() {
             </svg>
 
             <div className="text-center">
-              <p className="font-display text-3xl italic text-green">
+              <p className="font-display text-3xl italic text-violet">
                 375 W <span className="text-base">+23w</span>
               </p>
-              <p className="mt-1 text-xs text-cream/50">Test 20min · Pdc 65,8 kg</p>
-              <p className="mt-1 text-xs text-green">Rapport 5,7 w/kg (+0,6 w/kg)</p>
+              <p className="mt-1 text-xs text-carbon/50">Test 20min · Pdc 65,8 kg</p>
+              <p className="mt-1 text-xs text-violet">Rapport 5,7 w/kg (+0,6 w/kg)</p>
             </div>
           </div>
         </div>
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {TESTIMONIALS.map((t) => (
-            <div key={t.name} className="rounded-2xl bg-surface p-6 ring-1 ring-white/10">
-              <p className="text-green">★★★★★</p>
-              <p className="mt-3 text-sm leading-relaxed text-cream/70">{t.quote}</p>
-              <p className="mt-4 text-xs font-semibold text-cream">{t.name}</p>
-              <p className="text-xs text-cream/40">{t.date}</p>
+            <div key={t.name} className="rounded-2xl bg-surface p-6 ring-1 ring-carbon/10">
+              <p className="text-violet">★★★★★</p>
+              <p className="mt-3 text-sm leading-relaxed text-carbon/70">{t.quote}</p>
+              <p className="mt-4 text-xs font-semibold text-carbon">{t.name}</p>
+              <p className="text-xs text-carbon/40">{t.date}</p>
             </div>
           ))}
         </div>
@@ -255,8 +255,8 @@ export default function SystemeWattKgPage() {
         </h2>
 
         <div className="mx-auto mt-10 max-w-xl text-center">
-          <p className="font-display text-2xl italic text-green">1/ La méthode</p>
-          <p className="mx-auto mt-2 max-w-md text-cream/60">
+          <p className="font-display text-2xl italic text-violet">1/ La méthode</p>
+          <p className="mx-auto mt-2 max-w-md text-carbon/60">
             La partie théorique pour transformer ta vision de l'entraînement
             et débloquer tes 3 leviers de progression.
           </p>
@@ -271,9 +271,9 @@ export default function SystemeWattKgPage() {
             />
           </div>
 
-          <div className="mt-8 rounded-2xl bg-surface p-6 text-left ring-1 ring-white/10">
-            <p className="font-semibold text-cream">L'ebook méthode watt/kg</p>
-            <p className="mt-2 text-sm text-cream/60">
+          <div className="mt-8 rounded-2xl bg-surface p-6 text-left ring-1 ring-carbon/10">
+            <p className="font-semibold text-carbon">L'ebook méthode watt/kg</p>
+            <p className="mt-2 text-sm text-carbon/60">
               Le cœur de la méthode. 9 sections, 0 détour : chaque étape te
               permet de remettre ton entraînement sur les rails en débloquant
               des % de progression (voir le curriculum plus bas).
@@ -282,10 +282,10 @@ export default function SystemeWattKgPage() {
         </div>
 
         <div className="mx-auto mt-14 max-w-4xl">
-          <p className="text-center font-display text-2xl italic text-green">
+          <p className="text-center font-display text-2xl italic text-violet">
             2/ Le Système
           </p>
-          <p className="mx-auto mt-2 max-w-xl text-center text-cream/60">
+          <p className="mx-auto mt-2 max-w-xl text-center text-carbon/60">
             Tous les outils qui te permettront d'appliquer la méthode dès
             demain. Transforme ton savoir en actions concrètes, avec des
             tutoriels vidéo, des séances clé en main, un tracker de
@@ -304,12 +304,12 @@ export default function SystemeWattKgPage() {
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {SYSTEM_TOOLS.map((tool, i) => (
-              <div key={tool.title} className="rounded-2xl bg-surface p-6 ring-1 ring-white/10">
-                <p className="text-xs font-semibold uppercase tracking-wide text-cream/40">
+              <div key={tool.title} className="rounded-2xl bg-surface p-6 ring-1 ring-carbon/10">
+                <p className="text-xs font-semibold uppercase tracking-wide text-carbon/40">
                   {i + 1}/
                 </p>
-                <p className="mt-2 font-semibold text-cream">{tool.title}</p>
-                <p className="mt-2 text-sm leading-relaxed text-cream/60">{tool.desc}</p>
+                <p className="mt-2 font-semibold text-carbon">{tool.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-carbon/60">{tool.desc}</p>
               </div>
             ))}
           </div>
@@ -323,7 +323,7 @@ export default function SystemeWattKgPage() {
       {/* ── Curriculum ── */}
       <Container className="py-16">
         <div className="text-center">
-          <span className="inline-block rounded-full bg-green/10 px-3.5 py-1.5 text-xs font-semibold text-green">
+          <span className="inline-block rounded-full bg-violet/10 px-3.5 py-1.5 text-xs font-semibold text-violet">
             Le Curriculum
           </span>
           <h2 className="mx-auto mt-4 max-w-2xl font-display text-3xl italic sm:text-4xl">
@@ -350,12 +350,12 @@ export default function SystemeWattKgPage() {
         <div className="mx-auto mt-10 flex max-w-2xl flex-col gap-8">
           {STEPS.map((s) => (
             <div key={s.title}>
-              <p className="font-semibold text-cream">{s.title}</p>
-              <p className="mt-1.5 text-sm leading-relaxed text-cream/60">{s.desc}</p>
+              <p className="font-semibold text-carbon">{s.title}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-carbon/60">{s.desc}</p>
             </div>
           ))}
 
-          <p className="text-sm leading-relaxed text-cream/60">
+          <p className="text-sm leading-relaxed text-carbon/60">
             Ce n'est pas de l'ingénierie spatiale — c'est une méthode simple
             qui demande à être exécutée.
             <br />
@@ -374,37 +374,37 @@ export default function SystemeWattKgPage() {
       {/* ── Checkout : 2 offres ── */}
       <Container id="checkout" className="scroll-mt-8 py-16 md:scroll-mt-[190px]">
         <div className="text-center">
-          <span className="inline-block rounded-full bg-green/10 px-3.5 py-1.5 text-xs font-semibold text-green">
+          <span className="inline-block rounded-full bg-violet/10 px-3.5 py-1.5 text-xs font-semibold text-violet">
             Offre spéciale 2026
           </span>
           <h2 className="mx-auto mt-4 max-w-xl font-display text-3xl italic sm:text-4xl">
             Rejoins les cyclistes en pleine progression
           </h2>
-          <p className="mt-3 text-cream/60">★★★★★ — +109 témoignages</p>
+          <p className="mt-3 text-carbon/60">★★★★★ — +109 témoignages</p>
         </div>
 
         <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
           {/* Offre 1 : ebook seul */}
-          <div className="flex flex-col rounded-3xl bg-surface p-8 ring-1 ring-white/10">
-            <p className="font-display text-xl italic text-cream">Version ebook</p>
-            <p className="mt-1 text-xs text-cream/40">Accès immédiat — 20€ de réduction</p>
+          <div className="flex flex-col rounded-3xl bg-surface p-8 ring-1 ring-carbon/10">
+            <p className="font-display text-xl italic text-carbon">Version ebook</p>
+            <p className="mt-1 text-xs text-carbon/40">Accès immédiat — 20€ de réduction</p>
             <p className="mt-5 flex items-baseline gap-2">
-              <span className="font-display text-4xl italic text-cream">29€</span>
-              <span className="text-lg text-cream/40 line-through">49€</span>
+              <span className="font-display text-4xl italic text-carbon">29€</span>
+              <span className="text-lg text-carbon/40 line-through">49€</span>
             </p>
 
-            <ul className="mt-6 flex flex-1 flex-col gap-3 text-sm text-cream/70">
+            <ul className="mt-6 flex flex-1 flex-col gap-3 text-sm text-carbon/70">
               <li className="flex items-start gap-2">
-                <span className="text-green">★</span> Accès E-Book méthode watt/kg™
+                <span className="text-violet">★</span> Accès E-Book méthode watt/kg™
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green">★</span> Accès immédiat, format .pdf
+                <span className="text-violet">★</span> Accès immédiat, format .pdf
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green">★</span> Conférence FAQ sur la méthode
+                <span className="text-violet">★</span> Conférence FAQ sur la méthode
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green">★</span> Accès illimité à vie
+                <span className="text-violet">★</span> Accès illimité à vie
               </li>
             </ul>
 
@@ -422,58 +422,58 @@ export default function SystemeWattKgPage() {
           </div>
 
           {/* Offre 2 : système complet — mise en avant */}
-          <div className="relative flex flex-col rounded-3xl bg-surface p-8 ring-2 ring-green">
-            <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-green px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-ink">
+          <div className="relative flex flex-col rounded-3xl bg-surface p-8 ring-2 ring-violet">
+            <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-violet px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-paper">
               Le plus choisi
             </span>
 
-            <p className="mt-2 font-display text-xl italic text-cream">
+            <p className="mt-2 font-display text-xl italic text-carbon">
               Système watt/kg™
             </p>
-            <p className="mt-1 text-xs text-cream/40">Accès immédiat — 50€ de réduction</p>
+            <p className="mt-1 text-xs text-carbon/40">Accès immédiat — 50€ de réduction</p>
             <p className="mt-5 flex items-baseline gap-2">
-              <span className="font-display text-4xl italic text-green">249€</span>
-              <span className="text-lg text-cream/40 line-through">299€</span>
+              <span className="font-display text-4xl italic text-violet">249€</span>
+              <span className="text-lg text-carbon/40 line-through">299€</span>
             </p>
 
-            <ul className="mt-6 flex flex-1 flex-col gap-3 text-sm text-cream/70">
+            <ul className="mt-6 flex flex-1 flex-col gap-3 text-sm text-carbon/70">
               <li className="flex items-start gap-2">
-                <span className="text-green">★</span> Idem version ebook
+                <span className="text-violet">★</span> Idem version ebook
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green">★</span>{" "}
+                <span className="text-violet">★</span>{" "}
                 <span>
-                  <strong className="text-cream">Formation vidéo</strong> le
+                  <strong className="text-carbon">Formation vidéo</strong> le
                   Système watt/kg™ pour appliquer la méthode pas à pas
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green">★</span>{" "}
+                <span className="text-violet">★</span>{" "}
                 <span>
-                  <strong className="text-cream">La librairie de séances scientifiques</strong>{" "}
+                  <strong className="text-carbon">La librairie de séances scientifiques</strong>{" "}
                   (+150 séances calibrées)
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green">★</span>{" "}
+                <span className="text-violet">★</span>{" "}
                 <span>
-                  <strong className="text-cream">Le fichier de tracking</strong> de progression
+                  <strong className="text-carbon">Le fichier de tracking</strong> de progression
                   (format .xlsx)
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green">★</span>{" "}
+                <span className="text-violet">★</span>{" "}
                 <span>
-                  <strong className="text-cream">Le challenge 60 jours</strong> (obtiens tes
+                  <strong className="text-carbon">Le challenge 60 jours</strong> (obtiens tes
                   premiers résultats en 2 mois)
                 </span>
               </li>
-              <li className="flex items-start gap-2 pt-2 text-cream/50">
-                <span className="text-green">BONUS</span> Appel de coaching 20min, je t'aide à
+              <li className="flex items-start gap-2 pt-2 text-carbon/50">
+                <span className="text-violet">BONUS</span> Appel de coaching 20min, je t'aide à
                 appliquer la stratégie
               </li>
-              <li className="flex items-start gap-2 text-cream/50">
-                <span className="text-green">BONUS</span> 4 guides privés — nutrition de
+              <li className="flex items-start gap-2 text-carbon/50">
+                <span className="text-violet">BONUS</span> 4 guides privés — nutrition de
                 l'effort, entraînement 40 ans et +, routine d'échauffement secrète, séance de
                 renforcement sans matériel spéciale cycliste
               </li>
@@ -497,11 +497,11 @@ export default function SystemeWattKgPage() {
       {/* ── FAQ ── */}
       <Container className="py-16 pb-24">
         <h2 className="text-center font-display text-3xl italic sm:text-4xl">
-          <span className="text-green">Questions</span> fréquemment posées
+          <span className="text-violet">Questions</span> fréquemment posées
         </h2>
-        <p className="mt-3 text-center text-cream/60">
+        <p className="mt-3 text-center text-carbon/60">
           Une autre question ? Écris à{" "}
-          <a href="mailto:anto.albouy@gmail.com" className="text-green hover:underline">
+          <a href="mailto:anto.albouy@gmail.com" className="text-violet hover:underline">
             anto.albouy@gmail.com
           </a>
         </p>

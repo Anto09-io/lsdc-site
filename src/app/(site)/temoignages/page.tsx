@@ -22,10 +22,10 @@ export default function TemoignagesPage() {
       <header className="mx-auto max-w-4xl text-center">
         <h1 className="font-display text-4xl italic leading-tight sm:text-5xl">
           Voici les résultats des membres de la{" "}
-          <span className="text-green">méthode watt/kg</span> et des différents
+          <span className="text-violet">méthode watt/kg</span> et des différents
           programmes LSDC
         </h1>
-        <p className="mt-6 text-lg text-cream/60">
+        <p className="mt-6 text-lg text-carbon/60">
           Des témoignages de cyclistes amateurs, dans leurs propres mots.
         </p>
       </header>

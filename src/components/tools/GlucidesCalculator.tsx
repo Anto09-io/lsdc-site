@@ -42,7 +42,7 @@ export default function GlucidesCalculator() {
       <CalcDetails inputs={inputs} r={r} />
       <RulesDetails />
       <RefsDetails />
-      <p className="border-t border-white/10 pt-5 text-xs leading-relaxed text-cream/40">
+      <p className="border-t border-carbon/10 pt-5 text-xs leading-relaxed text-carbon/40">
         ⚠️ Outil pédagogique — La Science du Cyclisme. Ceci n'est pas un conseil
         médical ou nutritionnel individualisé : teste toujours ta stratégie à
         l'entraînement avant de l'utiliser en course, et pense à rincer à l'eau
@@ -65,14 +65,14 @@ function InputsCard({
   result: GlucidesResult;
 }) {
   return (
-    <section className="rounded-2xl bg-surface p-6 ring-1 ring-white/10">
-      <h2 className="font-display text-2xl italic text-cream">Ta sortie du jour</h2>
+    <section className="rounded-2xl bg-surface p-6 ring-1 ring-carbon/10">
+      <h2 className="font-display text-2xl italic text-carbon">Ta sortie du jour</h2>
       <div className="mt-5 grid gap-x-7 gap-y-5 sm:grid-cols-2">
         {SLIDERS.map((s) => (
           <label key={s.key} className="flex flex-col gap-1.5 text-sm">
-            <span className="flex items-baseline justify-between text-cream/70">
+            <span className="flex items-baseline justify-between text-carbon/70">
               <span className="font-medium">{s.label}</span>
-              <span className="font-display text-xl italic text-green">
+              <span className="font-display text-xl italic text-violet">
                 {s.key === "duree"
                   ? fmtDuree(inputs.duree)
                   : `${inputs[s.key]} ${s.unit}`}
@@ -87,21 +87,21 @@ function InputsCard({
               onChange={(e) =>
                 setInputs((prev) => ({ ...prev, [s.key]: parseFloat(e.target.value) }))
               }
-              className="accent-green"
+              className="accent-violet"
             />
             {s.key === "puiss" ? (
-              <span className="text-xs text-cream/50">
+              <span className="text-xs text-carbon/50">
                 Intensité : {Math.round(result.pctFTP * 100)} % FTP —{" "}
                 {zoneLabel(result.pctFTP)}
               </span>
             ) : (
-              "hint" in s && <span className="text-xs text-cream/50">{s.hint}</span>
+              "hint" in s && <span className="text-xs text-carbon/50">{s.hint}</span>
             )}
           </label>
         ))}
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-dashed border-white/10 pt-5">
+      <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-dashed border-carbon/10 pt-5">
         <label className="flex cursor-pointer select-none items-center gap-3">
           <input
             type="checkbox"
@@ -109,26 +109,26 @@ function InputsCard({
             onChange={(e) => setInputs((p) => ({ ...p, gut: e.target.checked }))}
             className="peer sr-only"
           />
-          <span className="relative h-6 w-[42px] flex-none rounded-full bg-white/15 transition-colors after:absolute after:left-[3px] after:top-[3px] after:h-[18px] after:w-[18px] after:rounded-full after:bg-cream after:shadow after:transition-all peer-checked:bg-green peer-checked:after:left-[21px]" />
-          <span className="text-sm font-medium text-cream">
+          <span className="relative h-6 w-[42px] flex-none rounded-full bg-carbon/15 transition-colors after:absolute after:left-[3px] after:top-[3px] after:h-[18px] after:w-[18px] after:rounded-full after:bg-carbon after:shadow after:transition-all peer-checked:bg-violet peer-checked:after:left-[21px]" />
+          <span className="text-sm font-medium text-carbon">
             Intestin entraîné
-            <span className="block text-xs font-normal text-cream/50">
+            <span className="block text-xs font-normal text-carbon/50">
               ≥ 5 semaines de gut training / régime riche en glucides
             </span>
           </span>
         </label>
 
         <label className="flex items-center gap-3 text-sm">
-          <span className="font-medium text-cream">
+          <span className="font-medium text-carbon">
             Profil métabolique
-            <span className="block text-xs font-normal text-cream/50">
+            <span className="block text-xs font-normal text-carbon/50">
               optionnel — mesuré en labo
             </span>
           </span>
           <select
             value={inputs.profil}
             onChange={(e) => setInputs((p) => ({ ...p, profil: parseFloat(e.target.value) }))}
-            className="rounded-lg border-0 bg-ink px-3 py-2 text-sm text-cream ring-1 ring-inset ring-white/10 focus:outline-none focus:ring-2 focus:ring-green-light"
+            className="rounded-lg border-0 bg-paper px-3 py-2 text-sm text-carbon ring-1 ring-inset ring-carbon/10 focus:outline-none focus:ring-2 focus:ring-violet-light"
           >
             <option value={1}>Inconnu (neutre)</option>
             <option value={0.92}>Très flexible — gros brûleur de graisses</option>
@@ -162,19 +162,19 @@ function ResultCard({ inputs, r }: { inputs: GlucidesInputs; r: GlucidesResult }
     alerts.push({ m: "Ton intensité du jour est basse : inutile de copier les 90–120 g/h des pros, ton corps n'en brûlerait pas autant." });
 
   return (
-    <section className="rounded-2xl bg-surface p-6 ring-1 ring-white/10">
-      <h2 className="font-display text-2xl italic text-cream">Ta dose recommandée</h2>
+    <section className="rounded-2xl bg-surface p-6 ring-1 ring-carbon/10">
+      <h2 className="font-display text-2xl italic text-carbon">Ta dose recommandée</h2>
       <div className="mt-4 grid items-center gap-6 sm:grid-cols-[auto_1fr]">
         <div>
-          <p className="whitespace-nowrap font-display text-[88px] font-bold italic leading-[0.9] text-green">
+          <p className="whitespace-nowrap font-display text-[88px] font-bold italic leading-[0.9] text-violet">
             {r.dose}
-            <span className="text-3xl text-cream"> g/h</span>
+            <span className="text-3xl text-carbon"> g/h</span>
           </p>
-          <p className="mt-2 text-sm text-cream/60">
+          <p className="mt-2 text-sm text-carbon/60">
             {r.dose === 0 ? "aucun apport nécessaire" : `fourchette ${lo}–${hi} g/h`}
           </p>
           {optimal && (
-            <span className="mt-2 inline-block rounded-full bg-green px-3 py-1 text-xs font-semibold text-ink">
+            <span className="mt-2 inline-block rounded-full bg-violet px-3 py-1 text-xs font-semibold text-paper">
               ✓ dans la zone optimale mesurée (Smith 2013)
             </span>
           )}
@@ -192,9 +192,9 @@ function ResultCard({ inputs, r }: { inputs: GlucidesInputs; r: GlucidesResult }
       </div>
 
       {r.dose > 0 && (
-        <p className="mt-4 text-sm text-cream/70">
+        <p className="mt-4 text-sm text-carbon/70">
           Facteur limitant :{" "}
-          <b className="text-green">{r.binding.label.toLowerCase()}</b> —{" "}
+          <b className="text-violet">{r.binding.label.toLowerCase()}</b> —{" "}
           {r.binding.why}.
         </p>
       )}
@@ -205,8 +205,8 @@ function ResultCard({ inputs, r }: { inputs: GlucidesInputs; r: GlucidesResult }
             <p
               key={i}
               className={cn(
-                "rounded-r-lg border-l-2 px-3 py-2 text-[13.5px] text-cream/80",
-                a.warn ? "border-amber-500 bg-amber-500/10" : "border-green bg-green/10",
+                "rounded-r-lg border-l-2 px-3 py-2 text-[13.5px] text-carbon/80",
+                a.warn ? "border-amber-500 bg-amber-500/10" : "border-violet bg-violet/10",
               )}
             >
               {a.m}
@@ -220,11 +220,11 @@ function ResultCard({ inputs, r }: { inputs: GlucidesInputs; r: GlucidesResult }
 
 function Kpi({ label, value, small }: { label: string; value: string; small?: boolean }) {
   return (
-    <div className="rounded-xl bg-ink p-3 ring-1 ring-white/10">
-      <p className="text-[11px] font-semibold uppercase tracking-wider text-cream/50">
+    <div className="rounded-xl bg-paper p-3 ring-1 ring-carbon/10">
+      <p className="text-[11px] font-semibold uppercase tracking-wider text-carbon/50">
         {label}
       </p>
-      <p className={cn("mt-0.5 font-display italic text-cream", small ? "text-base" : "text-xl")}>
+      <p className={cn("mt-0.5 font-display italic text-carbon", small ? "text-base" : "text-xl")}>
         {value}
       </p>
     </div>
@@ -244,9 +244,9 @@ function LimitsCard({ r }: { r: GlucidesResult }) {
   const xd = left + sc(r.dose);
 
   return (
-    <section className="rounded-2xl bg-surface p-6 ring-1 ring-white/10">
-      <h2 className="font-display text-2xl italic text-cream">Ton facteur limitant</h2>
-      <p className="mt-1 text-sm text-cream/60">
+    <section className="rounded-2xl bg-surface p-6 ring-1 ring-carbon/10">
+      <h2 className="font-display text-2xl italic text-carbon">Ton facteur limitant</h2>
+      <p className="mt-1 text-sm text-carbon/60">
         Ta dose = le plus bas de ces quatre plafonds. Inutile de pousser les
         autres tant que celui-ci ne bouge pas.
       </p>
@@ -268,7 +268,7 @@ function LimitsCard({ r }: { r: GlucidesResult }) {
                 textAnchor="end"
                 fontSize={13}
                 fontWeight={isMin ? 700 : 500}
-                fill={isMin ? "#22C55E" : "rgba(245,241,232,0.8)"}
+                fill={isMin ? "#9F01FF" : "rgba(11,11,12,0.75)"}
               >
                 {l.label}
               </text>
@@ -278,14 +278,14 @@ function LimitsCard({ r }: { r: GlucidesResult }) {
                 width={w}
                 height={22}
                 rx={4}
-                fill={isMin ? "#22C55E" : "rgba(245,241,232,0.25)"}
+                fill={isMin ? "#9F01FF" : "rgba(11,11,12,0.15)"}
               />
               <text
                 x={left + w + 8}
                 y={y + 15}
                 fontSize={13}
                 fontWeight={600}
-                fill="rgba(245,241,232,0.9)"
+                fill="rgba(11,11,12,0.85)"
               >
                 {Math.round(l.v)} g/h
               </text>
@@ -297,7 +297,7 @@ function LimitsCard({ r }: { r: GlucidesResult }) {
           y1={2}
           x2={xd}
           y2={top + 4 * rowH}
-          stroke="rgba(245,241,232,0.9)"
+          stroke="rgba(11,11,12,0.85)"
           strokeDasharray="4 4"
           strokeWidth={1.4}
         />
@@ -307,7 +307,7 @@ function LimitsCard({ r }: { r: GlucidesResult }) {
           textAnchor="middle"
           fontSize={12}
           fontWeight={700}
-          fill="rgba(245,241,232,0.9)"
+          fill="rgba(11,11,12,0.85)"
         >
           ta dose : {r.dose} g/h
         </text>
@@ -334,8 +334,8 @@ function CurveCard({ r }: { r: GlucidesResult }) {
   const g = curveGain(r.dose);
 
   return (
-    <section className="rounded-2xl bg-surface p-6 ring-1 ring-white/10">
-      <h2 className="font-display text-2xl italic text-cream">
+    <section className="rounded-2xl bg-surface p-6 ring-1 ring-carbon/10">
+      <h2 className="font-display text-2xl italic text-carbon">
         Où tu te situes sur la courbe dose-performance
       </h2>
       <svg
@@ -351,10 +351,10 @@ function CurveCard({ r }: { r: GlucidesResult }) {
               y1={Y(gv)}
               x2={W - m.r}
               y2={Y(gv)}
-              stroke="rgba(245,241,232,0.12)"
+              stroke="rgba(11,11,12,0.10)"
               strokeWidth={1}
             />
-            <text x={m.l - 8} y={Y(gv) + 4} textAnchor="end" fontSize={11} fill="rgba(245,241,232,0.5)">
+            <text x={m.l - 8} y={Y(gv) + 4} textAnchor="end" fontSize={11} fill="rgba(11,11,12,0.5)">
               +{gv}%
             </text>
           </g>
@@ -366,7 +366,7 @@ function CurveCard({ r }: { r: GlucidesResult }) {
             y={H - m.b + 18}
             textAnchor="middle"
             fontSize={11}
-            fill="rgba(245,241,232,0.5)"
+            fill="rgba(11,11,12,0.5)"
           >
             {d}
           </text>
@@ -376,17 +376,17 @@ function CurveCard({ r }: { r: GlucidesResult }) {
           y={H - 4}
           textAnchor="middle"
           fontSize={11.5}
-          fill="rgba(245,241,232,0.5)"
+          fill="rgba(11,11,12,0.5)"
         >
           glucides ingérés (g/h)
         </text>
-        <path d={pts.join(" ")} fill="none" stroke="#22C55E" strokeWidth={2.5} strokeLinejoin="round" />
+        <path d={pts.join(" ")} fill="none" stroke="#9F01FF" strokeWidth={2.5} strokeLinejoin="round" />
         <line
           x1={X(78)}
           y1={Y(4.7)}
           x2={X(78)}
           y2={m.t + ih}
-          stroke="rgba(245,241,232,0.3)"
+          stroke="rgba(11,11,12,0.25)"
           strokeDasharray="3 4"
           strokeWidth={1}
         />
@@ -396,27 +396,27 @@ function CurveCard({ r }: { r: GlucidesResult }) {
           textAnchor="middle"
           fontSize={11.5}
           fontWeight={600}
-          fill="rgba(245,241,232,0.6)"
+          fill="rgba(11,11,12,0.55)"
         >
           optimum 78 g/h
         </text>
         {r.dose > 0 && (
           <g>
-            <circle cx={X(r.dose)} cy={Y(g)} r={7} fill="#22C55E" stroke="#18181B" strokeWidth={2.5} />
+            <circle cx={X(r.dose)} cy={Y(g)} r={7} fill="#9F01FF" stroke="#FFFFFF" strokeWidth={2.5} />
             <text
               x={X(r.dose)}
               y={Y(g) + 26}
               textAnchor="middle"
               fontSize={12.5}
               fontWeight={700}
-              fill="#4ADE80"
+              fill="#7C00C9"
             >
               toi : {r.dose} g/h
             </text>
           </g>
         )}
       </svg>
-      <p className="mt-3 text-xs text-cream/50">
+      <p className="mt-3 text-xs text-carbon/50">
         Courbe reconstituée d'après Smith 2013 (n=51, optimum +4,7 % à 78 g/h
         sur ~2 h 20 d'effort) et King 2018–2019 pour le déclin au-delà de
         90 g/h. Le point vert = ta dose.
@@ -475,17 +475,17 @@ function PlanCard({ inputs, r }: { inputs: GlucidesInputs; r: GlucidesResult }) 
   }
 
   return (
-    <section className="rounded-2xl bg-surface p-6 ring-1 ring-white/10">
-      <h2 className="font-display text-2xl italic text-cream">Ton plan ravito, par heure</h2>
+    <section className="rounded-2xl bg-surface p-6 ring-1 ring-carbon/10">
+      <h2 className="font-display text-2xl italic text-carbon">Ton plan ravito, par heure</h2>
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
         {cells.map((c) => (
-          <div key={c.title} className="rounded-xl bg-ink p-4 ring-1 ring-white/10">
-            <p className="font-display text-lg italic text-green">{c.title}</p>
-            <p className="mt-1 text-[13.5px] text-cream/70">{c.body}</p>
+          <div key={c.title} className="rounded-xl bg-paper p-4 ring-1 ring-carbon/10">
+            <p className="font-display text-lg italic text-violet">{c.title}</p>
+            <p className="mt-1 text-[13.5px] text-carbon/70">{c.body}</p>
           </div>
         ))}
       </div>
-      {note && <p className="mt-3 text-xs text-cream/50">{note}</p>}
+      {note && <p className="mt-3 text-xs text-carbon/50">{note}</p>}
     </section>
   );
 }
@@ -494,18 +494,18 @@ function PlanCard({ inputs, r }: { inputs: GlucidesInputs; r: GlucidesResult }) 
 
 function Details({ summary, children }: { summary: string; children: React.ReactNode }) {
   return (
-    <details className="group rounded-2xl bg-surface ring-1 ring-white/10">
-      <summary className="flex cursor-pointer list-none items-center justify-between px-6 py-4 font-display text-lg italic text-cream [&::-webkit-details-marker]:hidden">
+    <details className="group rounded-2xl bg-surface ring-1 ring-carbon/10">
+      <summary className="flex cursor-pointer list-none items-center justify-between px-6 py-4 font-display text-lg italic text-carbon [&::-webkit-details-marker]:hidden">
         {summary}
-        <span className="text-2xl text-green transition-transform group-open:rotate-45">+</span>
+        <span className="text-2xl text-violet transition-transform group-open:rotate-45">+</span>
       </summary>
       <div className="px-6 pb-5">{children}</div>
     </details>
   );
 }
 
-const td = "border-b border-white/10 px-2.5 py-2 text-left";
-const th = "border-b border-white/10 px-2.5 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-cream/50";
+const td = "border-b border-carbon/10 px-2.5 py-2 text-left";
+const th = "border-b border-carbon/10 px-2.5 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-carbon/50";
 
 function CalcDetails({ inputs, r }: { inputs: GlucidesInputs; r: GlucidesResult }) {
   const rows: Array<[string, string, string]> = [
@@ -522,7 +522,7 @@ function CalcDetails({ inputs, r }: { inputs: GlucidesInputs; r: GlucidesResult 
   return (
     <Details summary="Le détail du calcul">
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-[13.5px] text-cream/80">
+        <table className="w-full border-collapse text-[13.5px] text-carbon/80">
           <thead>
             <tr>
               <th className={th}>Étape</th>
@@ -534,8 +534,8 @@ function CalcDetails({ inputs, r }: { inputs: GlucidesInputs; r: GlucidesResult 
             {rows.map((x) => (
               <tr key={x[0]}>
                 <td className={td}>{x[0]}</td>
-                <td className={cn(td, "font-semibold tabular-nums text-cream")}>{x[1]}</td>
-                <td className={cn(td, "text-cream/50")}>{x[2]}</td>
+                <td className={cn(td, "font-semibold tabular-nums text-carbon")}>{x[1]}</td>
+                <td className={cn(td, "text-carbon/50")}>{x[2]}</td>
               </tr>
             ))}
           </tbody>
@@ -558,12 +558,12 @@ function RulesDetails() {
   ];
   return (
     <Details summary="Les règles de l'algorithme">
-      <p className="mb-3 text-sm font-semibold text-cream">
+      <p className="mb-3 text-sm font-semibold text-carbon">
         Dose = min( besoin utilisable, capacité d'utilisation, plafond
         intestinal, plafond durée )
       </p>
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-[13.5px] text-cream/80">
+        <table className="w-full border-collapse text-[13.5px] text-carbon/80">
           <thead>
             <tr>
               <th className={th}>Règle</th>
@@ -574,7 +574,7 @@ function RulesDetails() {
             {rules.map((x) => (
               <tr key={x[0]}>
                 <td className={td}>{x[0]}</td>
-                <td className={cn(td, "tabular-nums text-cream/60")}>{x[1]}</td>
+                <td className={cn(td, "tabular-nums text-carbon/60")}>{x[1]}</td>
               </tr>
             ))}
           </tbody>
@@ -600,7 +600,7 @@ function RefsDetails() {
   ];
   return (
     <Details summary="Références scientifiques">
-      <ul className="flex list-disc flex-col gap-2 pl-4 text-[12.5px] text-cream/60">
+      <ul className="flex list-disc flex-col gap-2 pl-4 text-[12.5px] text-carbon/60">
         {refs.map((ref) => (
           <li key={ref.text}>
             {ref.text}{" "}
@@ -609,7 +609,7 @@ function RefsDetails() {
                 href={ref.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-green-light underline-offset-2 hover:underline"
+                className="text-violet-light underline-offset-2 hover:underline"
               >
                 PMID {ref.pmid}
               </a>

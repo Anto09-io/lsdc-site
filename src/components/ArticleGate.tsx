@@ -71,20 +71,20 @@ export default function ArticleGate({
       {/* Pop-up sticky par-dessus le contenu, suit le scroll. */}
       <div className="absolute inset-0">
         <div className="sticky top-24 px-2 pt-8 sm:top-32">
-          <div className="mx-auto max-w-md rounded-3xl bg-surface p-7 text-center shadow-[0_20px_60px_rgba(0,0,0,0.55)] ring-1 ring-green/30 sm:p-9">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green/15 text-2xl">
+          <div className="mx-auto max-w-md rounded-3xl bg-surface p-7 text-center shadow-[0_20px_60px_rgba(0,0,0,0.55)] ring-1 ring-violet/30 sm:p-9">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-violet/15 text-2xl">
               🔒
             </div>
-            <h2 className="mt-4 font-display text-2xl italic text-cream sm:text-3xl">
+            <h2 className="mt-4 font-display text-2xl italic text-carbon sm:text-3xl">
               Abonne-toi à la newsletter pour débloquer l'article
             </h2>
-            <p className="mt-3 text-sm text-cream/60">
+            <p className="mt-3 text-sm text-carbon/60">
               Chaque semaine, un conseil d'entraînement basé sur la science
               pour rouler plus vite. Déjà suivi par 8 500 cyclistes. Gratuit.
             </p>
 
             {status === "success" ? (
-              <p className="mt-6 font-medium text-green" role="status">
+              <p className="mt-6 font-medium text-violet" role="status">
                 C'est débloqué — bonne lecture ! 🎉
               </p>
             ) : (
@@ -101,7 +101,7 @@ export default function ArticleGate({
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="ton@email.com"
                   autoComplete="email"
-                  className="rounded-full border-0 bg-ink px-5 py-3 text-base text-cream shadow-sm ring-1 ring-inset ring-white/10 focus:outline-none focus:ring-2 focus:ring-green-light"
+                  className="rounded-full border-0 bg-paper px-5 py-3 text-base text-carbon shadow-sm ring-1 ring-inset ring-carbon/10 focus:outline-none focus:ring-2 focus:ring-violet-light"
                 />
                 <Button type="submit" disabled={status === "loading"}>
                   {status === "loading"
@@ -118,7 +118,7 @@ export default function ArticleGate({
             )}
 
             {status !== "success" && (
-              <p className="mt-4 text-xs text-cream/40">
+              <p className="mt-4 text-xs text-carbon/40">
                 Aucun spam. Désinscription possible en 1 clic.
               </p>
             )}

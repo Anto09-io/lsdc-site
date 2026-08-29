@@ -18,7 +18,7 @@ const PDF_URL = "/ebook/methode-watt-kg-d946089e5a46ff1b.pdf";
 export default function MerciMethodeWattKgPage() {
   return (
     <Container size="prose" className="py-20 sm:py-28">
-      <p className="text-sm uppercase tracking-widest text-green">
+      <p className="text-sm uppercase tracking-widest text-violet">
         Paiement confirmé
       </p>
 
@@ -26,7 +26,7 @@ export default function MerciMethodeWattKgPage() {
         Merci pour ta confiance.
       </h1>
 
-      <p className="mt-6 text-lg text-cream/70">
+      <p className="mt-6 text-lg text-carbon/70">
         Ta Méthode Watt/kg™ est prête. Télécharge-la tout de suite — tu la
         reçois aussi par email, dans la minute qui vient.
       </p>
@@ -39,19 +39,19 @@ export default function MerciMethodeWattKgPage() {
 
       <div className="mt-14 rounded-3xl bg-surface p-8">
         <h2 className="font-display text-2xl italic">Par où commencer</h2>
-        <p className="mt-4 text-cream/70">
+        <p className="mt-4 text-carbon/70">
           Ne lis pas les 81 pages d&apos;un coup. Commence par la partie sur la
           charge d&apos;entraînement en kilojoules : c&apos;est le socle, tout
           le reste en découle.
         </p>
       </div>
 
-      <p className="mt-10 text-sm text-cream/50">
+      <p className="mt-10 text-sm text-carbon/50">
         L&apos;email n&apos;arrive pas ou le fichier refuse de s&apos;ouvrir ?
         Écris-moi à{" "}
         <a
           href="mailto:antonin@lascienceducyclisme.com"
-          className="text-green hover:underline"
+          className="text-violet hover:underline"
         >
           antonin@lascienceducyclisme.com
         </a>

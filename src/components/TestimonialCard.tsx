@@ -33,7 +33,7 @@ function Stars({ rating }: { rating: number }) {
           key={i}
           viewBox="0 0 20 20"
           aria-hidden
-          className={cn("h-4 w-4", i < rating ? "fill-green" : "fill-white/15")}
+          className={cn("h-4 w-4", i < rating ? "fill-violet" : "fill-white/15")}
         >
           <path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
         </svg>
@@ -57,16 +57,16 @@ function Identity({ testimonial }: { testimonial: Testimonial }) {
           src={testimonial.avatar}
           alt=""
           loading="lazy"
-          className="h-10 w-10 flex-shrink-0 rounded-full object-cover ring-1 ring-white/10"
+          className="h-10 w-10 flex-shrink-0 rounded-full object-cover ring-1 ring-carbon/10"
         />
       ) : (
-        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-green/10 text-sm font-semibold text-green ring-1 ring-green/20">
+        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-violet/10 text-sm font-semibold text-violet ring-1 ring-violet/20">
           {initials}
         </div>
       )}
       <div>
-        <p className="text-sm font-semibold text-cream">{testimonial.name}</p>
-        <p className="text-xs text-cream/50">
+        <p className="text-sm font-semibold text-carbon">{testimonial.name}</p>
+        <p className="text-xs text-carbon/50">
           {testimonial.tagline ??
             (testimonial.date
               ? monthYearFormatter.format(new Date(testimonial.date))
@@ -101,7 +101,7 @@ export default function TestimonialCard({
           className="mt-4 aspect-video w-full rounded-xl bg-black object-cover"
         />
       ) : (
-        <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-cream/80">
+        <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-carbon/80">
           {shown}
         </p>
       )}
@@ -110,7 +110,7 @@ export default function TestimonialCard({
         <button
           type="button"
           onClick={() => setExpanded((value) => !value)}
-          className="mt-2 text-sm font-semibold text-green hover:underline"
+          className="mt-2 text-sm font-semibold text-violet hover:underline"
         >
           {expanded ? "Réduire" : "Lire la suite"}
         </button>

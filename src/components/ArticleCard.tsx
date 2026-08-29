@@ -11,7 +11,7 @@ export default function ArticleCard({ post }: { post: PostMeta }) {
     <Card className="overflow-hidden">
       <Link href={`/articles/${post.slug}`} className="flex h-full flex-col">
         {post.coverImage && (
-          <div className="relative aspect-[16/9] w-full overflow-hidden bg-green/5">
+          <div className="relative aspect-[16/9] w-full overflow-hidden bg-violet/5">
             <Image
               src={post.coverImage}
               alt=""
@@ -25,13 +25,13 @@ export default function ArticleCard({ post }: { post: PostMeta }) {
           <div className="flex items-center gap-3">
             <CategoryBadge category={post.category} />
           </div>
-          <h3 className="font-display text-2xl leading-tight text-cream transition-colors group-hover:text-green">
+          <h3 className="font-display text-2xl leading-tight text-carbon transition-colors group-hover:text-violet">
             {post.title}
           </h3>
-          <p className="line-clamp-3 flex-1 text-sm leading-relaxed text-cream/60">
+          <p className="line-clamp-3 flex-1 text-sm leading-relaxed text-carbon/60">
             {post.description}
           </p>
-          <p className="mt-2 text-xs text-cream/50">
+          <p className="mt-2 text-xs text-carbon/50">
             <time dateTime={post.date}>{formatDate(post.date)}</time>
             {" · "}
             {readingLabel(post.readingMinutes)}

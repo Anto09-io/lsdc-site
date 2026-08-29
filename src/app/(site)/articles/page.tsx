@@ -23,7 +23,7 @@ export default function ArticlesPage() {
       <Container className="py-16">
         <header className="mx-auto max-w-2xl text-center">
           <h1 className="font-display text-5xl italic">LSDC Newsletter</h1>
-          <p className="mt-4 text-lg text-cream/60">
+          <p className="mt-4 text-lg text-carbon/60">
             Abonne-toi pour recevoir chaque semaine les meilleurs conseils
             d'entraînement et analyses pour atteindre ton meilleur niveau sur le
             vélo. Déjà suivie par 8 500 cyclistes amateurs.
@@ -32,7 +32,7 @@ export default function ArticlesPage() {
 
         <div id="newsletter" className="mx-auto mt-10 max-w-xl scroll-mt-8 md:scroll-mt-[190px]">
           <NewsletterForm variant="hero" />
-          <p className="mt-3 text-center text-xs text-cream/40">
+          <p className="mt-3 text-center text-xs text-carbon/40">
             Aucun spam. Désinscription possible en 1 clic.
           </p>
         </div>

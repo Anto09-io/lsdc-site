@@ -59,7 +59,7 @@ export default function NewsletterForm({
       <div className="mx-auto w-full max-w-xl">
         {done ? (
           <p
-            className="rounded-full bg-green/10 px-6 py-4 text-center font-medium text-green"
+            className="rounded-full bg-violet/10 px-6 py-4 text-center font-medium text-violet"
             role="status"
           >
             {MESSAGES.success}
@@ -67,7 +67,7 @@ export default function NewsletterForm({
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-2 shadow-card ring-1 ring-white/10 sm:flex-row sm:items-center sm:rounded-full"
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-2 shadow-card ring-1 ring-carbon/10 sm:flex-row sm:items-center sm:rounded-full"
           >
             <HoneypotField value={website} onChange={setWebsite} />
             <label htmlFor="newsletter-hero" className="sr-only">
@@ -81,7 +81,7 @@ export default function NewsletterForm({
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               autoComplete="email"
-              className="flex-1 rounded-full border-0 bg-transparent px-5 py-3 text-base text-cream placeholder:text-cream/40 focus:outline-none"
+              className="flex-1 rounded-full border-0 bg-transparent px-5 py-3 text-base text-carbon placeholder:text-carbon/40 focus:outline-none"
             />
             <Button type="submit" disabled={status === "loading"}>
               {status === "loading" ? "Inscription…" : "S'abonner"}
@@ -99,17 +99,17 @@ export default function NewsletterForm({
 
   // ── Variante card : grand bloc sombre, accent vert ──
   return (
-    <div className="rounded-3xl bg-surface px-6 py-10 text-center text-cream ring-1 ring-green/20 sm:px-12">
-      <h2 className="font-display text-3xl italic text-cream sm:text-4xl">
-        La newsletter qui te fait <span className="text-green">progresser</span>
+    <div className="rounded-3xl bg-surface px-6 py-10 text-center text-carbon ring-1 ring-violet/20 sm:px-12">
+      <h2 className="font-display text-3xl italic text-carbon sm:text-4xl">
+        La newsletter qui te fait <span className="text-violet">progresser</span>
       </h2>
-      <p className="mx-auto mt-3 max-w-md text-sm text-cream/70">
+      <p className="mx-auto mt-3 max-w-md text-sm text-carbon/70">
         Chaque dimanche, mes meilleures recommandations d'entraînement basées sur
         la science. Méthode watt/kg, FTP, physiologie. Gratuit.
       </p>
 
       {done ? (
-        <p className="mt-6 font-medium text-green" role="status">
+        <p className="mt-6 font-medium text-violet" role="status">
           {MESSAGES.success}
         </p>
       ) : (
@@ -129,7 +129,7 @@ export default function NewsletterForm({
             onChange={(e) => setEmail(e.target.value)}
             placeholder="ton@email.com"
             autoComplete="email"
-            className="flex-1 rounded-full border-0 bg-ink px-5 py-3 text-base text-cream shadow-sm ring-1 ring-inset ring-white/10 focus:outline-none focus:ring-2 focus:ring-green-light"
+            className="flex-1 rounded-full border-0 bg-paper px-5 py-3 text-base text-carbon shadow-sm ring-1 ring-inset ring-carbon/10 focus:outline-none focus:ring-2 focus:ring-violet-light"
           />
           <Button type="submit" disabled={status === "loading"}>
             {status === "loading" ? "Inscription…" : "Je m'inscris"}

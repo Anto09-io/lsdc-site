@@ -28,7 +28,7 @@ export default function QuizResult() {
   if (data === null) {
     return (
       <div className="mx-auto max-w-lg px-5 py-24 text-center">
-        <p className="text-cream/60">
+        <p className="text-carbon/60">
           Ton bilan n'est pas disponible. Refais le quiz pour découvrir ton
           profil.
         </p>
@@ -44,13 +44,13 @@ export default function QuizResult() {
   return (
     <div className="mx-auto max-w-2xl px-5 py-16 sm:py-20">
       <div className="mb-9">
-        <p className="text-xs font-medium uppercase tracking-widest text-cream/40">
+        <p className="text-xs font-medium uppercase tracking-widest text-carbon/40">
           Ton profil de cycliste
         </p>
         <h1 className="mt-3 font-display text-5xl italic leading-tight sm:text-7xl">
           {profile.name}
         </h1>
-        <p className="mt-4 text-lg text-cream/70 sm:text-xl">{profile.tagline}</p>
+        <p className="mt-4 text-lg text-carbon/70 sm:text-xl">{profile.tagline}</p>
       </div>
 
       <ResultCard label="Le diagnostic">
@@ -60,37 +60,37 @@ export default function QuizResult() {
       <PerfPanel perf={perf} />
 
       <ResultCard label="Ton levier n°1" accent>
-        <p className="mb-3 font-display text-2xl font-bold italic text-cream sm:text-3xl">
+        <p className="mb-3 font-display text-2xl font-bold italic text-carbon sm:text-3xl">
           {profile.leverTitle}
         </p>
         <p>{profile.lever}</p>
       </ResultCard>
 
-      <div className="mt-4 rounded-2xl bg-cream p-7 text-ink sm:p-10">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-ink/50">
+      <div className="mt-4 rounded-2xl bg-carbon p-7 text-paper sm:p-10">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-paper/50">
           L'étape suivante
         </p>
         <h3 className="font-display text-2xl italic leading-tight sm:text-4xl">
           Fais grimper tes W/kg, méthodiquement.
         </h3>
-        <p className="mt-3 text-ink/70">
+        <p className="mt-3 text-paper/70">
           {profile.angle} Un système clair, basé sur la science, pour arrêter
           de rouler au hasard et faire monter le seul chiffre qui compte.
         </p>
         <Link
           href={siteConfig.links.methode}
-          className="mt-6 flex min-h-[62px] w-full items-center justify-center rounded-2xl bg-ink px-8 text-base font-semibold text-white transition-opacity hover:opacity-90"
+          className="mt-6 flex min-h-[62px] w-full items-center justify-center rounded-2xl bg-carbon px-8 text-base font-semibold text-paper transition-opacity hover:opacity-90"
         >
           Découvrir La Méthode Watt/kg →
         </Link>
-        <p className="mt-4 text-center text-xs text-ink/50">
+        <p className="mt-4 text-center text-xs text-paper/50">
           Tu vas aussi recevoir mes conseils d'entraînement chaque semaine par
           mail.
         </p>
       </div>
 
       <div className="mt-8 text-center">
-        <Link href="/" className="border-b border-white/20 text-sm text-cream/50 hover:text-cream">
+        <Link href="/" className="border-b border-carbon/20 text-sm text-carbon/50 hover:text-carbon">
           Retour à La Science du Cyclisme
         </Link>
       </div>
@@ -110,17 +110,17 @@ function ResultCard({
   return (
     <div
       className={`mb-4 rounded-2xl p-6 sm:p-8 ${
-        accent ? "bg-white/[0.04] ring-1 ring-white/20" : "bg-surface ring-1 ring-white/10"
+        accent ? "bg-violet/[0.06] ring-1 ring-violet/30" : "bg-surface ring-1 ring-carbon/10"
       }`}
     >
       <p
         className={`mb-3 text-xs font-medium uppercase tracking-widest ${
-          accent ? "text-cream" : "text-cream/50"
+          accent ? "text-carbon" : "text-carbon/50"
         }`}
       >
         {label}
       </p>
-      <div className="leading-relaxed text-cream/80">{children}</div>
+      <div className="leading-relaxed text-carbon/80">{children}</div>
     </div>
   );
 }
@@ -132,23 +132,23 @@ function PerfPanel({ perf }: { perf: PerfState }) {
     return (
       <ResultCard label="Ta loi de puissance">
         <div className="flex flex-wrap items-baseline gap-4">
-          <span className="text-5xl font-bold italic leading-none text-cream sm:text-6xl">
+          <span className="text-5xl font-bold italic leading-none text-carbon sm:text-6xl">
             {bigVal}
           </span>
-          <span className="text-lg text-cream/50">{bigUnit}</span>
-          <span className="rounded-full border border-white/20 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-cream">
+          <span className="text-lg text-carbon/50">{bigUnit}</span>
+          <span className="rounded-full border border-carbon/20 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-carbon">
             {perf.profile.label}
           </span>
         </div>
         <p className="mt-4">
           Ton exposant d'endurance est de{" "}
-          <strong className="text-cream">{perf.model.E.toFixed(2)}</strong>.{" "}
+          <strong className="text-carbon">{perf.model.E.toFixed(2)}</strong>.{" "}
           {perf.profile.desc}
         </p>
 
         <PowerCurve model={perf.model} points={perf.points} />
 
-        <div className="mt-6 flex flex-wrap gap-4 border-t border-white/10 pt-6">
+        <div className="mt-6 flex flex-wrap gap-4 border-t border-carbon/10 pt-6">
           <PlStat
             label="Seuil ~1h"
             value={`${perf.ftp} W`}
@@ -174,21 +174,21 @@ function PerfPanel({ perf }: { perf: PerfState }) {
     return (
       <ResultCard label="Ton rapport poids-puissance">
         <div className="flex flex-wrap items-baseline gap-4">
-          <span className="text-5xl font-bold italic leading-none text-cream sm:text-6xl">
+          <span className="text-5xl font-bold italic leading-none text-carbon sm:text-6xl">
             {perf.wkg.toFixed(2)}
           </span>
-          <span className="text-lg text-cream/50">W/kg</span>
-          <span className="rounded-full border border-white/20 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-cream">
+          <span className="text-lg text-carbon/50">W/kg</span>
+          <span className="rounded-full border border-carbon/20 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-carbon">
             {band.name}
           </span>
         </div>
-        <div className="relative mt-5 h-1.5 rounded-full bg-white/10">
+        <div className="relative mt-5 h-1.5 rounded-full bg-carbon/10">
           <div
-            className="absolute top-1/2 h-3.5 w-3.5 -translate-y-1/2 rounded-full bg-cream"
+            className="absolute top-1/2 h-3.5 w-3.5 -translate-y-1/2 rounded-full bg-carbon"
             style={{ left: `${band.pos}%`, transform: "translate(-50%, -50%)" }}
           />
         </div>
-        <div className="mt-2 flex justify-between text-xs text-cream/40">
+        <div className="mt-2 flex justify-between text-xs text-carbon/40">
           <span>2.0</span>
           <span>3.0</span>
           <span>4.0</span>
@@ -209,7 +209,7 @@ function PerfPanel({ perf }: { perf: PerfState }) {
       <p>
         Sans capteur de puissance, on ne peut pas encore tracer ta courbe — et
         c'est justement le premier angle mort à lever. Ta{" "}
-        <strong className="text-cream">loi de puissance</strong> (ton W/kg au
+        <strong className="text-carbon">loi de puissance</strong> (ton W/kg au
         seuil et ta capacité à le tenir dans la durée) est ce qui dicte ton
         niveau réel à vélo. La mesurer, puis la faire grimper, c'est le point
         de départ de toute vraie progression.
@@ -221,9 +221,9 @@ function PerfPanel({ perf }: { perf: PerfState }) {
 function PlStat({ label, value, sub }: { label: string; value: string; sub: string }) {
   return (
     <div className="min-w-[110px] flex-1">
-      <p className="text-[11px] font-medium uppercase tracking-wide text-cream/40">{label}</p>
-      <p className="mt-2 font-display text-2xl italic text-cream sm:text-3xl">{value}</p>
-      <p className="mt-1.5 text-xs text-cream/50">{sub}</p>
+      <p className="text-[11px] font-medium uppercase tracking-wide text-carbon/40">{label}</p>
+      <p className="mt-2 font-display text-2xl italic text-carbon sm:text-3xl">{value}</p>
+      <p className="mt-1.5 text-xs text-carbon/50">{sub}</p>
     </div>
   );
 }
@@ -277,10 +277,10 @@ function PowerCurve({
   return (
     <div className="mt-5 h-[180px]">
       <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="h-full w-full">
-        <path d={area} fill="rgba(255,255,255,0.06)" />
-        <path d={d} fill="none" stroke="#F5F1E8" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+        <path d={area} fill="rgba(159,1,255,0.12)" />
+        <path d={d} fill="none" stroke="#9F01FF" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
         {points.map((p, i) => (
-          <circle key={i} cx={x(p.T)} cy={y(p.P)} r={4.5} fill="#F5F1E8" stroke="#0B0B0C" strokeWidth={2} />
+          <circle key={i} cx={x(p.T)} cy={y(p.P)} r={4.5} fill="#9F01FF" stroke="#FFFFFF" strokeWidth={2} />
         ))}
         {ticks.map((t, i) => (
           <text

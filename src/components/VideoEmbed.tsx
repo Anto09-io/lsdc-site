@@ -11,7 +11,7 @@ export default function VideoEmbed({
   title: string;
 }) {
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-surface ring-1 ring-white/10">
+    <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-surface ring-1 ring-carbon/10">
       {youtubeId ? (
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
@@ -23,10 +23,10 @@ export default function VideoEmbed({
         />
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-violet">
             <div className="ml-1 h-0 w-0 border-y-[10px] border-l-[16px] border-y-transparent border-l-ink" />
           </div>
-          <p className="text-sm text-cream/40">Vidéo à venir</p>
+          <p className="text-sm text-carbon/40">Vidéo à venir</p>
         </div>
       )}
     </div>

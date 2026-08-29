@@ -14,7 +14,7 @@ export default function QuizLayout({
       <div className="flex justify-center pt-8">
         <Link href="/" aria-label="La Science du Cyclisme — accueil" className="opacity-80 transition-opacity hover:opacity-100">
           <Image
-            src="/lsdc-logo-blanc.svg"
+            src="/lsdc-logo-noir.svg"
             alt="La Science du Cyclisme"
             width={150}
             height={42}

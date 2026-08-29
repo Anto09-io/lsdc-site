@@ -8,11 +8,11 @@ import { cn } from "@/lib/cn";
 /* Emphases dans les textes de présentation : Hl = accent vert (chiffres,
    promesses), Strong = simple graisse claire (contexte). */
 function Hl({ children }: { children: ReactNode }) {
-  return <strong className="font-semibold text-green">{children}</strong>;
+  return <strong className="font-semibold text-violet">{children}</strong>;
 }
 
 function Strong({ children }: { children: ReactNode }) {
-  return <strong className="font-semibold text-cream">{children}</strong>;
+  return <strong className="font-semibold text-carbon">{children}</strong>;
 }
 
 type Teaser = {
@@ -110,7 +110,7 @@ function YouTubeLogo({ className }: { className?: string }) {
 
 function StatsBand() {
   return (
-    <section className="rounded-2xl bg-surface px-6 py-8 ring-1 ring-white/10 sm:px-10">
+    <section className="rounded-2xl bg-surface px-6 py-8 ring-1 ring-carbon/10 sm:px-10">
       {/* Mobile : les deux lignes partagent la même colonne d'icônes
           (w-fit centré, icônes en boîte fixe) pour rester alignées. */}
       <div className="mx-auto flex w-fit flex-col gap-8 sm:mx-0 sm:w-auto sm:flex-row sm:items-center sm:justify-center sm:gap-16">
@@ -120,7 +120,7 @@ function StatsBand() {
           </div>
           <div>
             <p className="text-3xl font-extrabold sm:text-4xl">+22,5k</p>
-            <p className="text-sm text-cream/60">abonnés YouTube</p>
+            <p className="text-sm text-carbon/60">abonnés YouTube</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -133,7 +133,7 @@ function StatsBand() {
               strokeWidth={1.8}
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="h-10 w-10 text-green"
+              className="h-10 w-10 text-violet"
             >
               <rect x="2" y="4" width="20" height="16" rx="3" />
               <path d="m3 6 9 7 9-7" />
@@ -141,7 +141,7 @@ function StatsBand() {
           </div>
           <div>
             <p className="text-3xl font-extrabold sm:text-4xl">8,5k</p>
-            <p className="text-sm text-cream/60">lecteurs de la newsletter</p>
+            <p className="text-sm text-carbon/60">lecteurs de la newsletter</p>
           </div>
         </div>
       </div>
@@ -153,7 +153,7 @@ function ChannelBand() {
   return (
     <section>
       <h2 className="font-display text-3xl italic sm:text-4xl">La chaîne YouTube</h2>
-      <p className="mt-4 max-w-2xl text-base leading-relaxed text-cream/70">
+      <p className="mt-4 max-w-2xl text-base leading-relaxed text-carbon/70">
         Chaque semaine, des vidéos et des podcasts pour débloquer ton meilleur
         niveau.
       </p>
@@ -180,21 +180,21 @@ export default function HomePage() {
       <section className="relative overflow-hidden md:-mt-[174px] md:pt-[174px]">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_0%,rgba(34,197,94,0.10),transparent_70%)]"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_0%,rgba(159,1,255,0.10),transparent_70%)]"
         />
         <Container className="py-12 text-center sm:py-28">
-          <p className="mx-auto inline-block rounded-full bg-green/10 px-4 py-1.5 text-xs font-semibold text-green sm:text-sm">
+          <p className="mx-auto inline-block rounded-full bg-violet/10 px-4 py-1.5 text-xs font-semibold text-violet sm:text-sm">
             Pour les cyclistes amateurs qui veulent progresser
           </p>
 
           <h1 className="mx-auto mt-6 max-w-4xl font-sans text-3xl font-extrabold not-italic leading-[1.15] tracking-tight sm:text-5xl">
-            Atteins ton <span className="text-green">meilleur niveau physique</span> grâce à
+            Atteins ton <span className="text-violet">meilleur niveau physique</span> grâce à
             la science
           </h1>
 
-          <p className="mx-auto mt-5 max-w-xl text-xl font-semibold text-cream/80 sm:text-2xl">
-            Pousse plus de <span className="text-green">watts</span> et deviens{" "}
-            <span className="text-green">durable</span>
+          <p className="mx-auto mt-5 max-w-xl text-xl font-semibold text-carbon/80 sm:text-2xl">
+            Pousse plus de <span className="text-violet">watts</span> et deviens{" "}
+            <span className="text-violet">durable</span>
           </p>
 
           <div className="relative mt-10 inline-flex items-center">
@@ -210,7 +210,7 @@ export default function HomePage() {
             {/* Annotation griffonnée, desktop uniquement — ancrée en haut,
                 au niveau du centre vertical du bouton, et grandit vers le bas. */}
             <div className="pointer-events-none absolute left-full top-1/2 ml-3 hidden w-64 items-start gap-2 lg:flex">
-              <svg viewBox="0 0 80 60" fill="none" className="mt-1 h-8 w-14 flex-shrink-0 text-cream/50">
+              <svg viewBox="0 0 80 60" fill="none" className="mt-1 h-8 w-14 flex-shrink-0 text-carbon/50">
                 <path
                   d="M66 46C50 48 26 42 13 15"
                   stroke="currentColor"
@@ -227,7 +227,7 @@ export default function HomePage() {
                   fill="none"
                 />
               </svg>
-              <p className="font-script text-center text-xl leading-snug text-cream/60">
+              <p className="font-script text-center text-xl leading-snug text-carbon/60">
                 Clique ici pour découvrir ton profil et suivre une stratégie
                 d'entraînement adaptée.
               </p>
@@ -264,7 +264,7 @@ export default function HomePage() {
                   {teaser.title}
                 </h2>
                 {teaser.paragraphs.map((paragraph, paragraphIndex) => (
-                  <p key={paragraphIndex} className="mt-4 text-base leading-relaxed text-cream/70">
+                  <p key={paragraphIndex} className="mt-4 text-base leading-relaxed text-carbon/70">
                     {paragraph}
                   </p>
                 ))}

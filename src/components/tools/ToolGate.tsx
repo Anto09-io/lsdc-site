@@ -61,11 +61,11 @@ export default function ToolGate({
   if (unlocked) return <>{children}</>;
 
   return (
-    <div className="mx-auto max-w-md rounded-2xl bg-surface p-8 text-center ring-1 ring-white/10">
-      <h2 className="font-display text-2xl italic text-cream">
+    <div className="mx-auto max-w-md rounded-2xl bg-surface p-8 text-center ring-1 ring-carbon/10">
+      <h2 className="font-display text-2xl italic text-carbon">
         Accède à l'outil gratuitement
       </h2>
-      <p className="mt-2 text-sm text-cream/60">
+      <p className="mt-2 text-sm text-carbon/60">
         Entre ton email, l'outil se débloque immédiatement.
       </p>
 
@@ -82,7 +82,7 @@ export default function ToolGate({
           onChange={(e) => setEmail(e.target.value)}
           placeholder="ton@email.com"
           autoComplete="email"
-          className="rounded-full border-0 bg-ink px-5 py-3 text-base text-cream shadow-sm ring-1 ring-inset ring-white/10 focus:outline-none focus:ring-2 focus:ring-green-light"
+          className="rounded-full border-0 bg-paper px-5 py-3 text-base text-carbon shadow-sm ring-1 ring-inset ring-carbon/10 focus:outline-none focus:ring-2 focus:ring-violet-light"
         />
         <Button type="submit" disabled={status === "loading"}>
           {status === "loading" ? "Vérification…" : "Accès offert →"}
@@ -95,7 +95,7 @@ export default function ToolGate({
         </p>
       )}
 
-      <p className="mt-4 text-xs text-cream/40">
+      <p className="mt-4 text-xs text-carbon/40">
         Aucun spam. Désinscription possible en 1 clic.
       </p>
     </div>

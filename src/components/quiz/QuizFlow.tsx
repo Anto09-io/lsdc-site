@@ -122,9 +122,9 @@ export default function QuizFlow() {
   return (
     <div className="mx-auto max-w-2xl px-5 py-16 sm:py-20">
       {progressPct !== null && (
-        <div className="fixed inset-x-0 top-0 z-50 h-0.5 bg-white/10">
+        <div className="fixed inset-x-0 top-0 z-50 h-0.5 bg-carbon/10">
           <div
-            className="h-full bg-cream transition-all duration-300"
+            className="h-full bg-carbon transition-all duration-300"
             style={{ width: `${progressPct}%` }}
           />
         </div>
@@ -132,13 +132,13 @@ export default function QuizFlow() {
 
       {stage === "intro" && (
         <div>
-          <p className="text-xs font-medium uppercase tracking-widest text-cream/40">
+          <p className="text-xs font-medium uppercase tracking-widest text-carbon/40">
             2 min · 8 questions · bilan offert
           </p>
           <h1 className="mt-5 font-display text-4xl italic leading-tight sm:text-6xl">
             Quel est ton profil de cycliste&nbsp;?
           </h1>
-          <p className="mt-5 max-w-lg text-lg text-cream/60">
+          <p className="mt-5 max-w-lg text-lg text-carbon/60">
             La plupart des cyclistes stagnent pour une seule raison qu'ils n'ont
             jamais nommée. Réponds à 8 questions. Tu repars avec ton profil afin
             d'estimer le levier n°1 pour débloquer ta progression.
@@ -148,7 +148,7 @@ export default function QuizFlow() {
               Découvrir mon profil →
             </Button>
           </div>
-          <p className="mt-5 text-sm text-cream/40">
+          <p className="mt-5 text-sm text-carbon/40">
             Gratuit. Aucune carte. Désabonnement en 1 clic.
           </p>
         </div>
@@ -165,14 +165,14 @@ export default function QuizFlow() {
 
       {stage === "perf" && (
         <div>
-          <p className="text-xs font-medium uppercase tracking-widest text-cream/40">
+          <p className="text-xs font-medium uppercase tracking-widest text-carbon/40">
             Question {TOTAL_STEPS} / {TOTAL_STEPS}
           </p>
           <h2 className="mt-4 font-display text-3xl italic leading-tight sm:text-4xl">
             Tes meilleures puissances.
           </h2>
-          <p className="mt-3 max-w-lg text-cream/60">
-            On en déduit ta <strong className="text-cream">loi de puissance</strong>
+          <p className="mt-3 max-w-lg text-carbon/60">
+            On en déduit ta <strong className="text-carbon">loi de puissance</strong>
             &nbsp;: ton profil physiologique, ton seuil et ton temps limite.
             Poids + au moins 2 efforts (Strava ou ton capteur te les donnent).
           </p>
@@ -183,7 +183,7 @@ export default function QuizFlow() {
             <PerfField label="Max 5 min" unit="W" value={p5} onChange={setP5} placeholder="330" />
             <PerfField label="Max 20 min" unit="W" value={p20} onChange={setP20} placeholder="280" />
           </div>
-          <p className="mt-3 text-sm text-cream/40">
+          <p className="mt-3 text-sm text-carbon/40">
             Tes records de puissance sur ces durées. Deux suffisent — trois
             affinent ta courbe.
           </p>
@@ -192,7 +192,7 @@ export default function QuizFlow() {
             <Button onClick={submitPerf}>Voir mon profil →</Button>
             <button
               onClick={skipPerf}
-              className="border-b border-white/20 text-sm text-cream/50 transition-colors hover:text-cream"
+              className="border-b border-carbon/20 text-sm text-carbon/50 transition-colors hover:text-carbon"
             >
               Je n'ai pas de capteur de puissance
             </button>
@@ -204,15 +204,15 @@ export default function QuizFlow() {
 
       {stage === "gate" && (
         <div>
-          <div className="rounded-2xl bg-surface p-8 ring-1 ring-white/10 sm:p-11">
+          <div className="rounded-2xl bg-surface p-8 ring-1 ring-carbon/10 sm:p-11">
             <div className="mb-8 text-center">
-              <p className="text-xs font-medium uppercase tracking-widest text-cream/40">
+              <p className="text-xs font-medium uppercase tracking-widest text-carbon/40">
                 ✓ Ton bilan est prêt
               </p>
-              <p className="mt-3 select-none text-4xl font-bold italic text-cream blur-[11px] sm:text-5xl">
+              <p className="mt-3 select-none text-4xl font-bold italic text-carbon blur-[11px] sm:text-5xl">
                 {currentProfile(answers.frustration).name}
               </p>
-              <p className="mt-3 text-cream/60">
+              <p className="mt-3 text-carbon/60">
                 Ton profil, ton W/kg et ton levier n°1 t'attendent.
               </p>
             </div>
@@ -230,7 +230,7 @@ export default function QuizFlow() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="ton@email.com"
                 autoComplete="email"
-                className="min-h-[60px] flex-1 rounded-2xl border border-white/10 bg-ink px-5 text-base text-cream outline-none focus:border-cream"
+                className="min-h-[60px] flex-1 rounded-2xl border border-carbon/10 bg-paper px-5 text-base text-carbon outline-none focus:border-carbon"
               />
               <Button type="submit" disabled={submitting} className="min-h-[60px]">
                 {submitting ? "…" : "Débloquer"}
@@ -241,7 +241,7 @@ export default function QuizFlow() {
                 {emailError}
               </p>
             )}
-            <p className="mt-4 text-xs text-cream/40">
+            <p className="mt-4 text-xs text-carbon/40">
               Je t'envoie ton bilan + des conseils utiles. Pas de spam,
               désabo en 1 clic.
             </p>
@@ -268,13 +268,13 @@ function QuestionStep({
   const q = QUESTIONS[index];
   return (
     <div>
-      <p className="text-xs font-medium uppercase tracking-widest text-cream/40">
+      <p className="text-xs font-medium uppercase tracking-widest text-carbon/40">
         Question {index + 1} / {TOTAL_STEPS}
       </p>
       <h2 className="mt-4 font-display text-3xl italic leading-tight sm:text-4xl">
         {q.title}
       </h2>
-      <p className="mt-3 text-cream/60">{q.hint}</p>
+      <p className="mt-3 text-carbon/60">{q.hint}</p>
 
       <div className="mt-8 flex flex-col gap-3">
         {q.options.map((o) => {
@@ -285,18 +285,18 @@ function QuestionStep({
               onClick={() => onAnswer(q.id, o.v)}
               className={`flex items-start gap-5 rounded-2xl border p-5 text-left transition-colors ${
                 selected
-                  ? "border-cream bg-white/[0.07]"
-                  : "border-white/10 bg-white/[0.025] hover:border-white/20 hover:bg-white/[0.05]"
+                  ? "border-carbon bg-carbon/[0.05]"
+                  : "border-carbon/10 bg-paper hover:border-violet hover:bg-violet/[0.04]"
               }`}
             >
               <span
                 className={`mt-0.5 h-5 w-5 flex-shrink-0 rounded-full border-[1.6px] ${
-                  selected ? "border-cream bg-cream" : "border-white/30"
+                  selected ? "border-carbon bg-carbon" : "border-carbon/30"
                 }`}
               />
               <span>
-                <span className="block text-lg font-semibold text-cream">{o.t}</span>
-                <span className="mt-1 block text-sm text-cream/50">{o.d}</span>
+                <span className="block text-lg font-semibold text-carbon">{o.t}</span>
+                <span className="mt-1 block text-sm text-carbon/50">{o.d}</span>
               </span>
             </button>
           );
@@ -322,8 +322,8 @@ function PerfField({
   placeholder: string;
 }) {
   return (
-    <div className="flex items-center rounded-2xl border border-white/10 bg-white/[0.025] focus-within:border-cream">
-      <label className="flex min-w-[120px] items-center self-stretch border-r border-white/10 px-5 text-xs font-medium uppercase tracking-wide text-cream/50">
+    <div className="flex items-center rounded-2xl border border-carbon/10 bg-paper focus-within:border-violet">
+      <label className="flex min-w-[120px] items-center self-stretch border-r border-carbon/10 px-5 text-xs font-medium uppercase tracking-wide text-carbon/50">
         {label}
       </label>
       <input
@@ -332,9 +332,9 @@ function PerfField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="min-h-[64px] flex-1 min-w-0 bg-transparent px-5 text-xl font-semibold text-cream outline-none placeholder:text-cream/30"
+        className="min-h-[64px] flex-1 min-w-0 bg-transparent px-5 text-xl font-semibold text-carbon outline-none placeholder:text-carbon/30"
       />
-      <span className="px-5 text-sm text-cream/40">{unit}</span>
+      <span className="px-5 text-sm text-carbon/40">{unit}</span>
     </div>
   );
 }
@@ -344,7 +344,7 @@ function BackLink({ onClick }: { onClick: () => void }) {
     <div className="mt-10">
       <button
         onClick={onClick}
-        className="text-xs uppercase tracking-widest text-cream/40 transition-colors hover:text-cream"
+        className="text-xs uppercase tracking-widest text-carbon/40 transition-colors hover:text-carbon"
       >
         ← Retour
       </button>

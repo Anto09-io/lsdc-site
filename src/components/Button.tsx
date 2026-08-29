@@ -4,14 +4,14 @@ import { cn } from "@/lib/cn";
 type Variant = "primary" | "outline";
 
 const base =
-  "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green disabled:opacity-60 motion-reduce:transition-none motion-reduce:transform-none";
+  "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet disabled:opacity-60 motion-reduce:transition-none motion-reduce:transform-none";
 
 const variants: Record<Variant, string> = {
-  // Texte sombre sur vert clair : meilleur contraste qu'un texte blanc.
+  // Bouton noir sur fond blanc : le contraste maximal, signature du nouveau branding.
   primary:
-    "bg-green text-ink shadow-[0_4px_20px_rgba(34,197,94,0.25)] hover:bg-green-light hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-[0_8px_28px_rgba(34,197,94,0.45)]",
+    "bg-carbon text-paper shadow-[0_4px_20px_rgba(11,11,12,0.18)] hover:bg-violet hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-[0_8px_28px_rgba(159,1,255,0.35)]",
   outline:
-    "border border-cream/25 text-cream hover:border-green/60 hover:bg-green/5 hover:text-green hover:-translate-y-0.5 hover:scale-[1.02]",
+    "border border-carbon/25 text-carbon hover:border-violet hover:bg-violet/5 hover:text-violet hover:-translate-y-0.5 hover:scale-[1.02]",
 };
 
 interface CommonProps {
@@ -29,7 +29,7 @@ function Shine() {
   return (
     <span
       aria-hidden
-      className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -translate-x-[250%] skew-x-[-20deg] bg-white/30 blur-sm transition-transform duration-700 group-hover:translate-x-[400%] motion-reduce:hidden"
+      className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -translate-x-[250%] skew-x-[-20deg] bg-white/25 blur-sm transition-transform duration-700 group-hover:translate-x-[400%] motion-reduce:hidden"
     />
   );
 }

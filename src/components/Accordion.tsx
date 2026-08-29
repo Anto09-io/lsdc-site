@@ -23,18 +23,18 @@ export default function Accordion({
       {items.map((item, i) => {
         const open = openIndex === i;
         return (
-          <div key={item.title} className="rounded-2xl bg-surface ring-1 ring-white/10">
+          <div key={item.title} className="rounded-2xl bg-surface ring-1 ring-carbon/10">
             <button
               onClick={() => setOpenIndex(open ? null : i)}
               aria-expanded={open}
               className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
             >
-              <span className="text-sm font-semibold text-cream sm:text-base">
+              <span className="text-sm font-semibold text-carbon sm:text-base">
                 {item.title}
               </span>
               <span
                 className={cn(
-                  "flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green text-sm font-bold text-ink transition-transform",
+                  "flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-violet text-sm font-bold text-paper transition-transform",
                   open && "rotate-45",
                 )}
               >
@@ -42,7 +42,7 @@ export default function Accordion({
               </span>
             </button>
             {open && (
-              <div className="px-5 pb-5 text-sm leading-relaxed text-cream/60">
+              <div className="px-5 pb-5 text-sm leading-relaxed text-carbon/60">
                 {item.content}
               </div>
             )}

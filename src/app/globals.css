@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --green: #22c55e;
+    --violet: #9f01ff;
   }
 
   html {
@@ -12,7 +12,7 @@
   }
 
   body {
-    @apply bg-ink text-cream font-sans antialiased;
+    @apply bg-paper text-carbon font-sans antialiased;
   }
 
   /* Titres éditoriaux : Barlow Condensed, italique = signature visuelle LSDC */
@@ -24,16 +24,16 @@
 }
 
 @layer components {
-  /* Gradient vert animé (accent décoratif) */
-  .text-gradient-green {
-    @apply bg-gradient-to-r from-green via-green-light to-green bg-clip-text text-transparent;
+  /* Gradient violet animé (accent décoratif) */
+  .text-gradient-violet {
+    @apply bg-gradient-to-r from-violet via-violet-light to-violet bg-clip-text text-transparent;
     background-size: 200% auto;
     @apply animate-gradient;
   }
 
   /* Lien souligné animé pour la navigation */
   .nav-link {
-    @apply relative text-cream/70 transition-colors hover:text-green;
+    @apply relative text-carbon/70 transition-colors hover:text-violet;
   }
 
   /* Rangée scrollable sans barre de défilement visible (nav mobile) */
@@ -48,13 +48,21 @@
 
 /* ── Styles du rendu MDX (prose) ── */
 .prose-lsdc {
-  @apply prose prose-lg prose-invert max-w-none;
-  /* Couleur d'accent verte pour titres, liens, citations */
-  --tw-prose-headings: #f5f1e8;
-  --tw-prose-links: #22c55e;
-  --tw-prose-quote-borders: #22c55e;
-  --tw-prose-bullets: #22c55e;
-  --tw-prose-counters: #22c55e;
+  @apply prose prose-lg max-w-none;
+  /* Couleur d'accent violette pour titres, liens, citations */
+  --tw-prose-body: #3f3f46;
+  --tw-prose-headings: #0b0b0c;
+  --tw-prose-bold: #0b0b0c;
+  --tw-prose-links: #9f01ff;
+  --tw-prose-quotes: #0b0b0c;
+  --tw-prose-quote-borders: #9f01ff;
+  --tw-prose-bullets: #9f01ff;
+  --tw-prose-counters: #9f01ff;
+  --tw-prose-hr: #e4e4e7;
+  --tw-prose-captions: #71717a;
+  --tw-prose-code: #0b0b0c;
+  --tw-prose-th-borders: #d4d4d8;
+  --tw-prose-td-borders: #e4e4e7;
 }
 
 .prose-lsdc :where(h2, h3) {
@@ -62,7 +70,7 @@
 }
 
 .prose-lsdc :where(blockquote) {
-  @apply not-italic font-medium text-cream/80;
+  @apply not-italic font-medium text-carbon/80;
 }
 
 .prose-lsdc :where(a) {
@@ -74,5 +82,5 @@
 }
 
 .prose-lsdc :where(thead) {
-  @apply border-b-2 border-green/30;
+  @apply border-b-2 border-violet/30;
 }
