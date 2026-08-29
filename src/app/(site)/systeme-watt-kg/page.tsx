@@ -410,7 +410,7 @@ export default function SystemeWattKgPage() {
 
             <div className="mt-8">
               <ButtonLink
-                href="https://lsdc-newsletter-e6a9c4.beehiiv.com/products/la-m-thode-watt-kg"
+                href="https://buy.stripe.com/6oU8wQ8Jf2D97V2ahtbo40i"
                 external
                 variant="outline"
                 withArrow
