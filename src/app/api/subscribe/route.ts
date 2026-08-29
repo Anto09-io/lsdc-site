@@ -1,52 +1,32 @@
 import { NextResponse } from "next/server";
 
-// Route d'inscription : relaie l'email (+ champs optionnels) vers l'API Beehiiv.
+// Route d'inscription : relaie l'email (+ champs optionnels) vers l'API Lumail.
 // La clé API n'est jamais exposée au client, elle reste côté serveur via
-// les variables d'environnement BEEHIIV_API_KEY / BEEHIIV_PUB_ID.
+// la variable d'environnement LUMAIL_API_KEY.
+//
+// Chaque page de capture envoie un `list`. On le traduit en tag Lumail, et
+// c'est l'ajout de ce tag qui déclenche la séquence de bienvenue correspondante
+// (workflows « … — bienvenue »). Le tag reste posé sur l'abonné : il sert
+// ensuite à savoir par quelle porte la personne est entrée.
 
-type ListConfig = {
-  automationEnv: string;
-  automationFallbackEnv?: string;
-  utm_source: string;
-  utm_medium: string;
-};
+const LUMAIL_ENDPOINT = "https://lumail.io/api/v2/tools/add_subscriber";
 
-const LISTS: Record<string, ListConfig> = {
-  waitinglist: {
-    automationEnv: "BEEHIIV_AUTOMATION_WAITINGLIST_ID",
-    utm_source: "waitinglist",
-    utm_medium: "landing-page",
-  },
-  quiz: {
-    // Tombe sur l'automation par défaut si l'ID dédié n'existe pas.
-    automationEnv: "BEEHIIV_AUTOMATION_QUIZ_ID",
-    automationFallbackEnv: "BEEHIIV_AUTOMATION_ID",
-    utm_source: "quiz-profil-cycliste",
-    utm_medium: "landing-page",
-  },
-  newsletter: {
-    // Opt-in newsletter classique depuis /articles.
-    automationEnv: "BEEHIIV_AUTOMATION_NEWSLETTER_ID",
-    automationFallbackEnv: "BEEHIIV_AUTOMATION_ID",
-    utm_source: "articles",
-    utm_medium: "newsletter-optin",
-  },
-  "calculateur-glucides": {
-    // Automation dédiée si configurée, sinon l'automation par défaut.
-    automationEnv: "BEEHIIV_AUTOMATION_GLUCIDES_ID",
-    automationFallbackEnv: "BEEHIIV_AUTOMATION_ID",
-    utm_source: "calculateur-glucides",
-    utm_medium: "landing-page",
-  },
-  default: {
-    automationEnv: "BEEHIIV_AUTOMATION_ID",
-    utm_source: "calculateur-gpx",
-    utm_medium: "landing-page",
-  },
+// list envoyé par le front → tag Lumail (= déclencheur de séquence)
+const LIST_TAGS: Record<string, string> = {
+  // /articles (ArticleGate) et le formulaire newsletter
+  newsletter: "newsletter",
+  // /quiz
+  quiz: "quiz",
+  // /outils/calculateur-glucides
+  "calculateur-glucides": "calculateur-glucides",
+  // landing JustPush — pas de séquence associée pour l'instant
+  waitinglist: "justpush-waitinglist",
+  // ToolGate et la landing calculateur GPX
+  default: "calculateur-performance",
 };
 
 // Liste blanche des custom fields acceptés depuis le quiz.
-// ⚠️ Chaque clé doit exister comme Custom Field dans Beehiiv (Audience → Custom fields).
+// Lumail crée le champ à la volée s'il n'existe pas encore.
 const ALLOWED_FIELDS = [
   "profil",
   "volume",
@@ -86,6 +66,7 @@ function rateLimited(ip: string): boolean {
 export async function POST(request: Request) {
   let email: string;
   let list: string | undefined;
+  let name: string | undefined;
   let fields: Record<string, unknown> | undefined;
   let honeypot: string;
 
@@ -93,6 +74,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     email = String(body.email || "").trim().toLowerCase();
     list = typeof body.list === "string" ? body.list : undefined;
+    name = typeof body.name === "string" && body.name.trim() ? body.name.trim() : undefined;
     fields =
       body.fields && typeof body.fields === "object" ? body.fields : undefined;
     honeypot = String(body.website || "");
@@ -122,91 +104,54 @@ export async function POST(request: Request) {
     );
   }
 
-  const config = (list && LISTS[list]) || LISTS.default;
-
-  const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
-  const BEEHIIV_PUB_ID = process.env.BEEHIIV_PUB_ID;
-  const BEEHIIV_AUTOMATION_ID =
-    process.env[config.automationEnv] ||
-    (config.automationFallbackEnv
-      ? process.env[config.automationFallbackEnv]
-      : undefined);
-
-  if (!BEEHIIV_API_KEY || !BEEHIIV_PUB_ID) {
-    console.error(
-      "BEEHIIV_API_KEY ou BEEHIIV_PUB_ID manquant dans les variables d'environnement.",
-    );
+  const LUMAIL_API_KEY = process.env.LUMAIL_API_KEY;
+  if (!LUMAIL_API_KEY) {
+    console.error("LUMAIL_API_KEY manquant dans les variables d'environnement.");
     return NextResponse.json(
       { error: "Configuration du serveur incomplète." },
       { status: 500 },
     );
   }
 
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${BEEHIIV_API_KEY}`,
-  };
+  const tag = (list && LIST_TAGS[list]) || LIST_TAGS.default;
 
-  let custom_fields: { name: string; value: string }[] = [];
+  const customFields: Record<string, string> = {};
   if (fields) {
-    custom_fields = ALLOWED_FIELDS.filter(
-      (name) =>
-        fields![name] !== undefined &&
-        fields![name] !== null &&
-        fields![name] !== "",
-    ).map((name) => ({ name, value: String(fields![name]) }));
+    for (const key of ALLOWED_FIELDS) {
+      const value = fields[key];
+      if (value !== undefined && value !== null && value !== "") {
+        customFields[key] = String(value);
+      }
+    }
   }
 
   try {
-    const subBody: Record<string, unknown> = {
-      email,
-      reactivate_existing: true,
-      send_welcome_email: false,
-      utm_source: config.utm_source,
-      utm_medium: config.utm_medium,
-    };
-    if (custom_fields.length > 0) {
-      subBody.custom_fields = custom_fields;
-    }
-
-    const subRes = await fetch(
-      `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUB_ID}/subscriptions`,
-      {
-        method: "POST",
-        headers,
-        body: JSON.stringify(subBody),
+    const res = await fetch(LUMAIL_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${LUMAIL_API_KEY}`,
       },
-    );
+      body: JSON.stringify({
+        email,
+        ...(name ? { name } : {}),
+        tags: [tag],
+        ...(Object.keys(customFields).length > 0 ? { fields: customFields } : {}),
+        // Ne jamais réabonner quelqu'un qui s'est désabonné : c'est lui qui
+        // décide, et le réintégrer abîmerait la réputation du domaine.
+        resubscribe: false,
+        // C'est l'ajout du tag qui déclenche la séquence de bienvenue.
+        triggerWorkflows: true,
+      }),
+    });
 
-    const subData = await subRes.json().catch(() => ({}));
-
-    if (!subRes.ok && subRes.status !== 201) {
-      console.error("Beehiiv subscribe error:", subRes.status, JSON.stringify(subData));
+    if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      console.error("Lumail subscribe error:", res.status, detail.slice(0, 500));
       return NextResponse.json(
-        { error: "Erreur création abonné", detail: subData },
+        { error: "Erreur création abonné" },
         { status: 500 },
       );
-    }
-
-    // Déclenche l'automation associée, best-effort (ne bloque pas la réponse).
-    if (BEEHIIV_AUTOMATION_ID) {
-      const automationRes = await fetch(
-        `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUB_ID}/automations/${BEEHIIV_AUTOMATION_ID}/journeys`,
-        {
-          method: "POST",
-          headers,
-          body: JSON.stringify({ email }),
-        },
-      );
-
-      if (!automationRes.ok) {
-        const automationData = await automationRes.json().catch(() => ({}));
-        console.error(
-          "Beehiiv automation error:",
-          automationRes.status,
-          JSON.stringify(automationData),
-        );
-      }
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
