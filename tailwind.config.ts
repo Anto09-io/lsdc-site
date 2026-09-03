@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
 const config: Config = {
   content: [
@@ -23,6 +24,8 @@ const config: Config = {
         // Titres éditoriaux (Barlow Condensed) et corps de texte (Inter)
         display: ["var(--font-barlow)", "Barlow Condensed", "sans-serif"],
         sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
+        // Étiquettes mono de la page de vente Méthode Watt/kg
+        mono: ["var(--font-jetbrains)", "JetBrains Mono", "ui-monospace", "monospace"],
         // Annotations griffonnées (flèches d'appel à l'action)
         script: ["var(--font-caveat)", "cursive"],
       },
@@ -52,7 +55,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [typography],
 };
 
 export default config;

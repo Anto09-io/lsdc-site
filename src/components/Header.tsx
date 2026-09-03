@@ -5,7 +5,7 @@ const nav = [
   { href: "/", label: "Accueil" },
   { href: "/articles", label: "Articles" },
   { href: "/outils", label: "Outils" },
-  { href: "/systeme-watt-kg", label: "Système Watt/Kg" },
+  { href: "/systeme-watt-kg", label: "Méthode Watt/kg" },
   { href: "/temoignages", label: "Témoignages" },
 ];
 

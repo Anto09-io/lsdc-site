@@ -13,7 +13,7 @@ Vérifié en production le 29 août 2026 (47 adresses, 23 articles publiés, 9 p
 | Accueil | https://lascienceducyclisme.com/ |
 | Articles | https://lascienceducyclisme.com/articles |
 | Outils | https://lascienceducyclisme.com/outils |
-| Système Watt/Kg (page de vente) | https://lascienceducyclisme.com/systeme-watt-kg |
+| Méthode Watt/kg (page de vente, sans menu du site) | https://lascienceducyclisme.com/systeme-watt-kg |
 | Témoignages | https://lascienceducyclisme.com/temoignages |
 | À propos | https://lascienceducyclisme.com/a-propos |
 
@@ -47,7 +47,7 @@ navigation interne : on passe de l'une à l'autre sans repasser par une landing.
 | 2. Paiement Stripe | https://buy.stripe.com/6oU8wQ8Jf2D97V2ahtbo40i | externe |
 | 3. Page de remerciement | https://lascienceducyclisme.com/merci/methode-watt-kg | non listée · noindex |
 | 4. Le PDF de l'ebook | https://lascienceducyclisme.com/ebook/methode-watt-kg-d946089e5a46ff1b.pdf | **confidentielle** |
-| Offre 249 € | https://lascienceducyclisme.thrivecart.com/le-systme-wattkg/ | externe · ThriveCart |
+| ~~Offre 249 €~~ (retirée de la page le 03/09/2026) | https://lascienceducyclisme.thrivecart.com/le-systme-wattkg/ | externe · ThriveCart |
 
 ## Mentions obligatoires
 
