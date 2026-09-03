@@ -41,9 +41,9 @@ export default function OfferBanner() {
   const cd = useCountdown(OFFER_END);
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-r from-[#7f0f14] via-[#c8161c] to-[#7f0f14] px-4 py-3 text-center text-paper shadow-[inset_0_-1px_0_rgba(255,255,255,0.12)]">
+    <div className="relative overflow-hidden bg-gradient-to-r from-[#7f0f14] via-[#c8161c] to-[#7f0f14] px-3 py-2.5 text-center sm:px-4 sm:py-3 text-paper shadow-[inset_0_-1px_0_rgba(255,255,255,0.12)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,60,70,0.45),transparent_70%)]" />
-      <p className="relative inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[0.78rem] font-extrabold uppercase tracking-[0.03em] sm:text-[0.95rem]">
+      <p className="relative inline-flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[0.72rem] font-extrabold uppercase tracking-[0.03em] sm:gap-x-3 sm:text-[0.95rem]">
         <span className="relative flex h-3 w-3 flex-shrink-0">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff4d6d] opacity-75 motion-reduce:hidden" />
           <span className="relative inline-flex h-3 w-3 rounded-full bg-[#ff4d6d]" />
@@ -58,7 +58,7 @@ export default function OfferBanner() {
           </>
         ) : (
           <span>
-            Offre spéciale : la Méthode Watt/kg à 29 €{" "}
+            Offre spéciale : <span className="hidden sm:inline">la Méthode Watt/kg à </span>29 €{" "}
             <span className="font-semibold opacity-80">
               au lieu de <span className="line-through">49 €</span>
             </span>

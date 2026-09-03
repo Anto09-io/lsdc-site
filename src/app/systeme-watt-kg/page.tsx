@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import VideoEmbed from "@/components/VideoEmbed";
+import MobileCta from "./MobileCta";
 
 export const metadata: Metadata = {
   title: "Méthode Watt/kg — Deviens un cycliste puissant et durable",
@@ -267,9 +268,9 @@ const BTN_PRIMARY =
   BTN +
   " bg-carbon text-paper shadow-[0_14px_40px_-10px_rgba(11,11,12,0.45)] hover:-translate-y-0.5 hover:bg-violet hover:shadow-[0_14px_40px_-10px_rgba(159,1,255,0.5)]";
 
-function Cta({ children, note }: { children: React.ReactNode; note?: string }) {
+function Cta({ children, note, id }: { children: React.ReactNode; note?: string; id?: string }) {
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div id={id} className="flex flex-col items-center gap-3">
       <a href="#offre" className={BTN_PRIMARY + " w-full animate-pulse-glow motion-reduce:animate-none sm:w-auto"}>
         {children} <Icon name="arrow" />
       </a>
@@ -288,7 +289,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className={"px-4 py-14 sm:px-5 sm:py-[72px] " + className}>
+    <section id={id} className={"px-4 py-11 sm:px-5 sm:py-[72px] " + className}>
       <div className="mx-auto max-w-[1100px]">{children}</div>
     </section>
   );
@@ -299,8 +300,8 @@ export default function MethodeWattKgPage() {
     <>
       {/* ── HERO ── */}
       <section className="mx-auto max-w-[1000px] px-4 pb-12 pt-8 text-center sm:px-5 sm:pb-14">
-        <span className="mb-5 inline-block rounded-full border border-violet/30 px-3.5 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-violet">
-          Pour les cyclistes amateurs qui refusent de stagner
+        <span className="mb-4 inline-block rounded-full border border-violet/30 px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.12em] text-violet sm:mb-5 sm:px-3.5 sm:text-[0.7rem] sm:tracking-[0.14em]">
+          Pour les cyclistes <span className="hidden sm:inline">amateurs </span>qui refusent de stagner
         </span>
         <h1 className="mx-auto font-sans text-[clamp(1.6rem,4.2vw,2.625rem)] font-black leading-[1.15] tracking-[-0.02em] text-carbon">
           <span className="block md:whitespace-nowrap">
@@ -322,13 +323,13 @@ export default function MethodeWattKgPage() {
           <span className="text-violet">★★★★★</span> — +109 témoignages
         </Link>
 
-        <div className="mx-auto mt-7 max-w-[760px] overflow-hidden rounded-[20px] shadow-[0_30px_80px_-20px_rgba(11,11,12,0.35)]">
+        <div className="mx-auto mt-5 max-w-[760px] overflow-hidden rounded-[14px] sm:mt-7 sm:rounded-[20px] shadow-[0_30px_80px_-20px_rgba(11,11,12,0.35)]">
           <VideoEmbed youtubeId="lEZUs6JQYWg" title="La Méthode Watt/kg — présentation" />
         </div>
 
-        <div className="mt-8">
-          <Cta note="49 € → 29 € · Paiement unique · Accès immédiat · PDF à vie">
-            Je veux la Méthode Watt/kg à 29 €
+        <div className="mt-6 sm:mt-8">
+          <Cta id="hero-cta" note="Paiement unique · Accès immédiat · PDF à vie">
+            Obtenir la méthode à 29 €
           </Cta>
         </div>
       </section>
@@ -500,21 +501,23 @@ export default function MethodeWattKgPage() {
           sub="Un parcours étape par étape pour t'amener à ton meilleur niveau physique en 2026."
         />
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-2.5 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {CURRICULUM.map((title, i) => (
             <article
               key={title}
-              className="relative rounded-[20px] border border-carbon/10 bg-surface px-6 pb-6 pt-8 transition-all hover:-translate-y-1 hover:border-violet"
+              className="relative flex items-center gap-3 rounded-[14px] border border-carbon/10 bg-surface px-4 py-3 transition-all hover:border-violet sm:block sm:rounded-[20px] sm:px-6 sm:pb-6 sm:pt-8 sm:hover:-translate-y-1"
             >
-              <span className="absolute -top-3.5 left-5 flex h-8 w-8 items-center justify-center rounded-full bg-violet text-[0.85rem] font-black text-paper">
+              <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-violet text-[0.85rem] font-black text-paper sm:absolute sm:-top-3.5 sm:left-5">
                 {i}
               </span>
-              <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.15em] text-carbon/40">
-                Partie {i}
-              </p>
-              <h3 className="mt-1.5 font-sans text-[1.05rem] font-extrabold leading-snug tracking-[-0.01em] text-carbon">
-                {title}
-              </h3>
+              <div>
+                <p className="hidden font-mono text-[0.65rem] font-bold uppercase tracking-[0.15em] text-carbon/40 sm:block">
+                  Partie {i}
+                </p>
+                <h3 className="font-sans text-[0.95rem] font-extrabold leading-snug tracking-[-0.01em] text-carbon sm:mt-1.5 sm:text-[1.05rem]">
+                  {title}
+                </h3>
+              </div>
             </article>
           ))}
         </div>
@@ -629,11 +632,11 @@ export default function MethodeWattKgPage() {
 
         {/* Meilleurs avis, juste avant le bon de commande */}
         <div className="mx-auto mb-10 max-w-[1000px]">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-3">
             {CHECKOUT_TESTIMONIALS.map((t) => (
               <figure
                 key={t.name}
-                className="flex flex-col rounded-[16px] border border-carbon/10 bg-paper p-5"
+                className="flex w-[84%] flex-shrink-0 snap-center flex-col rounded-[16px] border border-carbon/10 bg-paper p-5 sm:w-auto sm:flex-shrink"
               >
                 <span className="inline-block self-start rounded-full bg-violet/10 px-2.5 py-1 font-mono text-[0.62rem] font-bold uppercase tracking-[0.12em] text-violet">
                   {t.result}
@@ -649,7 +652,8 @@ export default function MethodeWattKgPage() {
               </figure>
             ))}
           </div>
-          <p className="mt-4 text-center text-sm">
+          <p className="mt-2 text-center text-[0.7rem] text-carbon/40 sm:hidden">← Fais défiler →</p>
+          <p className="mt-3 text-center text-sm sm:mt-4">
             <Link
               href="/temoignages"
               className="font-semibold text-violet underline-offset-4 hover:underline"
@@ -659,7 +663,7 @@ export default function MethodeWattKgPage() {
           </p>
         </div>
 
-        <div className="mx-auto max-w-[520px] rounded-[20px] border border-violet bg-paper p-6 shadow-[0_30px_80px_-20px_rgba(159,1,255,0.25)] sm:p-8">
+        <div id="offre-card" className="mx-auto max-w-[520px] rounded-[20px] border border-violet bg-paper p-5 shadow-[0_30px_80px_-20px_rgba(159,1,255,0.25)] sm:p-8">
           <h3 className="text-center font-sans text-[1.6rem] font-black leading-tight tracking-[-0.02em] text-carbon sm:text-[1.9rem]">
             Ce que tu reçois
           </h3>
@@ -716,12 +720,7 @@ export default function MethodeWattKgPage() {
           </div>
 
           <div className="mt-5 flex flex-col items-center gap-2.5">
-            <a
-              href={STRIPE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={BTN_PRIMARY + " w-full animate-pulse-glow motion-reduce:animate-none"}
-            >
+            <a href={STRIPE_URL} className={BTN_PRIMARY + " w-full animate-pulse-glow motion-reduce:animate-none"}>
               Obtenir la méthode à 29 € <Icon name="arrow" />
             </a>
             <p className="text-center text-[0.76rem] text-carbon/45">
@@ -803,10 +802,11 @@ export default function MethodeWattKgPage() {
       {/* ── Bouton flottant « Rejoindre » ── */}
       <a
         href="#offre"
-        className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full bg-carbon px-5 py-3.5 text-sm font-extrabold text-paper shadow-[0_8px_28px_rgba(11,11,12,0.35)] transition-all hover:-translate-y-0.5 hover:bg-violet motion-safe:animate-pulse-glow sm:bottom-6 sm:right-6 sm:px-6 sm:text-base"
+        className="fixed bottom-6 right-6 z-50 hidden items-center gap-2 rounded-full bg-carbon px-6 py-3.5 text-base font-extrabold text-paper shadow-[0_8px_28px_rgba(11,11,12,0.35)] transition-all hover:-translate-y-0.5 hover:bg-violet motion-safe:animate-pulse-glow sm:inline-flex"
       >
         Rejoindre <Icon name="arrow" className="h-4 w-4" />
       </a>
+      <MobileCta />
     </>
   );
 }
