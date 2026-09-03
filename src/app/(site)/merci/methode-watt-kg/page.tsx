@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const PDF_URL = "/ebook/methode-watt-kg-d946089e5a46ff1b.pdf";
+const PDF_URL = "/ebook/methode-watt-kg-c8792873a6c42708.pdf";
 
 export default function MerciMethodeWattKgPage() {
   return (

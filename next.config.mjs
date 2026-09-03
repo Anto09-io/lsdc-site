@@ -51,6 +51,13 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Ancienne URL de l'ebook (envoyée par email aux premiers acheteurs) :
+      // renvoie vers la version sans la page promo finale.
+      {
+        source: "/ebook/methode-watt-kg-d946089e5a46ff1b.pdf",
+        destination: "/ebook/methode-watt-kg-c8792873a6c42708.pdf",
+        permanent: true,
+      },
       // Ancienne URL du site statique encore présente dans des bios/descriptions.
       { source: "/acces-calculateur", destination: "/outils", permanent: true },
       // L'accès envoyé par email pointe désormais sur le calculateur complet.
