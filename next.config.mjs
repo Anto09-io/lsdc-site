@@ -73,6 +73,13 @@ const nextConfig = {
         destination: "/calculateur/:path*",
         permanent: true,
       },
+      // Lien court envoyé via ManyChat : temporaire pour pouvoir changer
+      // de fichier sans que les navigateurs gardent l'ancienne cible en cache.
+      {
+        source: "/muscu",
+        destination: "/ressources/protocole-musculation-maison.pdf",
+        statusCode: 302,
+      },
     ];
   },
   images: {
