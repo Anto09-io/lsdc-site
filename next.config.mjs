@@ -80,6 +80,11 @@ const nextConfig = {
         destination: "/ressources/protocole-musculation-maison.pdf",
         statusCode: 302,
       },
+      {
+        source: "/kj",
+        destination: "/ressources/le-systeme-kj.pdf",
+        statusCode: 302,
+      },
     ];
   },
   images: {
