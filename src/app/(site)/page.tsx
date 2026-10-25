@@ -166,6 +166,64 @@ function ChannelBand() {
   );
 }
 
+const kjBenefits = [
+  "Sache enfin quoi travailler en priorité",
+  "Fixe tes cibles sur TON profil de puissance record",
+  "Pilote ta charge en kilojoules, sans te cramer",
+];
+
+/* Ebook gratuit « Le Système kJ » : premier pas proposé aux nouveaux
+   visiteurs, juste sous le hero, avant l'offre payante. */
+function KjEbookBand() {
+  return (
+    <section className="rounded-3xl bg-surface px-6 py-10 ring-1 ring-violet/20 sm:px-10">
+      <div className="flex flex-col items-center gap-8 md:flex-row">
+        <div className="relative w-full max-w-sm md:w-1/2 md:max-w-none">
+          <Image
+            src="/images/systeme-kj/mockup.webp"
+            alt="Aperçu de l'ebook Le Système kJ sur tablette"
+            width={2000}
+            height={1250}
+            sizes="(max-width: 768px) 90vw, 45vw"
+            className="h-auto w-full"
+            style={{
+              maskImage: "radial-gradient(closest-side, #000 75%, transparent)",
+              WebkitMaskImage: "radial-gradient(closest-side, #000 75%, transparent)",
+            }}
+          />
+        </div>
+        <div className="w-full md:w-1/2">
+          <span className="inline-block rounded-full bg-violet px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-paper">
+            Ebook gratuit
+          </span>
+          <h2 className="mt-4 font-display text-3xl italic sm:text-4xl">
+            Le Système <span className="text-violet">kJ</span>
+          </h2>
+          <p className="mt-3 text-base leading-relaxed text-carbon/70">
+            Comment atteindre TON meilleur niveau sur le vélo sans te prendre
+            la tête.
+          </p>
+          <ul className="mt-5 flex flex-col gap-2.5">
+            {kjBenefits.map((b) => (
+              <li key={b} className="flex items-start gap-3">
+                <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-violet text-xs font-bold text-paper">
+                  ✓
+                </span>
+                <span className="text-sm font-medium text-carbon">{b}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-7">
+            <ButtonLink href="/le-systeme-kj" withArrow>
+              Recevoir l'ebook gratuit
+            </ButtonLink>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
   return (
     <>
@@ -238,6 +296,7 @@ export default function HomePage() {
 
       {/* ── Teasers ── */}
       <Container className="flex flex-col gap-14 py-12 sm:gap-20 sm:py-20">
+        <KjEbookBand />
         {teasers.map((teaser, index) => (
           <div key={teaser.title} className="contents">
             <section className="flex flex-col gap-8 md:flex-row md:items-center">

@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/outils"), changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/temoignages"), changeFrequency: "monthly", priority: 0.5 },
     { url: absoluteUrl("/systeme-watt-kg"), changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/le-systeme-kj"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/quiz"), changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/a-propos"), changeFrequency: "monthly", priority: 0.5 },
   ];

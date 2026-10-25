@@ -37,6 +37,14 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link
+                href="/le-systeme-kj"
+                className="inline-block py-2 text-carbon/70 transition-colors hover:text-violet"
+              >
+                Ebook gratuit
+              </Link>
+            </li>
+            <li>
               <a
                 href={siteConfig.social.instagram}
                 target="_blank"
