@@ -1,19 +1,20 @@
 "use client";
 
 import { track } from "@vercel/analytics";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/Button";
 import HoneypotField from "@/components/HoneypotField";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PDF_URL = "/ressources/le-systeme-kj.pdf";
-
-// Formulaire d'opt-in : inscrit l'email (tag Lumail "systeme-kj") puis
-// débloque le téléchargement du PDF sur place.
+// Formulaire d'opt-in : inscrit l'email (liste "systeme-kj" → séquence Lumail
+// qui livre le PDF) puis renvoie vers la thank-you. Le PDF n'est jamais donné
+// sur la page : il faut ouvrir l'email, donc donner une vraie adresse.
 export default function KjOptin() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "error" | "done">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -29,8 +30,8 @@ export default function KjOptin() {
         body: JSON.stringify({ email, list: "systeme-kj", website }),
       });
       if (res.ok) {
-        setStatus("done");
         track("subscribe", { source: "systeme-kj" });
+        router.push("/le-systeme-kj/merci");
       } else {
         setStatus("error");
       }
@@ -39,33 +40,13 @@ export default function KjOptin() {
     }
   }
 
-  if (status === "done") {
-    return (
-      <div className="rounded-2xl bg-surface p-6 text-center ring-1 ring-carbon/10" role="status">
-        <p className="text-2xl">🎉</p>
-        <p className="mt-2 text-lg font-extrabold text-carbon">C'est à toi !</p>
-        <p className="mt-1 text-sm text-carbon/60">
-          Ton ebook est prêt, télécharge-le maintenant.
-        </p>
-        <a
-          href={PDF_URL}
-          target="_blank"
-          rel="noopener"
-          className="mt-5 inline-flex min-h-[52px] items-center justify-center rounded-full bg-carbon px-6 text-sm font-semibold text-paper transition-colors hover:bg-violet"
-        >
-          Télécharger Le Système kJ (PDF)
-        </a>
-      </div>
-    );
-  }
-
   return (
-    <div className="rounded-2xl bg-surface p-6 ring-1 ring-carbon/10">
+    <div id="optin" className="scroll-mt-6 rounded-2xl bg-surface p-6 ring-1 ring-carbon/10">
       <p className="text-lg font-extrabold leading-snug text-carbon">
         Reçois l'ebook gratuitement
       </p>
       <p className="mt-1 text-sm text-carbon/60">
-        Entre ton email, le PDF se débloque immédiatement.
+        Entre ton email, je te l'envoie tout de suite.
       </p>
       <form onSubmit={handleSubmit} noValidate className="relative mt-5 flex flex-col gap-3">
         <HoneypotField value={website} onChange={setWebsite} />

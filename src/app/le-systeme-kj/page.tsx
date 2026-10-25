@@ -10,13 +10,43 @@ export const metadata: Metadata = {
 };
 
 // Page de capture de l'ebook gratuit « Le Système kJ ». Opt-in (liste
-// "systeme-kj" → tag Lumail) puis téléchargement du PDF sur place.
+// "systeme-kj") puis thank-you : le PDF est livré par email (séquence Lumail).
 
 const BENEFITS = [
   "Sache enfin quoi travailler en priorité, grâce à la pyramide des besoins d'entraînement de Stephen Seiler",
   "Fixe tes cibles sur TON profil de puissance record, pas sur une FTP extrapolée",
   "Connais ton temps de soutien à n'importe quelle puissance avec la loi de puissance",
   "Pilote ta charge en kilojoules : une seule unité simple pour progresser sans te cramer",
+];
+
+// Sommaire de l'ebook, phrases reprises telles quelles du PDF.
+const SOMMAIRE = [
+  {
+    title: "Les bases",
+    items: [
+      "Le seul mécanisme responsable de la progression (le principe d'hormèse)",
+      "La loi de la progression à vélo (accumuler le plus de travail possible sur 90 jours sans t'épuiser)",
+      "La pyramide des besoins d'entraînement théorisée par Stephen Seiler",
+      "La vraie utilité d'un capteur de puissance (99 % des cyclistes ont un capteur inutile)",
+      "Le triangle des données d'entraînement (kJ, puissance, durée)",
+    ],
+  },
+  {
+    title: "Le système",
+    items: [
+      "Pilier 1 : les kJ",
+      "Pilier 2 : la distribution des intensités optimale",
+      "Pilier 3 : charge externe vs charge interne (le mécanisme de progression)",
+      "Les résultats du système : étude de cas",
+    ],
+  },
+  {
+    title: "Bonus : les règles à intégrer",
+    items: [
+      "Les 7 règles à ne jamais oublier",
+      "La checklist de départ à valider",
+    ],
+  },
 ];
 
 export default function SystemeKjPage() {
@@ -67,6 +97,51 @@ export default function SystemeKjPage() {
           </ul>
 
           <KjOptin />
+        </div>
+      </section>
+
+      <section className="border-t border-carbon/10 bg-surface/50 py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl px-5">
+          <div className="text-center">
+            <span className="mb-3.5 inline-block text-[0.72rem] font-bold uppercase tracking-[0.12em] text-violet">
+              Ce qu'il y a dedans
+            </span>
+            <h2 className="font-sans text-[clamp(1.6rem,4vw,2.4rem)] font-black leading-[1.1] tracking-[-0.02em]">
+              Le sommaire
+            </h2>
+          </div>
+
+          <div className="mt-10 flex flex-col gap-5">
+            {SOMMAIRE.map((section, i) => (
+              <div key={section.title} className="rounded-2xl bg-paper p-6 ring-1 ring-carbon/10 sm:p-7">
+                <p className="font-mono text-[0.68rem] font-bold uppercase tracking-[0.12em] text-violet">
+                  Section {i + 1}
+                </p>
+                <h3 className="mt-1 font-sans text-xl font-extrabold tracking-[-0.01em] text-carbon">
+                  {section.title}
+                </h3>
+                <ol className="mt-4 flex flex-col gap-3">
+                  {section.items.map((item, j) => (
+                    <li key={item} className="flex items-start gap-3 text-[0.95rem] leading-snug text-carbon/80">
+                      <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-violet/10 text-xs font-bold text-violet">
+                        {j + 1}
+                      </span>
+                      <span className="font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <a
+              href="#optin"
+              className="inline-flex min-h-[52px] items-center justify-center rounded-full bg-carbon px-7 text-sm font-semibold text-paper transition-colors hover:bg-violet"
+            >
+              Je veux l'ebook gratuit →
+            </a>
+          </div>
         </div>
       </section>
 

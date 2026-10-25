@@ -11,16 +11,17 @@ import { NextResponse } from "next/server";
 
 const LUMAIL_ENDPOINT = "https://lumail.io/api/v2/tools/add_subscriber";
 
-// list envoyé par le front → tag Lumail (= déclencheur de séquence)
-const LIST_TAGS: Record<string, string> = {
+// list envoyé par le front → tag(s) Lumail (le premier déclenche la séquence)
+const LIST_TAGS: Record<string, string | string[]> = {
   // /articles (ArticleGate) et le formulaire newsletter
   newsletter: "newsletter",
   // /quiz
   quiz: "quiz",
   // /outils/calculateur-glucides
   "calculateur-glucides": "calculateur-glucides",
-  // /le-systeme-kj (ebook gratuit, PDF débloqué sur place)
-  "systeme-kj": "systeme-kj",
+  // /le-systeme-kj : manychat-kj déclenche la séquence « ManyChat — ebook
+  // Le système kJ » (l'email 1 livre le PDF), site-kj distingue la source.
+  "systeme-kj": ["manychat-kj", "site-kj"],
   // landing JustPush — pas de séquence associée pour l'instant
   waitinglist: "justpush-waitinglist",
   // ToolGate et la landing calculateur GPX
@@ -115,7 +116,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const tag = (list && LIST_TAGS[list]) || LIST_TAGS.default;
+  const tags = [(list && LIST_TAGS[list]) || LIST_TAGS.default].flat();
 
   const customFields: Record<string, string> = {};
   if (fields) {
@@ -137,7 +138,7 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         email,
         ...(name ? { name } : {}),
-        tags: [tag],
+        tags,
         ...(Object.keys(customFields).length > 0 ? { fields: customFields } : {}),
         // Ne jamais réabonner quelqu'un qui s'est désabonné : c'est lui qui
         // décide, et le réintégrer abîmerait la réputation du domaine.

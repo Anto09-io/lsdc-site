@@ -80,9 +80,17 @@ const nextConfig = {
         destination: "/ressources/protocole-musculation-maison.pdf",
         statusCode: 302,
       },
+      // Le PDF a un nom non devinable : /kj (lien des emails Lumail et de
+      // ManyChat) est le seul accès. L'ancienne URL renvoie vers la page de
+      // capture, pour que le PDF ne circule plus sans opt-in.
       {
         source: "/kj",
-        destination: "/ressources/le-systeme-kj.pdf",
+        destination: "/ressources/le-systeme-kj-3d0055032f06db0b.pdf",
+        statusCode: 302,
+      },
+      {
+        source: "/ressources/le-systeme-kj.pdf",
+        destination: "/le-systeme-kj",
         statusCode: 302,
       },
     ];
