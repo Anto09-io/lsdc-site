@@ -19,6 +19,8 @@ const LIST_TAGS: Record<string, string> = {
   quiz: "quiz",
   // /outils/calculateur-glucides
   "calculateur-glucides": "calculateur-glucides",
+  // /le-systeme-kj (ebook gratuit, PDF débloqué sur place)
+  "systeme-kj": "systeme-kj",
   // landing JustPush — pas de séquence associée pour l'instant
   waitinglist: "justpush-waitinglist",
   // ToolGate et la landing calculateur GPX
